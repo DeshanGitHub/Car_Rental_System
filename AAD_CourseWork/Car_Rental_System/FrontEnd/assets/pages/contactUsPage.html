@@ -10,20 +10,20 @@
     <link href="../../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <style>
-        .bgAboutImg {
-            background-image: url("../../assets/img/bg_2.jpg");
+        .bgImgContactUs {
+            background-image: url("../../assets/img/bg_3.jpg");
             background-size: cover;
+            background-position-y: 50px;
         }
 
         a:link {
             text-decoration: none;
         }
     </style>
-
 </head>
 <body>
 
-<main>
+<header>
     <!--NAV BAR-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark  mb-0" data-bs-theme="dark" id="nav1">
         <div class="container">
@@ -56,7 +56,8 @@
                     </li>
                     <li class="nav-item"><a class="nav-link text-white" href="../../assets/pages/aboutUsPage.html">About
                         Us</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="../../assets/pages/contactUsPage.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="../../assets/pages/contactUsPage.html">Contact
+                        Us</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">Register</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="#">Login</a></li>
                 </ul>
@@ -64,26 +65,43 @@
             </div>
         </div>
     </nav>
+</header>
 
-    <!--IMAGE AREA-->
-    <section class="container-fluid " style="margin-top: 50px">
+<main>
+    <!--BG IMAGE AREA-->
+    <section class="container-fluid">
         <div class="row">
-            <div class="bgAboutImg col-12 vh-100 text-center d-flex align-items-center">
-                <div class="container d-flex justify-content-center">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-center">
-                            <div class="w-50 text-bg-light p-3">
-                                <h3 class="pt-3">About Us</h3>
-                                <p class="p-5 pt-2 pb-3 ">Easy Car Rentals has provided millions of customers with the
-                                    best possible guaranteed
-                                    price for their Car Rental. We welcome you to become our next satisfied customer.
-                                    One of our top priorities is to adjust each package we offer to our customer’s exact
-                                    needs. We offer a variety of options that can enhance your experience, always
-                                    according to your necessities, and help you get the best out of your holidays or
-                                    your business trip. Our smart booking engine searches for for the best price, car
-                                    category, extras, exclusive offers and discounts suiting your needs. You can
-                                    securely book online today only with a small downpayment and pay the rest upon your
-                                    arrival at the desk!</p>
+            <div class="bgImgContactUs col-12 vh-100 d-flex align-items-center">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-6 border bg-white">
+                            <div class="container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 mt-4">
+                                        <h3>Let's talk about everything!</h3>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <input class="form-control"
+                                               placeholder="Full name" required type="text">
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
+                                        <input class="form-control"
+                                               pattern="[^ @]*@[^ @]*" placeholder="Email address"
+                                               required type="email">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <input class="form-control"
+                                               placeholder="Company" required type="text">
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                         <textarea class="form-control" placeholder="Message"
+                                                   rows="4"></textarea>
+                                    </div>
+                                    <div class="col-12 justify-content-center d-flex mt-3 mb-3">
+                                        <button type="button" class="btn btn-info px-5">Send</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +109,6 @@
             </div>
         </div>
     </section>
-
 </main>
 
 <!-- Footer -->
@@ -211,7 +228,6 @@
     </div>
 </footer>
 <!-- Footer -->
-
 
 <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
