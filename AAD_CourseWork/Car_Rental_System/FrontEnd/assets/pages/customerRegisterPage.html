@@ -10,10 +10,11 @@
     <link href="../../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <style>
-        .bgImgContactUs {
-            background-image: url("../../assets/img/bg_3.jpg");
+        .bgCustomerRegisterImg {
+            background-image: url("../img/bg_2(blurImage).jpg");
             background-size: cover;
-            background-position-y: 50px;
+            margin-top: 50px;
+
         }
 
         a:link {
@@ -22,7 +23,6 @@
     </style>
 </head>
 <body>
-
 <header>
     <!--NAV BAR-->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark  mb-0" data-bs-theme="dark" id="nav1">
@@ -67,40 +67,108 @@
         </div>
     </nav>
 </header>
-
 <main>
-    <!--BG IMAGE AREA-->
     <section class="container-fluid">
         <div class="row">
-            <div class="bgImgContactUs col-12 vh-100 d-flex align-items-center">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-6 border bg-white">
-                            <div class="container-fluid">
-                                <div class="row justify-content-center">
-                                    <div class="col-12 mt-4">
-                                        <h3>Let's talk about everything!</h3>
+            <div class="bgCustomerRegisterImg col-12 vh-100 d-flex align-items-center">
+                <div class="container " >
+                    <div class="row justify-content-center">
+                        <div class="col-8 bg-white">
+                            <div class="container">
+                                <div class="row">
+                                    <!--CUSTOMER REGISTRATION FORM START-->
+                                    <div class="col-12 text-center my-4">
+                                        <h3>Register Form</h3>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
-                                        <input class="form-control" placeholder="Full name" required type="text">
+                                    <div class="col-12">
+                                        <div class="container-fluid px-0">
+                                            <!--CUSTOMER REGISTRATION FORM-->
+                                            <form action="#" class="row custom-form contact-form mb-5 mb-lg-0 justify-content-center"
+                                                  method="post"
+                                                  role="form">
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerFirstNameId">First Name</label>
+                                                    <input id="txtCustomerFirstNameId" class="form-control" placeholder="First Name" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerLastNameId">Last Name</label>
+                                                    <input id="txtCustomerLastNameId" class="form-control" placeholder="Last Name" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerAddressId">Address</label>
+                                                    <input id="txtCustomerAddressId" class="form-control" placeholder="Address" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerEmailId">Email</label>
+                                                    <input id="txtCustomerEmailId" class="form-control" placeholder="Email" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerContactNum">Contact Number</label>
+                                                    <input id="txtCustomerContactNum" class="form-control" placeholder="Contact Number" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerDrivingOrNic">Driving License/NIC Number</label>
+                                                    <input id="txtCustomerDrivingOrNic" class="form-control" placeholder="Driving License/NIC"
+                                                           required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerUserName">User Name</label>
+                                                    <input id="txtCustomerUserName" class="form-control" placeholder="User Name" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label for="txtCustomerPassword">User Name</label>
+                                                    <input id="txtCustomerPassword" class="form-control" placeholder="Password" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label class="form-label" for="inputState">Select Upload Image
+                                                        Type</label>
+                                                    <select class="form-select" id="inputState">
+                                                        <option selected>Choose</option>
+                                                        <option>Driving License</option>
+                                                        <option>NIC</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <label class="form-label" for="uploadImgDiv1">Select Upload Image
+                                                        Front Side</label>
+                                                    <div class="input-group" id="uploadImgDiv1">
+                                                        <input class="form-control" id="customerInputImage1"
+                                                               type="file">
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 mb-3">
+                                                    <label class="form-label" for="uploadImgDiv2">Select Upload Image
+                                                        Back Side</label>
+                                                    <div class="input-group" id="uploadImgDiv2">
+                                                        <input class="form-control" id="customerInputImage2"
+                                                               type="file">
+                                                    </div>
+                                                </div>
+                                                <!-- Force next columns to break to new line -->
+
+
+                                                <div class="col-6 mb-3">
+                                                    <div class="w-100"></div>
+                                                </div>
+
+                                                <div class="col-4 d-flex justify-content-center mb-4">
+                                                    <button type="button" class="btn btn-info vw-100">Register Now</button>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
-                                        <input class="form-control"
-                                               pattern="[^ @]*@[^ @]*" placeholder="Email address"
-                                               required type="email">
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <input class="form-control"
-                                               placeholder="Company" required type="text">
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                         <textarea class="form-control" placeholder="Message"
-                                                   rows="4"></textarea>
-                                    </div>
-                                    <div class="col-12 justify-content-center d-flex mt-3 mb-3">
-                                        <button class="btn btn-info px-5" type="button">Send</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -110,7 +178,6 @@
         </div>
     </section>
 </main>
-
 <!-- Footer -->
 <footer class="text-center text-lg-start text-white bg-dark">
     <!-- Grid container -->
