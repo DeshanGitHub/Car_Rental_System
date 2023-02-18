@@ -10,10 +10,10 @@
     <link href="../../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <style>
-        .bgImgContactUs {
-            background-image: url("../../assets/img/bg_3.jpg");
+        .bgLoginImg {
+            background-image: url("../../assets/img/bg_2(blurImage).jpg");
             background-size: cover;
-            background-position-y: 50px;
+            margin-top: 30px;
         }
 
         a:link {
@@ -60,46 +60,87 @@
                         Us</a></li>
                     <li class="nav-item"><a class="nav-link text-white"
                                             href="../../assets/pages/customerRegisterPage.html">Register</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="../../assets/pages/loginPage.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link text-white"
+                                            href="../../assets/pages/loginPage.html">Login</a></li>
                 </ul>
 
             </div>
         </div>
     </nav>
 </header>
-
 <main>
-    <!--BG IMAGE AREA-->
     <section class="container-fluid">
         <div class="row">
-            <div class="bgImgContactUs col-12 vh-100 d-flex align-items-center">
-                <div class="container">
-                    <div class="row justify-content-start">
-                        <div class="col-6 border bg-white">
+            <div class="bgLoginImg col-12 vh-100 d-flex align-items-center">
+                <div class="container ">
+                    <div class="row justify-content-center ">
+                        <div class="col-5 bg-white">
                             <div class="container-fluid">
-                                <div class="row justify-content-center">
-                                    <div class="col-12 mt-4">
-                                        <h3>Let's talk about everything!</h3>
+                                <div class="row ">
+                                    <div class="col-12 text-center my-4">
+                                        <h3>Login Form</h3>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
-                                        <input class="form-control" placeholder="Full name" required type="text">
-                                    </div>
+                                    <div class="col-12">
+                                        <!--LOGIN FORM-->
+                                        <div class="container">
+                                            <form action="#"
+                                                  class="row custom-form contact-form mb-5 mb-lg-0 justify-content-center"
+                                                  method="post"
+                                                  role="form">
+                                                <div class="col-10">
+                                                    <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon3">
+                                                    <img alt="Login Icon" src="../../assets/img/loginRole.png"
+                                                         style="max-width: 30px">
+                                                </span>
+                                                        <select aria-describedby="basic-addon3"
+                                                                aria-label="Default select example"
+                                                                class="form-select">
+                                                            <option selected>Select Role</option>
+                                                            <option value="1">Customer</option>
+                                                            <option value="2">Driver</option>
+                                                            <option value="3">Admin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
 
-                                    <div class="col-lg-6 col-md-6 col-12 mt-3">
-                                        <input class="form-control"
-                                               pattern="[^ @]*@[^ @]*" placeholder="Email address"
-                                               required type="email">
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <input class="form-control"
-                                               placeholder="Company" required type="text">
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                         <textarea class="form-control" placeholder="Message"
-                                                   rows="4"></textarea>
-                                    </div>
-                                    <div class="col-12 justify-content-center d-flex mt-3 mb-3">
-                                        <button class="btn btn-info px-5" type="button">Send</button>
+                                                <div class="col-10">
+                                                    <div class=" input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img alt="Login Icon" src="../../assets/img/loginUserName.png">
+                                                </span>
+                                                        <input aria-describedby="basic-addon1" aria-label="Username"
+                                                               class="form-control"
+                                                               placeholder="Username" required type="text">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-10">
+                                                    <div class=" input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon2">
+                                                    <img alt="Login Icon"
+                                                         src="../../assets/img/loginPassword.png"
+                                                         style="max-width: 30px">
+                                                </span>
+                                                        <input aria-describedby="basic-addon2" aria-label="Password"
+                                                               class="form-control"
+                                                               placeholder="Password" required type="text">
+                                                    </div>
+                                                </div>
+                                                <!-- Force next columns to break to new line -->
+                                                <!--<div class="col-4 mb-3">
+                                                    <div class="w-100"></div>
+                                                </div>-->
+
+                                                <div class="col-5 d-flex justify-content-center mb-4 mt-3">
+                                                    <button class="btn btn-info vw-100" type="button">Register Now
+                                                    </button>
+                                                </div>
+
+
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
