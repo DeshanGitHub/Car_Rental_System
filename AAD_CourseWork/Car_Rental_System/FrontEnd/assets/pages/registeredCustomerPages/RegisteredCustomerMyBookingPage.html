@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Car Rental</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="../../img/car_rental_logo.png" rel="icon">
+
+    <!--CSS FILES-->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<header>
+    <!--NAV BAR-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark  mb-0" data-bs-theme="dark" id="nav1">
+        <div class="container">
+            <a class="navbar-brand fs-3 fw-bold fst-italic" href="#">Easy Car <span style="color: #ff6363">Rental</span></a>
+            <button
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle Navbar"
+                    class="navbar-toggler"
+                    data-bs-target="#navbarNav"
+                    data-bs-toggle="collapse"
+                    type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mx-auto"></div>
+                <ul class="navbar-nav fw-semibold">
+                    <li class="nav-item"><a class="nav-link text-white" href="RegisteredCustomerHomePage.html">Home</a>
+                    </li>
+                    <!--<li class="nav-item"><a class="nav-link text-white" href="#">Cars</a></li>-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button">
+                            Cars
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="RegisteredCustomerAllCarPage.html">All Cars</a></li>
+                            <li><a class="dropdown-item" href="#">General Cars</a></li>
+                            <li><a class="dropdown-item" href="#">Premium Cars</a></li>
+                            <li><a class="dropdown-item" href="#">Luxury Cars</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" href="RegisteredCustomerMyBookingPage.html">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container-fluid" style="margin-top: 84px">
+        <div class="row">
+            <div class="col-12">
+                <h3>My Bookings</h3>
+            </div>
+            <div class="col-12">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Booking ID</th>
+                        <th scope="col">Car Name</th>
+                        <th scope="col">Requested Date</th>
+                        <th scope="col">Pickup Location</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Pickup Date</th>
+                        <th scope="col">Pickup Time</th>
+                        <th scope="col">Return Date</th>
+                        <th scope="col">Amount to pay</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td><button type="button" class="btn btn-outline-danger w-75" >Danger</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Jacob</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>Thornton</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+                        <td>@fat</td>
+                        <td><button type="button" class="btn btn-outline-danger w-75" >Danger</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td >Larry the Bird</td>
+                        <td >Larry the Bird</td>
+                        <td >Larry the Bird</td>
+                        <td >Larry the Bird</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td><button type="button" class="btn btn-outline-danger w-75" >Danger</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer></footer>
+
+</body>
+</html>
