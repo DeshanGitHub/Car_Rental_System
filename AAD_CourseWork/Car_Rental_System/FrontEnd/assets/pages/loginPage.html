@@ -283,9 +283,11 @@ $("#btnLogin").click(function () {
         /*GET SELECTED BOOTSTRAP DROPDOWN VALUE*/
         let cmbSelectedValue=$("#cmbUserType option:selected").text();
 
-        if(cmbSelectedValue == "Customer"){
+        if(cmbSelectedValue === "Customer"){
             /*REDIRECT TO OTHER WEB PAGE*/
             window.location.href="registeredCustomerPages/RegisteredCustomerHomePage.html";
+        }else if(cmbSelectedValue === "Driver"){
+            window.location.href="RegisterDriverPages/driverSchedulePage.html";
         }
 });
 

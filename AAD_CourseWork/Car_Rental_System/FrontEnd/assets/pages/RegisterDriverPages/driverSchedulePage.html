@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="../../img/car_rental_logo.png" rel="icon">
+
+    <!--CSS FILES-->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <style>
+        .bgDriverScheduleImg{
+            background-image: url("../../img/bg_2(blurImage).jpg");
+            background-size: cover;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!--NAV BAR-->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark  mb-0" data-bs-theme="dark" id="nav1">
+        <div class="container">
+            <a class="navbar-brand fs-3 fw-bold fst-italic" href="#">Easy Car <span style="color: #ff6363">Rental</span></a>
+            <button
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle Navbar"
+                    class="navbar-toggler"
+                    data-bs-target="#navbarNav"
+                    data-bs-toggle="collapse"
+                    type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="mx-auto"></div>
+                <ul class="navbar-nav fw-semibold">
+                    <li class="nav-item"><a class="nav-link text-white" href="driverSchedulePage.html">My
+                        Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">My Profile</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="../../../index.html">Logout</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <section class="container-fluid">
+        <div class="row">
+            <div class="bgDriverScheduleImg col-12 vh-100 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 bg-white p-0">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Car ID</th>
+                                    <th scope="col">Car Model</th>
+                                    <th scope="col">Pickup Date</th>
+                                    <th scope="col">Pickup Time</th>
+                                    <th scope="col">Pickup Location</th>
+                                    <th scope="col">Destination</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td >Larry the Bird</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                    <td>@twitter</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
+</body>
+</html>
