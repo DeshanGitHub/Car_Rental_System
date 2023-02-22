@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Car Rental</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="../../img/car_rental_logo.png" rel="icon">
+
+    <!--CSS FILES-->
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <style>
+        body {
+            position: relative;
+            overflow-x: hidden;
+            background-color: white;
+        }
+
+        body,
+        html {
+            height: 100%;
+        }
+
+        .nav .open > a,
+        .nav .open > a:hover,
+        .nav .open > a:focus {
+            background-color: transparent;
+        }
+
+        /*-------------------------------*/
+        /*           Wrappers            */
+        /*-------------------------------*/
+
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #wrapper.toggled {
+            padding-left: 220px;
+        }
+
+        #sidebar-wrapper {
+            z-index: 1000;
+            left: 220px;
+            width: 0;
+            height: 100%;
+            margin-left: -220px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: #1a1a1a;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #sidebar-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 220px;
+        }
+
+        #page-content-wrapper {
+            width: 100%;
+            padding-top: 70px;
+        }
+
+        #wrapper.toggled #page-content-wrapper {
+            position: absolute;
+            margin-right: -220px;
+        }
+
+        /*-------------------------------*/
+        /*     Sidebar nav styles        */
+        /*-------------------------------*/
+        .navbar {
+            padding: 0;
+        }
+
+        .sidebar-nav {
+            position: absolute;
+            top: 0;
+            width: 220px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            position: relative;
+            line-height: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .sidebar-nav li:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            height: 100%;
+            width: 3px;
+            background-color: #1c1c1c;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+
+        }
+
+        .sidebar-nav li:first-child a {
+            color: #fff;
+            background-color: #1a1a1a;
+        }
+
+        .sidebar-nav li:nth-child(5n+1):before {
+            background-color: #ec1b5a;
+        }
+
+        .sidebar-nav li:nth-child(5n+2):before {
+            background-color: #79aefe;
+        }
+
+        .sidebar-nav li:nth-child(5n+3):before {
+            background-color: #314190;
+        }
+
+        .sidebar-nav li:nth-child(5n+4):before {
+            background-color: #279636;
+        }
+
+        .sidebar-nav li:nth-child(5n+5):before {
+            background-color: #7d5d81;
+        }
+
+        .sidebar-nav li:hover:before,
+        .sidebar-nav li.open:hover:before {
+            width: 100%;
+            -webkit-transition: width .2s ease-in;
+            -moz-transition: width .2s ease-in;
+            -ms-transition: width .2s ease-in;
+            transition: width .2s ease-in;
+
+        }
+
+        .sidebar-nav li a {
+            display: block;
+            color: #ddd;
+            text-decoration: none;
+            padding: 10px 15px 10px 30px;
+        }
+
+        .sidebar-nav li a:hover,
+        .sidebar-nav li a:active,
+        .sidebar-nav li a:focus,
+        .sidebar-nav li.open a:hover,
+        .sidebar-nav li.open a:active,
+        .sidebar-nav li.open a:focus {
+            color: #fff;
+            text-decoration: none;
+            background-color: transparent;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            font-size: 20px;
+            position: relative;
+            width: 100%;
+            display: inline-block;
+        }
+
+        .sidebar-brand {
+            height: 65px;
+            position: relative;
+            background: #212531;
+            background: linear-gradient(to right bottom, #2f3441 50%, #212531 50%);
+            padding-top: 1em;
+        }
+
+        .sidebar-brand a {
+            color: #ddd;
+        }
+
+        .sidebar-brand a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .dropdown-header {
+            text-align: center;
+            font-size: 1em;
+            color: #ddd;
+            background: #212531;
+            background: linear-gradient(to right bottom, #2f3441 50%, #212531 50%);
+        }
+
+        .sidebar-nav .dropdown-menu {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            border: none;
+            background-color: #222;
+            box-shadow: none;
+        }
+
+        .dropdown-menu.show {
+            top: 0;
+        }
+
+        /*Fontawesome icons*/
+        .nav.sidebar-nav li a::before {
+            font-family: fontawesome;
+            content: "\f12e";
+            vertical-align: baseline;
+            display: inline-block;
+            padding-right: 5px;
+        }
+
+        a[href*="#home"]::before {
+            content: "\f015" !important;
+        }
+
+        a[href*="#about"]::before {
+            content: "\f129" !important;
+        }
+
+        a[href*="#events"]::before {
+            content: "\f073" !important;
+        }
+
+        a[href*="#events"]::before {
+            content: "\f073" !important;
+        }
+
+        a[href*="#team"]::before {
+            content: "\f0c0" !important;
+        }
+
+        a[href*="#works"]::before {
+            content: "\f0b1" !important;
+        }
+
+        a[href*="#pictures"]::before {
+            content: "\f03e" !important;
+        }
+
+        a[href*="#videos"]::before {
+            content: "\f03d" !important;
+        }
+
+        a[href*="#books"]::before {
+            content: "\f02d" !important;
+        }
+
+        a[href*="#art"]::before {
+            content: "\f1fc" !important;
+        }
+
+        a[href*="#awards"]::before {
+            content: "\f02e" !important;
+        }
+
+        a[href*="#services"]::before {
+            content: "\f013" !important;
+        }
+
+        a[href*="#contact"]::before {
+            content: "\f086" !important;
+        }
+
+        a[href*="#followme"]::before {
+            content: "\f099" !important;
+            color: #0084b4;
+        }
+
+        /*-------------------------------*/
+        /*       Hamburger-Cross         */
+        /*-------------------------------*/
+
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            z-index: 999;
+            display: block;
+            width: 32px;
+            height: 32px;
+            margin-left: 15px;
+            background: transparent;
+            border: none;
+        }
+
+        .hamburger:hover,
+        .hamburger:focus,
+        .hamburger:active {
+            outline: none;
+        }
+
+        .hamburger.is-closed:before {
+            content: '';
+            display: block;
+            width: 100px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 32px;
+            text-align: center;
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover:before {
+            opacity: 1;
+            display: block;
+            -webkit-transform: translate3d(-100px, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed .hamb-top,
+        .hamburger.is-closed .hamb-middle,
+        .hamburger.is-closed .hamb-bottom,
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-middle,
+        .hamburger.is-open .hamb-bottom {
+            position: absolute;
+            left: 0;
+            height: 4px;
+            width: 100%;
+        }
+
+        .hamburger.is-closed .hamb-top,
+        .hamburger.is-closed .hamb-middle,
+        .hamburger.is-closed .hamb-bottom {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger.is-closed .hamb-top {
+            top: 5px;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed .hamb-middle {
+            top: 50%;
+            margin-top: -2px;
+        }
+
+        .hamburger.is-closed .hamb-bottom {
+            bottom: 5px;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover .hamb-top {
+            top: 0;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-closed:hover .hamb-bottom {
+            bottom: 0;
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-middle,
+        .hamburger.is-open .hamb-bottom {
+            background-color: #1a1a1a;
+        }
+
+        .hamburger.is-open .hamb-top,
+        .hamburger.is-open .hamb-bottom {
+            top: 50%;
+            margin-top: -2px;
+        }
+
+        .hamburger.is-open .hamb-top {
+            -webkit-transform: rotate(45deg);
+            -webkit-transition: -webkit-transform .2s cubic-bezier(.73, 1, .28, .08);
+        }
+
+        .hamburger.is-open .hamb-middle {
+            display: none;
+        }
+
+        .hamburger.is-open .hamb-bottom {
+            -webkit-transform: rotate(-45deg);
+            -webkit-transition: -webkit-transform .2s cubic-bezier(.73, 1, .28, .08);
+        }
+
+        .hamburger.is-open:before {
+            content: '';
+            display: block;
+            width: 100px;
+            font-size: 14px;
+            color: #fff;
+            line-height: 32px;
+            text-align: center;
+            opacity: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        .hamburger.is-open:hover:before {
+            opacity: 1;
+            display: block;
+            -webkit-transform: translate3d(-100px, 0, 0);
+            -webkit-transition: all .35s ease-in-out;
+        }
+
+        /*-------------------------------*/
+        /*            Overlay            */
+        /*-------------------------------*/
+
+        .overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(250, 250, 250, .8);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div id="wrapper">
+        <div class="overlay"></div>
+
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <div class="sidebar-header">
+                    <div class="sidebar-brand">
+                        <a href="#" style="text-decoration: none">Easy Car <span
+                                style="color: #ff6363">Rental</span></a></div>
+                </div>
+                <li><a href="adminDashBoardPage.html">Dashboard</a></li>
+                <li><a href="adminCarsPage.html">Cars</a></li>
+                <li><a href="adminCarsPage.html">Car Rental Rate</a></li>
+                <li><a href="#">Customers</a></li>
+                <li><a href="#">Bookings</a></li>
+                <li><a href="#">Team</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#works">Works <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu animated fadeInLeft" role="menu">
+                        <div class="dropdown-header">Dropdown heading</div>
+                        <li><a href="#pictures">Pictures</a></li>
+                        <li><a href="#videos">Videeos</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#art">Art</a></li>
+                        <li><a href="#awards">Awards</a></li>
+                    </ul>
+                </li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#followme">Follow me</a></li>
+            </ul>
+        </nav>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas" type="button">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-lg-offset-2 ">
+                        <h1>Add new driver</h1>
+                        <hr class="hr"/>
+                        <div class="container-fluid">
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center">
+                                            <!--DRIVER SAVE FORM-->
+                                            <div class="col-8 mt-3">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtDriverId">Driver
+                                                                ID</label>
+                                                            <input class="form-control" id="txtDriverId"
+                                                                   placeholder="Driver ID"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtDriverFirstName">First
+                                                                Name</label>
+                                                            <input class="form-control" id="txtDriverFirstName"
+                                                                   placeholder="First Name"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtDriverLastName">Last
+                                                                Name</label>
+                                                            <input class="form-control" id="txtDriverLastName"
+                                                                   placeholder="Last Name"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtContactNum">Contact
+                                                                Number</label>
+                                                            <input class="form-control" id="txtContactNum"
+                                                                   placeholder="Contact"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtEmailAddress">Email
+                                                                Address</label>
+                                                            <input class="form-control" id="txtEmailAddress"
+                                                                   placeholder="Email"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtAddress">Address</label>
+                                                            <input class="form-control" id="txtAddress"
+                                                                   placeholder="Address"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtDrivingLicense">Driving
+                                                                License Number</label>
+                                                            <input class="form-control" id="txtDrivingLicense"
+                                                                   placeholder="Driving License"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="uploadImgDiv1">Upload Driving
+                                                                License Image</label>
+                                                            <div class="input-group" id="uploadImgDiv1">
+                                                                <input class="form-control"
+                                                                       id="inpDriverDrivingLicenseImg"
+                                                                       type="file">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtNicNum">NIC Number</label>
+                                                            <input class="form-control" id="txtNicNum"
+                                                                   placeholder="NIC"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="uploadImgDiv2">Upload NIC
+                                                                Image</label>
+                                                            <div class="input-group" id="uploadImgDiv2">
+                                                                <input class="form-control" id="inpDriverNicImg"
+                                                                       type="file">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtUserName">User
+                                                                Name</label>
+                                                            <input class="form-control" id="txtUserName"
+                                                                   placeholder="User Name"
+                                                                   type="text">
+                                                        </div>
+
+                                                        <div class="mb-3 col-6">
+                                                            <label class="form-label" for="txtPassword">Password</label>
+                                                            <input class="form-control" id="txtPassword"
+                                                                   placeholder="Password"
+                                                                   type="password">
+                                                        </div>
+
+
+                                                        <div class="col-12 d-flex justify-content-center">
+                                                            <button class="btn btn-primary w-25" type="submit">Save
+                                                                Driver
+                                                            </button>
+                                                        </div>
+
+
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+</main>
+
+<script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
+
+<script>
+    /*ADD CAR BUTTON FUNCTION*/
+    $("#btnAddCar1").click(function () {
+        alert("ok")
+    });
+
+    /*SIDE BAR SCRIPT*/
+    $(document).ready(function () {
+        var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+        trigger.click(function () {
+            hamburger_cross();
+        });
+
+        function hamburger_cross() {
+
+            if (isClosed == true) {
+                overlay.hide();
+                trigger.removeClass('is-open');
+                trigger.addClass('is-closed');
+                isClosed = false;
+            } else {
+                overlay.show();
+                trigger.removeClass('is-closed');
+                trigger.addClass('is-open');
+                isClosed = true;
+            }
+        }
+
+        $('[data-toggle="offcanvas"]').click(function () {
+            $('#wrapper').toggleClass('toggled');
+        });
+    });
+</script>
+</body>
+</html>
