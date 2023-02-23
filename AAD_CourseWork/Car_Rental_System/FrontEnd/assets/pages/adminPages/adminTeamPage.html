@@ -478,71 +478,100 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-lg-offset-2 ">
-                        <h1>Payment Details</h1>
+                        <h1>Admin Team</h1>
                         <hr class="hr"/>
                         <div class="container-fluid">
                             <div class="row">
-
-                                <div class="col-12 mb-3">
-                                    <div class="row d-flex justify-content-end">
-                                        <div class="col-3">
-                                            <select aria-label="Default select example" class="form-select">
-                                                <option selected>Search by payment status</option>
-                                                <option value="1">Pending</option>
-                                                <option value="2">Confirmed</option>
-                                                <option value="3">Deny</option>
-                                            </select>
+                                <div class="col-12">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminId">Admin ID</label>
+                                                <input class="form-control" id="txtAdminId" type="text" placeholder="ID">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminFirstName">First Name</label>
+                                                <input class="form-control" id="txtAdminFirstName" type="text" placeholder="First Name">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminLastName">Last Name</label>
+                                                <input class="form-control" id="txtAdminLastName" type="text" placeholder="Last Name">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminEmailAddress">Email Address</label>
+                                                <input class="form-control" id="txtAdminEmailAddress" type="text" placeholder="Email">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminContactNum">Contact Number</label>
+                                                <input class="form-control" id="txtAdminContactNum" type="text" placeholder="Number">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtAdminAddress">Address</label>
+                                                <input class="form-control" id="txtAdminAddress" type="text" placeholder="Address">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtJobRole">Job Role</label>
+                                                <input class="form-control" id="txtJobRole" type="text" placeholder="Job Role">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtUserName">User Name</label>
+                                                <input class="form-control" id="txtUserName" type="text" placeholder="User Name">
+                                            </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtPassword">Password</label>
+                                                <input class="form-control" id="txtPassword" type="password" placeholder="Password">
+                                            </div>
                                         </div>
+                                    </form>
 
-                                        <div class="col-1 px-0">
-                                            <button class="btn btn-primary w-100" type="button">Search</button>
+                                    <!--BUTTONS-->
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-success m-1" style="width: 120px">Save</button>
+                                            <button type="button" class="btn btn-secondary m-1" style="width: 120px">Clear</button>
+                                            <button type="button" class="btn btn-warning m-1" style="width: 120px">Update</button>
+                                            <button type="button" class="btn btn-danger m-1" style="width: 120px">Delete</button>
+
                                         </div>
                                     </div>
-                                </div>
+                                    <!--BUTTONS - WRAPPER-->
 
-                                <div class="col-12 px-0">
-                                    <!--PAYMENT DETAILS TABLE-->
-                                    <table class="table table-bordered">
+                                    <!--ADMIN DETAILS TABLE-->
+                                    <table class="table my-3 table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Payment ID</th>
-                                            <th scope="col">Booking ID</th>
-                                            <th scope="col">Customer ID</th>
-                                            <th scope="col">Pay Date</th>
-                                            <th scope="col">Reason</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Admin ID</th>
+                                            <th scope="col">First Name</th>
+                                            <th scope="col">Last Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Contact No</th>
+                                            <th scope="col">Address</th>
+                                            <th scope="col">Job Role</th>
                                         </tr>
                                         </thead>
-                                        <tbody class="table-group-divider" id="tblPaymentDetailsBody">
+                                        <tbody class="table-group-divider">
                                         <tr>
                                             <th scope="row">1</th>
-                                            <td>cr001</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
                                             <td>@mdo</td>
                                             <td>@mdo</td>
                                             <td>@mdo</td>
-
+                                            <td>@mdo</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
-                                            <td>cr002</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
                                             <td>@fat</td>
                                             <td>@fat</td>
                                             <td>@fat</td>
-
+                                            <td>@fat</td>
                                         </tr>
-
                                         </tbody>
                                     </table>
-
-
+                                    <!--ADMIN DETAILS TABLE - WRAPPER-->
                                 </div>
-                                <!--LEFT SIDE AREA-->
-
                             </div>
                         </div>
                     </div>
@@ -551,164 +580,18 @@
         </div>
         <!-- /#page-content-wrapper -->
 
-
-        <!--PAGE CONTENT 2-->
-        <div id="page-content-wrapper2">
-            <button class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas" type="button">
-                <span class="hamb-top"></span>
-                <span class="hamb-middle"></span>
-                <span class="hamb-bottom"></span>
-            </button>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 col-lg-offset-2 ">
-                        <h1>Payment - P001</h1>
-                        <hr class="hr"/>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-3">
-                                    <h4>Payment Details</h4>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPaymentId">Payment ID</label>
-                                                <input class="form-control" id="txtPaymentId" placeholder="Payment ID"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingId">Booking ID</label>
-                                                <input class="form-control" id="txtBookingId" placeholder="Booking ID"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtCustomerId">Customer ID</label>
-                                                <input class="form-control" id="txtCustomerId" placeholder="Customer ID"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtCustomerName">Customer Name</label>
-                                                <input class="form-control" id="txtCustomerName"
-                                                       placeholder="Customer Name"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPayedDate">Pay Date</label>
-                                                <input class="form-control" id="txtPayedDate" placeholder="Pay Date"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPayedAmount">Amount</label>
-                                                <input class="form-control" id="txtPayedAmount" placeholder="Amount"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPaymentReason">Payment Reason</label>
-                                                <input class="form-control" id="txtPaymentReason" placeholder="Payment Reason"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPaymentStatus">Payment Status</label>
-                                                <input class="form-control" id="txtPaymentStatus"
-                                                       placeholder="Status"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPaymentStatusReason">Status Reason</label>
-                                                <input class="form-control" id="txtPaymentStatusReason"
-                                                       placeholder="Reason"
-                                                       type="text">
-                                            </div>
-
-
-                                        </div>
-                                    </form>
-
-                                    <!--PAYMENT CONFIRMATIONS AREA-->
-                                    <div class="row">
-                                        <div class="col-12 mb-1">
-                                            <h4>Payment Confirmations</h4>
-                                        </div>
-                                    </div>
-
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbPaymentStatus">Select Payment Status</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbPaymentStatus">
-                                                    <option selected>Select here</option>
-                                                    <option value="1">Pending</option>
-                                                    <option value="2">Accept</option>
-                                                    <option value="3">Deny</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPaymentStatusReason2">Status Reason</label>
-                                                <input class="form-control" id="txtPaymentStatusReason2"
-                                                       placeholder="Reason"
-                                                       type="text">
-                                            </div>
-                                            <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-primary w-50">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!--PAYMENT CONFIRMATIONS AREA - WRAPPER-->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/PAGE CONTENT 2 - WRAPPER-->
-
     </div>
     <!-- /#wrapper -->
 
 </main>
+
 
 <script src="../../../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
-    loadCarTable();
 
-    $("#page-content-wrapper1").css("display", "block");
-    $("#page-content-wrapper2").css("display", "none");
-
-    /*LOAD CAR TABLE*/
-    function loadCarTable() {
-        bindingRowClickEvent();
-    }
-
-    /*EVENT BINDING FOR THE TABLE ROWS*/
-    function bindingRowClickEvent() {
-        $("#tblPaymentDetailsBody>tr").click(function () {
-            $("#page-content-wrapper1").css("display", "none");
-            $("#page-content-wrapper2").css("display", "block");
-        });
-    }
-
-    /*ADD DRIVER BUTTON FUNCTION*/
-    $("#btnAddDriver1").click(function () {
-        window.location.href = "adminAddDriverPage.html";
-    });
 
     /*SIDE BAR SCRIPT*/
     $(document).ready(function () {
@@ -740,6 +623,5 @@
         });
     });
 </script>
-
 </body>
 </html>
