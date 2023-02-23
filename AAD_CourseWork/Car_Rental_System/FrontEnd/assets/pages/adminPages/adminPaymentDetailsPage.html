@@ -478,7 +478,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-lg-offset-2 ">
-                        <h1>Booking Details</h1>
+                        <h1>Payment Details</h1>
                         <hr class="hr"/>
                         <div class="container-fluid">
                             <div class="row">
@@ -487,10 +487,10 @@
                                     <div class="row d-flex justify-content-end">
                                         <div class="col-3">
                                             <select aria-label="Default select example" class="form-select">
-                                                <option selected>Search by booking status</option>
+                                                <option selected>Search by payment status</option>
                                                 <option value="1">Pending</option>
                                                 <option value="2">Confirmed</option>
-                                                <option value="3">Closed</option>
+                                                <option value="3">Deny</option>
                                             </select>
                                         </div>
 
@@ -501,25 +501,20 @@
                                 </div>
 
                                 <div class="col-12 px-0">
-                                    <!--DRIVERS TABLE-->
+                                    <!--PAYMENT DETAILS TABLE-->
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
+                                            <th scope="col">Payment ID</th>
                                             <th scope="col">Booking ID</th>
-                                            <th scope="col">Car ID</th>
-                                            <th scope="col">Requested Date</th>
                                             <th scope="col">Customer ID</th>
-                                            <th scope="col">Pickup Date</th>
-                                            <th scope="col">Pickup Time</th>
-                                            <th scope="col">Return Date</th>
-                                            <th scope="col">Driver Status</th>
-                                            <th scope="col">Rental Payment</th>
-                                            <th scope="col">Rental Payment</th>
-                                            <th scope="col">Loss Damage Waiver</th>
-                                            <th scope="col">Booking Status</th>
+                                            <th scope="col">Pay Date</th>
+                                            <th scope="col">Reason</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Status</th>
                                         </tr>
                                         </thead>
-                                        <tbody class="table-group-divider" id="tblBookingDetailsBody">
+                                        <tbody class="table-group-divider" id="tblPaymentDetailsBody">
                                         <tr>
                                             <th scope="row">1</th>
                                             <td>cr001</td>
@@ -528,11 +523,7 @@
                                             <td>@mdo</td>
                                             <td>@mdo</td>
                                             <td>@mdo</td>
-                                            <td>Yes</td>
-                                            <td>Yes</td>
-                                            <td>Yes</td>
-                                            <td>Yes</td>
-                                            <td>Yes</td>
+
                                         </tr>
                                         <tr>
                                             <th scope="row">2</th>
@@ -542,11 +533,7 @@
                                             <td>@fat</td>
                                             <td>@fat</td>
                                             <td>@fat</td>
-                                            <td>@fat</td>
-                                            <td>No</td>
-                                            <td>No</td>
-                                            <td>No</td>
-                                            <td>No</td>
+
                                         </tr>
 
                                         </tbody>
@@ -556,26 +543,6 @@
                                 </div>
                                 <!--LEFT SIDE AREA-->
 
-                                <!--<div class="col-3" style="padding-left: 30px">
-
-                                    <form>
-                                        <div class="row">
-
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <button class="btn btn-success" id="btnAddDriver1" type="button">+ Add New
-                                                    Driver
-                                                </button>
-                                            </div>
-                                            <hr class="hr mt-3"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label" for="txtSearchById">Search by ID</label>
-                                            <input class="form-control" id="txtSearchById" placeholder="Driver ID"
-                                                   type="text">
-                                        </div>
-                                        <button class="btn btn-primary" type="submit">Search</button>
-                                    </form>
-                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -595,12 +562,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-lg-offset-2 ">
-                        <h1>Booking - 001</h1>
+                        <h1>Payment - P001</h1>
                         <hr class="hr"/>
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-3">
-                                    <h4>Booking Details</h4>
+                                    <h4>Payment Details</h4>
                                 </div>
                             </div>
 
@@ -608,6 +575,12 @@
                                 <div class="col-12">
                                     <form>
                                         <div class="row">
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtPaymentId">Payment ID</label>
+                                                <input class="form-control" id="txtPaymentId" placeholder="Payment ID"
+                                                       type="text">
+                                            </div>
+
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtBookingId">Booking ID</label>
                                                 <input class="form-control" id="txtBookingId" placeholder="Booking ID"
@@ -622,172 +595,59 @@
 
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtCustomerName">Customer Name</label>
-                                                <input class="form-control" id="txtCustomerName" placeholder="Customer Name"
+                                                <input class="form-control" id="txtCustomerName"
+                                                       placeholder="Customer Name"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtRequestedDate">Requested Date</label>
-                                                <input class="form-control" id="txtRequestedDate"
-                                                       placeholder="Requested Date"
+                                                <label class="form-label" for="txtPayedDate">Pay Date</label>
+                                                <input class="form-control" id="txtPayedDate" placeholder="Pay Date"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPickupDate">Pickup Date</label>
-                                                <input class="form-control" id="txtPickupDate" placeholder="Pickup Date"
+                                                <label class="form-label" for="txtPayedAmount">Amount</label>
+                                                <input class="form-control" id="txtPayedAmount" placeholder="Amount"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPickupTime">Pickup Time</label>
-                                                <input class="form-control" id="txtPickupTime" placeholder="Pickup Time"
+                                                <label class="form-label" for="txtPaymentReason">Payment Reason</label>
+                                                <input class="form-control" id="txtPaymentReason" placeholder="Payment Reason"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtPickupLocation">Pickup
-                                                    Location</label>
-                                                <input class="form-control" id="txtPickupLocation"
-                                                       placeholder="Pickup Location"
+                                                <label class="form-label" for="txtPaymentStatus">Payment Status</label>
+                                                <input class="form-control" id="txtPaymentStatus"
+                                                       placeholder="Status"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtReturnDate">Return Date</label>
-                                                <input class="form-control" id="txtReturnDate"
-                                                       placeholder="Return Date"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDestination">Destination</label>
-                                                <input class="form-control" id="txtDestination"
-                                                       placeholder="Destination"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDriverStatus">Driver Status</label>
-                                                <input class="form-control" id="txtDriverStatus"
-                                                       placeholder="Driver Status"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDriverId">Driver ID</label>
-                                                <input class="form-control" id="txtDriverId"
-                                                       placeholder="Driver ID"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingStatus">Booking Status</label>
-                                                <input class="form-control" id="txtBookingStatus"
-                                                       placeholder="Booking Status"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingStatusReason">Booking Status Reason</label>
-                                                <input class="form-control" id="txtBookingStatusReason"
+                                                <label class="form-label" for="txtPaymentStatusReason">Status Reason</label>
+                                                <input class="form-control" id="txtPaymentStatusReason"
                                                        placeholder="Reason"
                                                        type="text">
                                             </div>
+
+
                                         </div>
                                     </form>
 
-                                    <!--BOOKING PAYMENT DETAILS AREA-->
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h4>Payment Details</h4>
-                                        </div>
-                                    </div>
-
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtLossDamageWaiverAmount">Loss Damage Waiver Amount</label>
-                                                <input class="form-control" id="txtLossDamageWaiverAmount"
-                                                       placeholder="Amount"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtLDWPayedAmount">LDW Payed Amount</label>
-                                                <input class="form-control" id="txtLDWPayedAmount"
-                                                       placeholder="Amount"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtRentalPrice">Rental Price</label>
-                                                <input class="form-control" id="txtRentalPrice"
-                                                       placeholder="Rental Price"
-                                                       type="text">
-                                            </div>
-
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtRentalPayedAmount">Rental Payed Amount</label>
-                                                <input class="form-control" id="txtRentalPayedAmount"
-                                                       placeholder="Amount To Pay"
-                                                       type="text">
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!--BOOKING PAYMENT DETAILS AREA - WRAPPER-->
-
-                                    <!--DRIVER CHANGING AREA-->
+                                    <!--PAYMENT CONFIRMATIONS AREA-->
                                     <div class="row">
                                         <div class="col-12 mb-1">
-                                            <h4>Change The Driver</h4>
+                                            <h4>Payment Confirmations</h4>
                                         </div>
                                     </div>
 
                                     <form>
                                         <div class="row">
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbDrivers">Select Driver</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbDrivers">
-                                                    <option selected>Select here</option>
-                                                    <option value="1">D001</option>
-                                                    <option value="2">D002</option>
-                                                    <option value="3">D003</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDriverName">Driver Name</label>
-                                                <input class="form-control" id="txtDriverName"
-                                                       placeholder="Name"
-                                                       type="text">
-                                            </div>
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDriverAvailability">Driver Availability</label>
-                                                <input class="form-control" id="txtDriverAvailability"
-                                                       placeholder="Availability"
-                                                       type="text">
-                                            </div>
-                                            <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-secondary w-50">Update</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <!--DRIVER CHANGING AREA - WRAPPER-->
-
-                                    <!--BOOKING CONFIRMATIONS AREA-->
-                                    <div class="row">
-                                        <div class="col-12 mb-1">
-                                            <h4>Booking Confirmations</h4>
-                                        </div>
-                                    </div>
-
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbBookingStatus">Select Booking Status</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbBookingStatus">
+                                                <label class="form-label" for="cmbPaymentStatus">Select Payment Status</label>
+                                                <select class="form-select" aria-label="Default select example" id="cmbPaymentStatus">
                                                     <option selected>Select here</option>
                                                     <option value="1">Pending</option>
                                                     <option value="2">Accept</option>
@@ -795,8 +655,8 @@
                                                 </select>
                                             </div>
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingStatusReason2">Status Reason</label>
-                                                <input class="form-control" id="txtBookingStatusReason2"
+                                                <label class="form-label" for="txtPaymentStatusReason2">Status Reason</label>
+                                                <input class="form-control" id="txtPaymentStatusReason2"
                                                        placeholder="Reason"
                                                        type="text">
                                             </div>
@@ -806,33 +666,8 @@
                                         </div>
                                     </form>
 
-                                    <!--BOOKING CONFIRMATIONS AREA - WRAPPER-->
+                                    <!--PAYMENT CONFIRMATIONS AREA - WRAPPER-->
 
-
-                                    <!--DELETE BOOKING DETAILS AREA-->
-
-                                    <div class="row">
-                                        <div class="col-12 mb-1">
-                                            <h4>Delete Booking Details</h4>
-                                        </div>
-                                    </div>
-
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbDeleteConfirmation">Do You Want To Delete This Booking</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbDeleteConfirmation">
-                                                    <option selected>No</option>
-                                                    <option value="1">Yes</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-danger w-50">Delete</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <!--DELETE BOOKING DETAILS AREA - WRAPPER-->
                                 </div>
                             </div>
                         </div>
@@ -864,7 +699,7 @@
 
     /*EVENT BINDING FOR THE TABLE ROWS*/
     function bindingRowClickEvent() {
-        $("#tblBookingDetailsBody>tr").click(function () {
+        $("#tblPaymentDetailsBody>tr").click(function () {
             $("#page-content-wrapper1").css("display", "none");
             $("#page-content-wrapper2").css("display", "block");
         });
@@ -905,7 +740,6 @@
         });
     });
 </script>
-
 
 </body>
 </html>
