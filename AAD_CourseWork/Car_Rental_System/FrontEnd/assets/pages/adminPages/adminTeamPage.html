@@ -487,39 +487,62 @@
                                         <div class="row">
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtAdminId">Admin ID</label>
-                                                <input class="form-control" id="txtAdminId" type="text" placeholder="ID">
+                                                <input class="form-control" id="txtAdminId" placeholder="ID"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtAdminFirstName">First Name</label>
-                                                <input class="form-control" id="txtAdminFirstName" type="text" placeholder="First Name">
+                                                <input class="form-control" id="txtAdminFirstName"
+                                                       placeholder="First Name"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtAdminLastName">Last Name</label>
-                                                <input class="form-control" id="txtAdminLastName" type="text" placeholder="Last Name">
+                                                <input class="form-control" id="txtAdminLastName"
+                                                       placeholder="Last Name"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtAdminEmailAddress">Email Address</label>
-                                                <input class="form-control" id="txtAdminEmailAddress" type="text" placeholder="Email">
+                                                <label class="form-label" for="txtAdminEmailAddress">Email
+                                                    Address</label>
+                                                <input class="form-control" id="txtAdminEmailAddress"
+                                                       placeholder="Email"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtAdminContactNum">Contact Number</label>
-                                                <input class="form-control" id="txtAdminContactNum" type="text" placeholder="Number">
+                                                <label class="form-label" for="txtAdminContactNum">Contact
+                                                    Number</label>
+                                                <input class="form-control" id="txtAdminContactNum" placeholder="Number"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtAdminAddress">Address</label>
-                                                <input class="form-control" id="txtAdminAddress" type="text" placeholder="Address">
+                                                <input class="form-control" id="txtAdminAddress" placeholder="Address"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtJobRole">Job Role</label>
-                                                <input class="form-control" id="txtJobRole" type="text" placeholder="Job Role">
+                                                <input class="form-control" id="txtJobRole" placeholder="Job Role"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtUserName">User Name</label>
-                                                <input class="form-control" id="txtUserName" type="text" placeholder="User Name">
+                                                <input class="form-control" id="txtUserName" placeholder="User Name"
+                                                       type="text">
+                                                <span></span>
                                             </div>
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtPassword">Password</label>
-                                                <input class="form-control" id="txtPassword" type="password" placeholder="Password">
+                                                <input class="form-control" id="txtPassword" placeholder="Password"
+                                                       type="password">
+                                                <span></span>
                                             </div>
                                         </div>
                                     </form>
@@ -527,10 +550,19 @@
                                     <!--BUTTONS-->
                                     <div class="row">
                                         <div class="col-12 d-flex justify-content-end">
-                                            <button type="button" class="btn btn-success m-1" style="width: 120px">Save</button>
-                                            <button type="button" class="btn btn-secondary m-1" style="width: 120px">Clear</button>
-                                            <button type="button" class="btn btn-warning m-1" style="width: 120px">Update</button>
-                                            <button type="button" class="btn btn-danger m-1" style="width: 120px">Delete</button>
+                                            <button class="btn btn-success m-1" id="btnSaveAdmin" style="width: 120px"
+                                                    type="button">
+                                                Save
+                                            </button>
+                                            <button class="btn btn-secondary m-1" style="width: 120px" type="button">
+                                                Clear
+                                            </button>
+                                            <button class="btn btn-warning m-1" style="width: 120px" type="button">
+                                                Update
+                                            </button>
+                                            <button class="btn btn-danger m-1" style="width: 120px" type="button">
+                                                Delete
+                                            </button>
 
                                         </div>
                                     </div>
@@ -592,6 +624,242 @@
 
 <script>
 
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+    /* DISABLE "TAB" KEY DEFAULT FUNCTION */
+    $("#txtAdminId, #txtAdminFirstName, #txtAdminLastName, #txtAdminEmailAddress, #txtAdminContactNum, #txtAdminAddress, #txtJobRole, #txtUserName, #txtPassword").keydown(function (
+        event
+    ) {
+        if (event.key == "Tab") {
+            event.preventDefault();
+        }
+    });
+    /* DISABLE "TAB" KEY DEFAULT FUNCTION - WRAPPER*/
+
+    /*MANAGE CHANGING TEXT FIELDS WHEN CLICK ENTER BUTTON*/
+    $("#txtAdminId").focus();
+
+    $("#txtAdminId").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(adminIdRegEx, $("#txtAdminId"))) {
+            $("#txtAdminFirstName").focus();
+        } else {
+            $("#txtAdminId").focus();
+        }
+    });
+
+    $("#txtAdminFirstName").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(firstNameRegEx, $("#txtAdminFirstName"))) {
+            $("#txtAdminLastName").focus();
+        } else {
+            $("#txtAdminFirstName").focus();
+        }
+    });
+
+    $("#txtAdminLastName").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(lastNameRegEx, $("#txtAdminLastName"))) {
+            $("#txtAdminEmailAddress").focus();
+        } else {
+            $("#txtAdminLastName").focus();
+        }
+    });
+
+    $("#txtAdminEmailAddress").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(emailRegEx, $("#txtAdminEmailAddress"))) {
+            $("#txtAdminContactNum").focus();
+        } else {
+            $("#txtAdminEmailAddress").focus();
+        }
+    });
+
+    $("#txtAdminContactNum").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(contactNumRegEx, $("#txtAdminContactNum"))) {
+            $("#txtAdminAddress").focus();
+        } else {
+            $("#txtAdminContactNum").focus();
+        }
+    });
+
+    $("#txtAdminAddress").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(addressRegEx, $("#txtAdminAddress"))) {
+            $("#txtJobRole").focus();
+        } else {
+            $("#txtAdminAddress").focus();
+        }
+    });
+
+    $("#txtJobRole").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(jobRoleRegEx, $("#txtJobRole"))) {
+            $("#txtUserName").focus();
+        } else {
+            $("#txtJobRole").focus();
+        }
+    });
+
+    $("#txtUserName").keydown(function (event) {
+
+        if (event.keyCode == 13 && check(userNameRegEx, $("#txtUserName"))) {
+            $("#txtPassword").focus();
+        } else {
+            $("#txtUserName").focus();
+        }
+    });
+
+    $("#txtPassword").keydown(function (event) {
+        if (
+            event.keyCode === 13 &&
+            check(passwordRegEx, $("#txtPassword")) &&
+            !($("#btnSaveAdmin").attr("disabled") === "disabled")
+        ) {
+            let res = confirm("Do you want to save this Admin ?");
+            if (res) {
+                alert("Saved");
+                /*TODO*/
+               /* saveCustomer();
+                $("#txtCusID").focus();*/
+            }
+        }
+    });
+
+
+    /*MANAGE CHANGING TEXT FIELDS WHEN CLICK ENTER BUTTON - WRAPPER*/
+
+
+    /*TEXT FIELDS VALIDATIONS*/
+
+    const adminIdRegEx = /^(A00-)[0-9]{1,3}$/;
+    const firstNameRegEx = /^[A-z ]{5,15}$/;
+    const lastNameRegEx = /^[A-z ]{5,20}$/;
+    const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const contactNumRegEx = /^(?:\+94|0)?(7\d{8}|[1-9][1-9](?:\d{7}|\d{6}\d))$/;
+    const addressRegEx = /^[0-9/A-z. ,]{7,}$/;
+    const jobRoleRegEx = /^[0-9/A-z. ,]{4,}$/;
+    const userNameRegEx = /^[0-9/A-z. ,]{4,}/;
+    const passwordRegEx = /.{4,}/;
+
+    let adminValidations = [];
+
+    adminValidations.push({
+        reg: adminIdRegEx,
+        field: $("#txtAdminId"),
+        error: "Admin ID Pattern is : A00-001",
+    });
+    adminValidations.push({
+        reg: firstNameRegEx,
+        field: $("#txtAdminFirstName"),
+        error: "First Name Pattern is : A-z 5-20",
+    });
+    adminValidations.push({
+        reg: lastNameRegEx,
+        field: $("#txtAdminLastName"),
+        error: "Last Name Pattern is : A-z 5-20",
+    });
+    adminValidations.push({
+        reg: emailRegEx,
+        field: $("#txtAdminEmailAddress"),
+        error: "Email is wrong",
+    });
+    adminValidations.push({
+        reg: contactNumRegEx,
+        field: $("#txtAdminContactNum"),
+        error: "Phone Number is wrong.",
+    });
+    adminValidations.push({
+        reg: addressRegEx,
+        field: $("#txtAdminAddress"),
+        error: "Address pattern example : 123 Main St.",
+    });
+    adminValidations.push({
+        reg: jobRoleRegEx,
+        field: $("#txtJobRole"),
+        error: "Job Role pattern example : A1B",
+    });
+    adminValidations.push({
+        reg: userNameRegEx,
+        field: $("#txtUserName"),
+        error: "User name pattern example : A1B/",
+    });
+    adminValidations.push({
+        reg: passwordRegEx,
+        field: $("#txtPassword"),
+        error: "Password Not Strong",
+    });
+
+
+    $("#txtAdminId, #txtAdminFirstName, #txtAdminLastName, #txtAdminEmailAddress, #txtAdminContactNum, #txtAdminAddress, #txtJobRole, #txtUserName, #txtPassword").on("keyup", function () {
+        checkValidity();
+    });
+
+    $("#txtAdminId, #txtAdminFirstName, #txtAdminLastName, #txtAdminEmailAddress, #txtAdminContactNum, #txtAdminAddress, #txtJobRole, #txtUserName, #txtPassword").on("blur", function () {
+        checkValidity();
+    });
+
+    function checkValidity() {
+        let errorCount = 0;
+
+        for (let validation of adminValidations) {
+            if (check(validation.reg, validation.field)) {
+                setTextSuccess(validation.field, "");
+            } else {
+                errorCount = errorCount + 1;
+                setTextError(validation.field, validation.error);
+            }
+        }
+
+        /*MANAGE "SAVE BUTTON" ACTIVATION AND DISABLE*/
+        setButtonState(errorCount);
+    }
+
+    function setButtonState(errorCount) {
+        if (errorCount > 0) {
+            $("#btnSaveAdmin").attr("disabled", true);
+        } else {
+            $("#btnSaveAdmin").attr("disabled", false);
+        }
+    }
+
+    function setTextError(textFieldId, error) {
+        if (textFieldId.val().length <= 0) {
+            defaultText(textFieldId, "");
+        } else {
+            textFieldId.css("border", "2px solid red");
+            textFieldId.parent().children("span").text(error);
+            textFieldId.parent().children("span").css("color", "red");
+        }
+    }
+
+    function setTextSuccess(textFieldId, error) {
+        if (textFieldId.val().length <= 0) {
+            defaultText(textFieldId, "");
+        } else {
+            textFieldId.css("border", "2px solid green");
+            textFieldId.parent().children("span").text(error);
+        }
+    }
+
+    function defaultText(textField, error) {
+        textField.css("border", "1px solid #ced4da");
+        textField.parent().children("span").text(error);
+    }
+
+    function check(regEx, textFieldId) {
+        let inputValue = textFieldId.val();
+
+        if (regEx.test(inputValue)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /*TEXT FIELDS VALIDATIONS - WRAPPER*/
 
     /*SIDE BAR SCRIPT*/
     $(document).ready(function () {
