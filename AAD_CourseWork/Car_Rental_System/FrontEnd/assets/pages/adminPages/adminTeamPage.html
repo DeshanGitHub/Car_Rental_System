@@ -616,7 +616,19 @@
 
     /*DELETE BUTTON ON ACTION*/
     $("#btnDeleteAdmin").click(function () {
-        alert("delete button")
+        let adminId = $("#txtAdminId").val();
+        $.ajax({
+            url: baseUrl + "employee?id=" + adminId + "",
+            method: "DELETE",
+            dataType: "json",
+            success: function (resp) {
+                alert(resp.message);
+                loadAllAdminTable();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        })
     });
 
     /*UPDATE BUTTON ON ACTION*/
