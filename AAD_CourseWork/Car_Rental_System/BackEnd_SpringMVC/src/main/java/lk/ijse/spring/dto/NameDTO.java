@@ -1,5 +1,6 @@
 package lk.ijse.spring.dto;
 
+
 public class NameDTO {
     private String fName;
     private String lName;

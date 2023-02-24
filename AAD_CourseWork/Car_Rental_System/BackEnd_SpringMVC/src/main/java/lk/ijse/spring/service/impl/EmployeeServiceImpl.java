@@ -48,6 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public ArrayList<EmployeeDTO> getAllEmployees() {
+
+        System.out.println("This is from employee service layer");
+        System.out.println("Answer => "+employeeRepo.findAll());
         return mapper.map(employeeRepo.findAll(), new TypeToken<ArrayList<EmployeeDTO>>() {
         }.getType());
     }
