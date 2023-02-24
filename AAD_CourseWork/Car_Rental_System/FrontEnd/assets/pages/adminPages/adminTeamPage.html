@@ -554,13 +554,16 @@
                                                     type="button">
                                                 Save
                                             </button>
-                                            <button id="btnClearAdmin" class="btn btn-secondary m-1" style="width: 120px" type="button">
+                                            <button class="btn btn-secondary m-1" id="btnClearAdmin"
+                                                    style="width: 120px" type="button">
                                                 Clear
                                             </button>
-                                            <button id="btnUpdateAdmin" class="btn btn-warning m-1" style="width: 120px" type="button">
+                                            <button class="btn btn-warning m-1" id="btnUpdateAdmin" style="width: 120px"
+                                                    type="button">
                                                 Update
                                             </button>
-                                            <button class="btn btn-danger m-1" style="width: 120px" type="button">
+                                            <button class="btn btn-danger m-1" id="btnDeleteAdmin" style="width: 120px"
+                                                    type="button">
                                                 Delete
                                             </button>
 
@@ -611,21 +614,65 @@
 
     loadAllAdminTable();
 
+    /*DELETE BUTTON ON ACTION*/
+    $("#btnDeleteAdmin").click(function () {
+        alert("delete button")
+    });
+
     /*UPDATE BUTTON ON ACTION*/
     $("#btnUpdateAdmin").click(function () {
-      //TODO
+        let adminId = $("#txtAdminId").val();
+        let firstName = $("#txtAdminFirstName").val();
+        let lastName = $("#txtAdminLastName").val();
+        let email = $("#txtAdminEmailAddress").val();
+        let contactNum = $("#txtAdminContactNum").val();
+        let address = $("#txtAdminAddress").val();
+        let jobRole = $("#txtJobRole").val();
+        let userName = $("#txtUserName").val();
+        let password = $("#txtPassword").val();
+
+        var admin = {
+            id: adminId,
+            name: {
+                fName: firstName,
+                lName: lastName,
+            },
+            address: address,
+            email: email,
+            contactNum: contactNum,
+            jobRole: jobRole,
+            password: password,
+            userName: userName
+        }
+
+        $.ajax({
+            url: baseUrl + "employee",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(admin),
+            dataType: "json",
+            success: function (res) {
+                alert(res.message);
+                loadAllAdminTable();
+            },
+            error: function (error) {
+                let cause = (JSON).parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+
     });
 
     /*EVENT BINDING FOR THE ADMIN TABLE ROWS*/
-    function bindRowClickEvent(){
+    function bindRowClickEvent() {
         $("#tblAdminBody>tr").click(function () {
-            let adminId=$(this).children(":eq(0)").text();
-            let firstName=$(this).children(":eq(1)").text();
-            let lastName=$(this).children(":eq(2)").text();
-            let emailAddress=$(this).children(":eq(3)").text();
-            let contactNum=$(this).children(":eq(4)").text();
-            let address=$(this).children(":eq(5)").text();
-            let jobRole=$(this).children(":eq(6)").text();
+            let adminId = $(this).children(":eq(0)").text();
+            let firstName = $(this).children(":eq(1)").text();
+            let lastName = $(this).children(":eq(2)").text();
+            let emailAddress = $(this).children(":eq(3)").text();
+            let contactNum = $(this).children(":eq(4)").text();
+            let address = $(this).children(":eq(5)").text();
+            let jobRole = $(this).children(":eq(6)").text();
 
             /*console.log(adminId, firstName);*/
 
@@ -661,15 +708,15 @@
         $("#txtPassword").val("");
     }
 
-    function loadAllAdminTable(){
+    function loadAllAdminTable() {
         $("#tblAdminBody").empty();
         $.ajax({
-            url:baseUrl+'employee',
+            url: baseUrl + 'employee',
             dataType: "json",
-            success:function (resp) {
+            success: function (resp) {
                 console.log(resp);
                 for (let admin of resp.data) {
-                    var row='<tr><td>'+admin.id+'</td><td>'+admin.name.fName+'</td><td>'+admin.name.lName+'</td><td>'+admin.email+'</td><td>'+admin.contactNum+'</td><td>'+admin.address+'</td><td>'+admin.jobRole+'</td></tr>';
+                    var row = '<tr><td>' + admin.id + '</td><td>' + admin.name.fName + '</td><td>' + admin.name.lName + '</td><td>' + admin.email + '</td><td>' + admin.contactNum + '</td><td>' + admin.address + '</td><td>' + admin.jobRole + '</td></tr>';
                     $("#tblAdminBody").append(row);
                 }
                 clearTextFields();
@@ -686,43 +733,43 @@
         saveAdmin();
     });
 
-    function saveAdmin(){
-        let adminId=$("#txtAdminId").val();
-        let firstName=$("#txtAdminFirstName").val();
-        let lastName=$("#txtAdminLastName").val();
-        let email=$("#txtAdminEmailAddress").val();
-        let contactNum=$("#txtAdminContactNum").val();
-        let address=$("#txtAdminAddress").val();
-        let jobRole=$("#txtJobRole").val();
-        let userName=$("#txtUserName").val();
-        let password=$("#txtPassword").val();
+    function saveAdmin() {
+        let adminId = $("#txtAdminId").val();
+        let firstName = $("#txtAdminFirstName").val();
+        let lastName = $("#txtAdminLastName").val();
+        let email = $("#txtAdminEmailAddress").val();
+        let contactNum = $("#txtAdminContactNum").val();
+        let address = $("#txtAdminAddress").val();
+        let jobRole = $("#txtJobRole").val();
+        let userName = $("#txtUserName").val();
+        let password = $("#txtPassword").val();
 
-        var admin={
-            id:adminId,
-            name:{
-                fName:firstName,
-                lName:lastName,
+        var admin = {
+            id: adminId,
+            name: {
+                fName: firstName,
+                lName: lastName,
             },
-            address:address,
-            email:email,
-            contactNum:contactNum,
-            jobRole:jobRole,
-            password:password,
-            userName:userName
+            address: address,
+            email: email,
+            contactNum: contactNum,
+            jobRole: jobRole,
+            password: password,
+            userName: userName
         }
 
         $.ajax({
-            url:baseUrl+'employee',
-            method:'POST',
-            contentType:"application/json",
-            data:JSON.stringify(admin),
-            dataType:'json',
-            success:function (res) {
+            url: baseUrl + 'employee',
+            method: 'POST',
+            contentType: "application/json",
+            data: JSON.stringify(admin),
+            dataType: 'json',
+            success: function (res) {
                 alert(res.message);
                 loadAllAdminTable();
             },
-            error:function (error) {
-                let cause=JSON.parse(error.responseText).message;
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
                 alert(cause);
             }
         });
@@ -821,8 +868,6 @@
         ) {
             let res = confirm("Do you want to save this Admin ?");
             if (res) {
-               /* alert("Saved");*/
-                /*TODO*/
                 saveAdmin();
                 $("#txtCusID").focus();
             }
@@ -916,15 +961,17 @@
             }
         }
 
-        /*MANAGE "SAVE BUTTON" ACTIVATION AND DISABLE*/
+        /*MANAGE "SAVE BUTTON" & "UPDATE BUTTON" ACTIVATION AND DISABLE*/
         setButtonState(errorCount);
     }
 
     function setButtonState(errorCount) {
         if (errorCount > 0) {
             $("#btnSaveAdmin").attr("disabled", true);
+            $("#btnUpdateAdmin").attr("disabled", true);
         } else {
             $("#btnSaveAdmin").attr("disabled", false);
+            $("#btnUpdateAdmin").attr("disabled", false);
         }
     }
 
