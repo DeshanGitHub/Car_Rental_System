@@ -582,24 +582,7 @@
                                         </tr>
                                         </thead>
                                         <tbody class="table-group-divider" id="tblAdminBody">
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                            <td>@mdo</td>
-                                            <td>@mdo</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                            <td>@fat</td>
-                                            <td>@fat</td>
-                                            <td>@fat</td>
-                                        </tr>
+                                        <!--ADMIN TABLE BODY-->
                                         </tbody>
                                     </table>
                                     <!--ADMIN DETAILS TABLE - WRAPPER-->
@@ -625,6 +608,23 @@
 <script>
 
     let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+    loadAllAdminTable();
+
+    function loadAllAdminTable(){
+        $("#tblAdminBody").empty();
+        $.ajax({
+            url:baseUrl+'employee',
+            dataType: "json",
+            success:function (resp) {
+                console.log(resp);
+                for (let admin of resp.data) {
+                    var row='<tr><td>'+admin.id+'</td><td>'+admin.name.fName+'</td><td>'+admin.name.lName+'</td><td>'+admin.email+'</td><td>'+admin.contactNum+'</td><td>'+admin.address+'</td><td>'+admin.jobRole+'</td></tr>';
+                    $("#tblAdminBody").append(row);
+                }
+            }
+        });
+    }
 
     /*SAVE BUTTON ON ACTION*/
     $("#btnSaveAdmin").click(function () {
@@ -663,8 +663,9 @@
             data:JSON.stringify(admin),
             dataType:'json',
             success:function (res) {
-                alert("success")
+                alert("Saved");
                 alert(res.message);
+                loadAllAdminTable();
             },
             error:function (error) {
                 alert("error")

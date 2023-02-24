@@ -18,17 +18,7 @@ public class EmployeeController {
 
     @GetMapping
     public ResponseUtil getAllEmployees() {
-
         ArrayList<EmployeeDTO> allEmployees = employeeService.getAllEmployees();
-        System.out.println("Get All Employees method from employee controller");
-        for (EmployeeDTO employee:allEmployees
-             ) {
-
-            System.out.println(employee.getName());
-
-
-        }
-
         return new ResponseUtil("200", "", allEmployees);
     }
 
