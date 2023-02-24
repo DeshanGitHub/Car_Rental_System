@@ -554,10 +554,10 @@
                                                     type="button">
                                                 Save
                                             </button>
-                                            <button class="btn btn-secondary m-1" style="width: 120px" type="button">
+                                            <button id="btnClearAdmin" class="btn btn-secondary m-1" style="width: 120px" type="button">
                                                 Clear
                                             </button>
-                                            <button class="btn btn-warning m-1" style="width: 120px" type="button">
+                                            <button id="btnUpdateAdmin" class="btn btn-warning m-1" style="width: 120px" type="button">
                                                 Update
                                             </button>
                                             <button class="btn btn-danger m-1" style="width: 120px" type="button">
@@ -611,6 +611,56 @@
 
     loadAllAdminTable();
 
+    /*UPDATE BUTTON ON ACTION*/
+    $("#btnUpdateAdmin").click(function () {
+      //TODO
+    });
+
+    /*EVENT BINDING FOR THE ADMIN TABLE ROWS*/
+    function bindRowClickEvent(){
+        $("#tblAdminBody>tr").click(function () {
+            let adminId=$(this).children(":eq(0)").text();
+            let firstName=$(this).children(":eq(1)").text();
+            let lastName=$(this).children(":eq(2)").text();
+            let emailAddress=$(this).children(":eq(3)").text();
+            let contactNum=$(this).children(":eq(4)").text();
+            let address=$(this).children(":eq(5)").text();
+            let jobRole=$(this).children(":eq(6)").text();
+
+            /*console.log(adminId, firstName);*/
+
+            $("#txtAdminId").val(adminId);
+            $("#txtAdminFirstName").val(firstName);
+            $("#txtAdminLastName").val(lastName);
+            $("#txtAdminEmailAddress").val(emailAddress);
+            $("#txtAdminContactNum").val(contactNum);
+            $("#txtAdminAddress").val(address);
+            $("#txtJobRole").val(jobRole);
+
+            checkValidity();
+        });
+
+    }
+
+    /*CLEAR BUTTON ON ACTION*/
+    $("#btnClearAdmin").click(function () {
+        clearTextFields();
+        checkValidity();
+        $("#txtAdminId").focus();
+    });
+
+    function clearTextFields() {
+        $("#txtAdminId").val("");
+        $("#txtAdminFirstName").val("");
+        $("#txtAdminLastName").val("");
+        $("#txtAdminEmailAddress").val("");
+        $("#txtAdminContactNum").val("");
+        $("#txtAdminAddress").val("");
+        $("#txtJobRole").val("");
+        $("#txtUserName").val("");
+        $("#txtPassword").val("");
+    }
+
     function loadAllAdminTable(){
         $("#tblAdminBody").empty();
         $.ajax({
@@ -622,6 +672,11 @@
                     var row='<tr><td>'+admin.id+'</td><td>'+admin.name.fName+'</td><td>'+admin.name.lName+'</td><td>'+admin.email+'</td><td>'+admin.contactNum+'</td><td>'+admin.address+'</td><td>'+admin.jobRole+'</td></tr>';
                     $("#tblAdminBody").append(row);
                 }
+                clearTextFields();
+                checkValidity();
+                $("#txtAdminId").focus();
+
+                bindRowClickEvent();
             }
         });
     }
@@ -663,12 +718,10 @@
             data:JSON.stringify(admin),
             dataType:'json',
             success:function (res) {
-                alert("Saved");
                 alert(res.message);
                 loadAllAdminTable();
             },
             error:function (error) {
-                alert("error")
                 let cause=JSON.parse(error.responseText).message;
                 alert(cause);
             }
