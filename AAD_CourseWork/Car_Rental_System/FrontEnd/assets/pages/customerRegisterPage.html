@@ -60,7 +60,8 @@
                         Us</a></li>
                     <li class="nav-item"><a class="nav-link text-white"
                                             href="../../assets/pages/customerRegisterPage.html">Register</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="../../assets/pages/loginPage.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link text-white"
+                                            href="../../assets/pages/loginPage.html">Login</a></li>
                 </ul>
 
             </div>
@@ -113,35 +114,36 @@
                                                            type="text">
                                                 </div>
                                                 <div class="col-6 mb-2">
-                                                    <label for="txtCustomerContactNum">Contact Number</label>
-                                                    <input class="form-control" id="txtCustomerContactNum"
+                                                    <label for="txtCustomerContactNumId">Contact Number</label>
+                                                    <input class="form-control" id="txtCustomerContactNumId"
                                                            placeholder="Contact Number" required
                                                            type="text">
                                                 </div>
                                                 <div class="col-6 mb-2">
-                                                    <label for="txtCustomerDrivingOrNic">Driving License/NIC
+                                                    <label for="txtCustomerDrivingOrNicId">Driving License/NIC
                                                         Number</label>
-                                                    <input class="form-control" id="txtCustomerDrivingOrNic"
+                                                    <input class="form-control" id="txtCustomerDrivingOrNicId"
                                                            placeholder="Driving License/NIC"
                                                            required
                                                            type="text">
                                                 </div>
                                                 <div class="col-6 mb-2">
-                                                    <label for="txtCustomerUserName">User Name</label>
-                                                    <input class="form-control" id="txtCustomerUserName"
+                                                    <label for="txtCustomerUserNameId">User Name</label>
+                                                    <input class="form-control" id="txtCustomerUserNameId"
                                                            placeholder="User Name" required
                                                            type="text">
                                                 </div>
                                                 <div class="col-6 mb-2">
-                                                    <label for="txtCustomerPassword">Password</label>
-                                                    <input class="form-control" id="txtCustomerPassword"
+                                                    <label for="txtCustomerPasswordId">Password</label>
+                                                    <input class="form-control" id="txtCustomerPasswordId"
                                                            placeholder="Password" required
                                                            type="text">
                                                 </div>
                                                 <div class="col-6 mb-2">
-                                                    <label class="form-label" for="inputState">Select Upload Image
+                                                    <label class="form-label" for="cmbUploadImgTypeId">Select Upload
+                                                        Image
                                                         Type</label>
-                                                    <select class="form-select" id="inputState">
+                                                    <select class="form-select" id="cmbUploadImgTypeId">
                                                         <option selected>Choose</option>
                                                         <option>Driving License</option>
                                                         <option>NIC</option>
@@ -151,30 +153,31 @@
                                                     <label class="form-label" for="uploadImgDiv1">Select Upload Image
                                                         Front Side</label>
                                                     <div class="input-group" id="uploadImgDiv1">
-                                                        <input class="form-control" id="customerInputImage1"
-                                                               type="file">
+                                                        <input class="form-control" id="customerImageFrontSide"
+                                                               name="imgFront" type="file">
                                                     </div>
                                                 </div>
                                                 <div class="col-6 mb-3">
                                                     <label class="form-label" for="uploadImgDiv2">Select Upload Image
                                                         Back Side</label>
                                                     <div class="input-group" id="uploadImgDiv2">
-                                                        <input class="form-control" id="customerInputImage2"
-                                                               type="file">
+                                                        <input class="form-control" id="customerImageBackSide"
+                                                               name="imgBack" type="file">
                                                     </div>
                                                 </div>
                                                 <!-- Force next columns to break to new line -->
                                                 <div class="col-6 mb-3">
                                                     <div class="w-100"></div>
                                                 </div>
-
-                                                <div class="col-4 d-flex justify-content-center mb-4">
-                                                    <button class="btn btn-info vw-100" type="button">Register Now
-                                                    </button>
-                                                </div>
-
-
                                             </form>
+
+                                            <!--BUTTONS-->
+                                            <div class="row d-flex justify-content-center">
+                                                <button class="col-3 mb-4 btn btn-info" id="btnRegisterNowId"
+                                                        type="button">Register Now
+                                                </button>
+                                            </div>
+
                                         </div>
 
                                     </div>
@@ -309,5 +312,141 @@
 <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../../assets/jQuery/jquery-3.6.0.min.js"></script>
+
+<script>
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+
+    /*CREATE NEW CUSTOMER ID*/
+    let newCustomerId;
+
+    function createNewCustomerId() {
+        $.ajax({
+            url: baseUrl + "customer/cusId",
+            dataType: "JSON",
+            async: false,
+            success: function (resp) {
+                /*console.log(resp.data);*/
+                let lastCustomerId = resp.data;
+
+                let tempId = parseInt(lastCustomerId.split("-")[1]);
+                tempId = tempId + 1;
+
+                if (tempId < 9) {
+
+                    newCustomerId = "CUS-00" + tempId;
+
+                } else if (tempId < 99) {
+                    newCustomerId = "CUS-0" + tempId;
+
+                } else {
+                    newCustomerId = "CUS-" + tempId;
+
+                }
+            },
+            error: function (error) {
+                alert("Error When Getting Last Customer ID From Back End!!")
+            }
+        });
+
+    }
+
+    /*REGISTER BUTTON ON ACTION*/
+    $("#btnRegisterNowId").click(function () {
+        createNewCustomerId();
+        if (typeof newCustomerId === "undefined") {
+            alert("Customer ID Not Defined!")
+        } else {
+            /*console.log(newCustomerId);*/
+            uploadCustomerImagesAndSaveDetails();
+        }
+    });
+
+    console.log("ok 1");
+
+
+    /*UPLOAD CUSTOMER IMAGES*/
+    function uploadCustomerImagesAndSaveDetails() {
+
+        console.log("kd : " + newCustomerId);
+
+        var imgFrontObject = $("#customerImageFrontSide")[0].files[0];
+        var imgFrontName = newCustomerId + "_FrontImage_" + $("#customerImageFrontSide")[0].files[0].name;
+
+        var imgBackObject = $("#customerImageBackSide")[0].files[0];
+        var imgBackName = newCustomerId + "_BackImage_" + $("#customerImageBackSide")[0].files[0].name;
+
+        var data = new FormData();
+        data.append("frontImage", imgFrontObject, imgFrontName);
+        data.append("backImage", imgBackObject, imgBackName);
+
+        $.ajax({
+            url: baseUrl + "customer",
+            method: "POST",
+            async: true,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (res) {
+                alert("Successfully Uploaded");
+                saveCustomer();
+            },
+            error: function (error) {
+                alert("Error When Uploading Files!!");
+            }
+        });
+    }
+
+
+    /*SAVE CUSTOMER*/
+    function saveCustomer() {
+        let cusId = newCustomerId;
+        let cusFirstName = $("#txtCustomerFirstNameId").val();
+        let cusLastName = $("#txtCustomerLastNameId").val();
+        let cusAddress = $("#txtCustomerAddressId").val();
+        let cusEmail = $("#txtCustomerEmailId").val();
+        let cusContactNum = $("#txtCustomerContactNumId").val();
+        let cusDrivingOrNicNumber = $("#txtCustomerDrivingOrNicId").val();
+        let cusUserName = $("#txtCustomerUserNameId").val();
+        let cusPassword = $("#txtCustomerPasswordId").val();
+        let cmbInputImgType = $("#cmbUploadImgTypeId").val();
+
+        var customer = {
+            cusId: cusId,
+            cusName: {
+                fName: cusFirstName,
+                lName: cusLastName,
+            },
+            cusAddress: cusAddress,
+            cusNicOrDlNum: cusDrivingOrNicNumber,
+            cusContactNum: cusContactNum,
+            cusEmail: cusEmail,
+            cusUserName: cusUserName,
+            cusPassword: cusPassword,
+            cusImgDescription: cmbInputImgType,
+            cusFrontImgPath: "",
+            cusBackImgPath: "",
+            cusStatus: "Pending",
+            cusStatusReason: "Pending"
+        }
+
+        $.ajax({
+            url: baseUrl + "customer",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(customer),
+            dataType: 'json',
+            success: function (res) {
+                alert(res.message);
+                /*loadAllAdminTable();*/
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+
+    }
+</script>
 </body>
 </html>
