@@ -17,7 +17,7 @@ public class CustomerController {
     static String frontImageUploadingPath;
     static String backImageUploadPath;
 
-    /*SEND LAST CUSTOMER ID*/
+    /*GET LAST CUSTOMER ID*/
     @GetMapping(path = "/cusId")
     public ResponseUtil getLastCustomerId() {
         String lastCustomerId = "CUS-076";
