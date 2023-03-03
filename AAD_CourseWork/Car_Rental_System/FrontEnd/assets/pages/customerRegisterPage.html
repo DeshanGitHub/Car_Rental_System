@@ -381,7 +381,7 @@
         data.append("backImage", imgBackObject, imgBackName);
 
         $.ajax({
-            url: baseUrl + "customer",
+            url: baseUrl + "customer/image/"+newCustomerId,
             method: "POST",
             async: true,
             contentType: false,
@@ -392,7 +392,8 @@
                 saveCustomer();
             },
             error: function (error) {
-                alert("Error When Uploading Files!!");
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
             }
         });
     }
