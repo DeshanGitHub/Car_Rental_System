@@ -19,4 +19,6 @@ public interface CustomerService {
     String getLastCustomerId();
 
     int getCustomersCount();
+
+    CustomerDTO getCustomerById(String cusId);
 }

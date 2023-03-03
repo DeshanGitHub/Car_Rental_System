@@ -580,13 +580,13 @@
                                     <div class="row mb-3 mt-3">
                                         <div class="col-6 px-0">
                                             <label class="form-label" for="txtCustomerId">Customer ID</label>
-                                            <input class="form-control" id="txtCustomerId"
-                                                   placeholder="Customer ID" type="text">
+                                            <input class="form-control" disabled
+                                                   id="txtCustomerId" placeholder="Customer ID" type="text">
                                         </div>
                                         <div class="col-6" style="padding-right: 0">
                                             <label class="form-label" for="txtStatus">Status</label>
-                                            <input class="form-control" id="txtStatus"
-                                                   placeholder="Status" type="text">
+                                            <input class="form-control" disabled
+                                                   id="txtStatus" placeholder="Status" type="text">
                                         </div>
                                     </div>
 
@@ -669,7 +669,7 @@
                                                 <label class="form-label" for="cmbStatus">Status</label>
                                                 <select aria-label="Default select example" class="form-select"
                                                         id="cmbStatus">
-                                                    <option selected>Pending</option>
+                                                    <option id="cmbSelectedValue" selected>Pending</option>
                                                     <option value="1">Confirm</option>
                                                     <option value="2">Deny</option>
                                                 </select>
@@ -679,9 +679,10 @@
                                         <div class="row mb-3">
                                             <div class="col-12 px-0 form-floating">
 
-                                                <textarea class="form-control" id="floatingTextarea2"
-                                                          placeholder="Leave a comment here" style="height: 100px"></textarea>
-                                                <label for="floatingTextarea2">Status Reason</label>
+                                                <textarea class="form-control" id="txtStatusReason"
+                                                          placeholder="Leave a comment here"
+                                                          style="height: 100px"></textarea>
+                                                <label for="txtStatusReason">Status Reason</label>
 
                                             </div>
                                         </div>
@@ -715,6 +716,9 @@
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
+
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
     loadCustomerTable();
 
     $("#page-content-wrapper1").css("display", "block");
@@ -722,14 +726,55 @@
 
     /*LOAD CUSTOMER TABLE*/
     function loadCustomerTable() {
-        bindingClickEventForTable();
+        $("#tblBodyCustomer").empty();
+        $.ajax({
+            url: baseUrl + "customer",
+            dataType: "JSON",
+            success: function (resp) {
+                /*console.log(resp.data);*/
+                for (let customer of resp.data) {
+                    var row = '<tr><td>' + customer.cusId + '</td><td>' + customer.cusName.fName + " " + customer.cusName.lName + '</td><td>' + customer.cusAddress + '</td><td>' + customer.cusNicOrDlNum + '</td><td>' + customer.cusContactNum + '</td><td>' + customer.cusEmail + '</td><td>' + customer.cusStatus + '</td></tr>';
+                    $("#tblBodyCustomer").append(row);
+                }
+                bindingClickEventForTable();
+            }
+        });
     }
+
 
     /*BINDING CLICK EVENT FOR CUSTOMER TABLE*/
     function bindingClickEventForTable() {
         $("#tblBodyCustomer>tr").click(function () {
             $("#page-content-wrapper1").css("display", "none");
             $("#page-content-wrapper2").css("display", "block");
+
+            let tblRowCustomerId = $(this).children(":eq(0)").text();
+            loadPageContentTwo(tblRowCustomerId);
+        });
+    }
+
+    /*LOAD PAGE CONTENT 2*/
+    function loadPageContentTwo(cusId) {
+        $.ajax({
+            url: baseUrl + "customer/getCus/" + cusId,
+            dataType: "JSON",
+            success: function (resp) {
+                $("#txtCustomerId").val(resp.data.cusId);
+                $("#txtStatus").val(resp.data.cusStatus);
+                $("#txtCustomerFirstName").val(resp.data.cusName.fName);
+                $("#txtCustomerLastName").val(resp.data.cusName.lName);
+                $("#txtCustomerAddress").val(resp.data.cusAddress);
+                $("#txtContactNum").val(resp.data.cusContactNum);
+                $("#txtInputImageType").val(resp.data.cusImgDescription);
+                $("#txtNicOrDrLicense").val(resp.data.cusNicOrDlNum);
+                $("#txtEmail").val(resp.data.cusEmail);
+                $("#txtUserName").val(resp.data.cusUserName);
+                $("#txtPassword").val(resp.data.cusPassword);
+                $("#cmbSelectedValue").text(resp.data.cusStatus);
+                if (!(resp.data.cusStatusReason === "Pending")) {
+                    $("#txtStatusReason").text(resp.data.cusStatusReason);
+                }
+            }
         });
     }
 

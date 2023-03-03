@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/customer")
@@ -23,6 +24,20 @@ public class CustomerController {
     /*CREATE STATIC VARIABLES TO STORE IMAGE UPLOADING PATH*/
     static String frontImageUploadingPath;
     static String backImageUploadPath;
+
+    /*GET CUSTOMER BY ID*/
+    @GetMapping(path = "/getCus/{cusId}")
+    public ResponseUtil getCustomerById(@PathVariable String cusId) {
+        CustomerDTO customer = customerService.getCustomerById(cusId);
+        return new ResponseUtil("200", "success", customer);
+    }
+
+    /*GET ALL CUSTOMERS*/
+    @GetMapping
+    public ResponseUtil getAllCustomers() {
+        ArrayList<CustomerDTO> allCustomers = customerService.getAllCustomers();
+        return new ResponseUtil("200", "success", allCustomers);
+    }
 
     /*GET LAST CUSTOMER ID*/
     @GetMapping(path = "/cusId")

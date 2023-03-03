@@ -68,4 +68,13 @@ public class CustomerServiceImpl implements CustomerService {
     public int getCustomersCount() {
         return customerRepo.getRowCount();
     }
+
+    @Override
+    public CustomerDTO getCustomerById(String cusId) {
+        if(!customerRepo.existsById(cusId)){
+            throw new RuntimeException("No " + cusId + " Customer..!!");
+        }
+
+        return mapper.map(customerRepo.findCustomerByCusId(cusId),CustomerDTO.class);
+    }
 }
