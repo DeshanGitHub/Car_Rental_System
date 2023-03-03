@@ -17,4 +17,6 @@ public interface CustomerService {
     void isExistsCustomer(String id);
 
     String getLastCustomerId();
+
+    int getCustomersCount();
 }

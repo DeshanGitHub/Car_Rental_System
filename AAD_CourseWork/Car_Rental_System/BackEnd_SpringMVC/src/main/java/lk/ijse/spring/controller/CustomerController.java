@@ -27,11 +27,16 @@ public class CustomerController {
     /*GET LAST CUSTOMER ID*/
     @GetMapping(path = "/cusId")
     public ResponseUtil getLastCustomerIdFromCustomerDbTbl() {
-        String lastCustomerId = customerService.getLastCustomerId();
+        String lastCustomerId;
+        if (customerService.getCustomersCount() > 0) {
+            lastCustomerId = customerService.getLastCustomerId();
+        } else {
+            lastCustomerId = "CUS-000";
+        }
         return new ResponseUtil("200", "success", lastCustomerId);
     }
 
-    @PostMapping(path="/image/{cusId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/image/{cusId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseUtil uploadImages(@RequestPart("frontImage") MultipartFile frontImage, @RequestPart("backImage") MultipartFile backImage, @PathVariable String cusId) {
         System.out.println("Save Image method invoked.");
         try {

@@ -60,6 +60,12 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public String getLastCustomerId() {
+
         return customerRepo.getLastId();
+    }
+
+    @Override
+    public int getCustomersCount() {
+        return customerRepo.getRowCount();
     }
 }
