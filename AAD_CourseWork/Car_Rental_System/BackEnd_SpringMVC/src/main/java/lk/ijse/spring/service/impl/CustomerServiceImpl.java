@@ -57,4 +57,9 @@ public class CustomerServiceImpl implements CustomerService {
             throw new RuntimeException("Customer " + id + " Already Exists..!!");
         }
     }
+
+    @Override
+    public String getLastCustomerId() {
+        return customerRepo.getLastId();
+    }
 }

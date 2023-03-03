@@ -26,8 +26,8 @@ public class CustomerController {
 
     /*GET LAST CUSTOMER ID*/
     @GetMapping(path = "/cusId")
-    public ResponseUtil getLastCustomerId() {
-        String lastCustomerId = "CUS-001";
+    public ResponseUtil getLastCustomerIdFromCustomerDbTbl() {
+        String lastCustomerId = customerService.getLastCustomerId();
         return new ResponseUtil("200", "success", lastCustomerId);
     }
 

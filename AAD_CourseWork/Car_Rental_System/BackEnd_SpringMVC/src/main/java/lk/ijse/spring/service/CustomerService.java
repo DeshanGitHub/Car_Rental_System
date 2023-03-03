@@ -15,4 +15,6 @@ public interface CustomerService {
     ArrayList<CustomerDTO> getAllCustomers();
 
     void isExistsCustomer(String id);
+
+    String getLastCustomerId();
 }
