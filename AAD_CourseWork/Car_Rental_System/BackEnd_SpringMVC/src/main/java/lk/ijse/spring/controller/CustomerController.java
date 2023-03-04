@@ -22,7 +22,6 @@ public class CustomerController {
 
     /*DELETE UPLOADED IMAGE*/
     public boolean deleteUploadedImg(String frontImagePath, String backImagePath) {
-        //TODO
         try {
 
             File fileFront = new File(frontImagePath);
@@ -48,10 +47,10 @@ public class CustomerController {
         CustomerDTO customer = customerService.getCustomerById(cusId);
         customerService.deleteCustomer(cusId);
         boolean isDeletedImages = deleteUploadedImg(customer.getCusFrontImgPath(), customer.getCusBackImgPath());
-        if(isDeletedImages){
+        if (isDeletedImages) {
             return new ResponseUtil("200", cusId + " : Deleted", null);
-        }else {
-            return new ResponseUtil("500","Customer Details Are Deleted, But Images Are Not Deleted!!!","");
+        } else {
+            return new ResponseUtil("500", "Customer Details Are Deleted, But Images Are Not Deleted!!!", "");
         }
 
     }
