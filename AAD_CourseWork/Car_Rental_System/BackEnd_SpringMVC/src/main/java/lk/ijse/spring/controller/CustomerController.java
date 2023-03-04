@@ -21,6 +21,13 @@ public class CustomerController {
     private CustomerService customerService;
 
 
+    /*DELETE CUSTOMER*/
+    @DeleteMapping(params = "cusId")
+    public ResponseUtil deleteCustomer(String cusId){
+        customerService.deleteCustomer(cusId);
+        return new ResponseUtil("200", cusId + " : Deleted", null);
+    }
+
     /*CREATE STATIC VARIABLES TO STORE IMAGE UPLOADING PATH*/
     static String frontImageUploadingPath;
     static String backImageUploadPath;

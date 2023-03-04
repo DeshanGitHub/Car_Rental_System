@@ -689,7 +689,9 @@
                                                 <button class="btn btn-warning w-25 mx-1" id="btnUpdateCustomer"
                                                         type="button">Update
                                                 </button>
-                                                <button class="btn btn-danger w-25 mx-1" type="button">Delete</button>
+                                                <button class="btn btn-danger w-25 mx-1" id="btnDeleteCustomer"
+                                                        type="button">Delete
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -720,6 +722,28 @@
 
     loadCustomerTable();
 
+    /*DELETE BUTTON ON ACTION*/
+    $("#btnDeleteCustomer").click(function () {
+        let cusId = $("#txtCustomerId").val();
+
+        $.ajax({
+            url: baseUrl + "customer?cusId=" + cusId,
+            method: "DELETE",
+            dataType: "JSON",
+            success: function (resp) {
+                alert(resp.message);
+                $("#page-content-wrapper1").css("display", "block");
+                $("#page-content-wrapper2").css("display", "none");
+                loadCustomerTable();
+            },
+            error:function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+
+        });
+    });
+
+
     /*UPDATE BUTTON ON ACTION*/
     $("#btnUpdateCustomer").click(function () {
         let cusId = $("#txtCustomerId").val();
@@ -740,10 +764,6 @@
         } else {
             cusStatusReason = $("#txtStatusReason").val();
         }
-
-        console.log(cusId + ", " + ", " + cusFirstName + ", " + cusLastName + ", " + cusAddress + ", " + cusContactNum + ", " + cusImageDescription + ", "
-            + cusNicOrDlNum + ", " + cusEmail + ", " + cusUserName + ", " + cusPassword + ", " + cusCmbSelectedStatus + ", " + cusStatusReason);
-
 
         var customer = {
             cusId: cusId,
@@ -780,7 +800,6 @@
             }
         })
 
-        //TODO
     });
 
     $("#page-content-wrapper1").css("display", "block");
