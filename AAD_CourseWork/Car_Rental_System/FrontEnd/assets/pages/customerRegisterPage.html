@@ -316,6 +316,21 @@
 <script>
     let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
 
+    /*CLEAR TEXT FIELDS*/
+    function clearTextFields() {
+        $("#txtCustomerFirstNameId").val("");
+        $("#txtCustomerLastNameId").val("");
+        $("#txtCustomerAddressId").val("");
+        $("#txtCustomerEmailId").val("");
+        $("#txtCustomerContactNumId").val("");
+        $("#txtCustomerDrivingOrNicId").val("");
+        $("#txtCustomerUserNameId").val("");
+        $("#txtCustomerPasswordId").val("");
+        $("#cmbUploadImgTypeId").val("Choose");
+        $("#customerImageFrontSide").val("");
+        $("#customerImageBackSide").val("");
+    }
+
 
     /*CREATE NEW CUSTOMER ID*/
     let newCustomerId;
@@ -381,7 +396,7 @@
         data.append("backImage", imgBackObject, imgBackName);
 
         $.ajax({
-            url: baseUrl + "customer/image/"+newCustomerId,
+            url: baseUrl + "customer/image/" + newCustomerId,
             method: "POST",
             async: true,
             contentType: false,
@@ -439,7 +454,7 @@
             dataType: 'json',
             success: function (res) {
                 alert(res.message);
-                /*loadAllAdminTable();*/
+               clearTextFields();
             },
             error: function (error) {
                 let cause = JSON.parse(error.responseText).message;
