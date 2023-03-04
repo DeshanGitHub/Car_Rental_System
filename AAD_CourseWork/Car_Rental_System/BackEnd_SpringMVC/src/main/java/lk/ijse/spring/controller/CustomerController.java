@@ -20,12 +20,40 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    /*DELETE UPLOADED IMAGE*/
+    public boolean deleteUploadedImg(String frontImagePath, String backImagePath) {
+        //TODO
+        try {
+
+            File fileFront = new File(frontImagePath);
+            File fileBack = new File(backImagePath);
+
+            if (fileFront.delete() && fileBack.delete()) {
+                System.out.println("Images are deleted.");
+                return true;
+            } else {
+                System.out.println("Delete operation is failed.");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to Delete images !!");
+            return false;
+        }
+    }
+
 
     /*DELETE CUSTOMER*/
     @DeleteMapping(params = "cusId")
-    public ResponseUtil deleteCustomer(String cusId){
+    public ResponseUtil deleteCustomer(String cusId) {
+        CustomerDTO customer = customerService.getCustomerById(cusId);
         customerService.deleteCustomer(cusId);
-        return new ResponseUtil("200", cusId + " : Deleted", null);
+        boolean isDeletedImages = deleteUploadedImg(customer.getCusFrontImgPath(), customer.getCusBackImgPath());
+        if(isDeletedImages){
+            return new ResponseUtil("200", cusId + " : Deleted", null);
+        }else {
+            return new ResponseUtil("500","Customer Details Are Deleted, But Images Are Not Deleted!!!","");
+        }
+
     }
 
     /*CREATE STATIC VARIABLES TO STORE IMAGE UPLOADING PATH*/
