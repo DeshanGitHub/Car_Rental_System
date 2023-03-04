@@ -666,7 +666,7 @@
                                                 <label class="form-label" for="cmbStatus">Status</label>
                                                 <select aria-label="Default select example" class="form-select"
                                                         id="cmbStatus">
-                                                    <option id="cmbSelectedValue" selected>Pending</option>
+                                                    <option selected>Pending</option>
                                                     <option value="1">Confirm</option>
                                                     <option value="2">Deny</option>
                                                 </select>
@@ -686,7 +686,9 @@
 
                                         <div class="row mb-3">
                                             <div class="col-12  px-0 d-flex justify-content-center">
-                                                <button class="btn btn-warning w-25 mx-1" type="button">Update</button>
+                                                <button class="btn btn-warning w-25 mx-1" id="btnUpdateCustomer"
+                                                        type="button">Update
+                                                </button>
                                                 <button class="btn btn-danger w-25 mx-1" type="button">Delete</button>
                                             </div>
                                         </div>
@@ -717,6 +719,69 @@
     let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
 
     loadCustomerTable();
+
+    /*UPDATE BUTTON ON ACTION*/
+    $("#btnUpdateCustomer").click(function () {
+        let cusId = $("#txtCustomerId").val();
+        //let cusStatus = $("#txtStatus").val();
+        let cusFirstName = $("#txtCustomerFirstName").val();
+        let cusLastName = $("#txtCustomerLastName").val();
+        let cusAddress = $("#txtCustomerAddress").val();
+        let cusContactNum = $("#txtContactNum").val();
+        let cusImageDescription = $("#txtInputImageType").val();
+        let cusNicOrDlNum = $("#txtNicOrDrLicense").val();
+        let cusEmail = $("#txtEmail").val();
+        let cusUserName = $("#txtUserName").val();
+        let cusPassword = $("#txtPassword").val();
+        let cusCmbSelectedStatus = $("#cmbStatus").find(":selected").text();
+        let cusStatusReason;
+        if ($("#txtStatusReason").val() === "") {
+            cusStatusReason = "Pending";
+        } else {
+            cusStatusReason = $("#txtStatusReason").val();
+        }
+
+        console.log(cusId + ", " + ", " + cusFirstName + ", " + cusLastName + ", " + cusAddress + ", " + cusContactNum + ", " + cusImageDescription + ", "
+            + cusNicOrDlNum + ", " + cusEmail + ", " + cusUserName + ", " + cusPassword + ", " + cusCmbSelectedStatus + ", " + cusStatusReason);
+
+
+        var customer = {
+            cusId: cusId,
+            cusName: {
+                fName: cusFirstName,
+                lName: cusLastName,
+            },
+            cusAddress: cusAddress,
+            cusNicOrDlNum: cusNicOrDlNum,
+            cusContactNum: cusContactNum,
+            cusEmail: cusEmail,
+            cusUserName: cusUserName,
+            cusPassword: cusPassword,
+            cusImgDescription: cusImageDescription,
+            cusFrontImgPath: "",
+            cusBackImgPath: "",
+            cusStatus: cusCmbSelectedStatus,
+            cusStatusReason: cusStatusReason
+        }
+
+        $.ajax({
+            url: baseUrl + "customer/updateWithoutImages",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(customer),
+            dataType: "JSON",
+            success: function (res) {
+                alert(res.message);
+                loadPageContentTwo(cusId)
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        })
+
+        //TODO
+    });
 
     $("#page-content-wrapper1").css("display", "block");
     $("#page-content-wrapper2").css("display", "none");
@@ -776,13 +841,13 @@
                 $("#txtEmail").val(resp.data.cusEmail);
                 $("#txtUserName").val(resp.data.cusUserName);
                 $("#txtPassword").val(resp.data.cusPassword);
-                $("#cmbSelectedValue").text(resp.data.cusStatus);
+                $("#cmbStatus").find(":selected").text(resp.data.cusStatus);
                 if (!(resp.data.cusStatusReason === "Pending")) {
-                    $("#txtStatusReason").text(resp.data.cusStatusReason);
+                    $("#txtStatusReason").val(resp.data.cusStatusReason);
                 }
                 $("#h1_1").text("Customer : " + resp.data.cusId);
                 /*SET IMAGES*/
-                setImages(resp.data.cusFrontImgPath, resp.data.cusBackImgPath);//TODO
+                setImages(resp.data.cusFrontImgPath, resp.data.cusBackImgPath);
 
             }
         });

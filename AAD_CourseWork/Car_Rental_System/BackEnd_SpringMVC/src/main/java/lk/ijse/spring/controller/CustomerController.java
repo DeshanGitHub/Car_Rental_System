@@ -25,6 +25,13 @@ public class CustomerController {
     static String frontImageUploadingPath;
     static String backImageUploadPath;
 
+    /*UPDATE CUSTOMER WITHOUT IMAGES*/
+    @PutMapping(path = "/updateWithoutImages")
+    public ResponseUtil updateCustomerWithoutImages(@RequestBody CustomerDTO dto) {
+        customerService.updateCustomerWithoutImages(dto);
+        return new ResponseUtil("200", "Updated", null);
+    }
+
     /*GET CUSTOMER BY ID*/
     @GetMapping(path = "/getCus/{cusId}")
     public ResponseUtil getCustomerById(@PathVariable String cusId) {

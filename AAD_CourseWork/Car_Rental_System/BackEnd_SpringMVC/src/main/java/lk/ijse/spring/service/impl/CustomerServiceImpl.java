@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void isExistsCustomer(String id) {
-        if(customerRepo.existsById(id)){
+        if (customerRepo.existsById(id)) {
             throw new RuntimeException("Customer " + id + " Already Exists..!!");
         }
     }
@@ -71,10 +71,21 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO getCustomerById(String cusId) {
-        if(!customerRepo.existsById(cusId)){
+        if (!customerRepo.existsById(cusId)) {
             throw new RuntimeException("No " + cusId + " Customer..!!");
         }
 
-        return mapper.map(customerRepo.findCustomerByCusId(cusId),CustomerDTO.class);
+        return mapper.map(customerRepo.findCustomerByCusId(cusId), CustomerDTO.class);
+    }
+
+    @Override
+    public void updateCustomerWithoutImages(CustomerDTO dto) {
+        Customer customer = mapper.map(dto, Customer.class);
+
+        if (!customerRepo.existsById(customer.getCusId())) {
+            throw new RuntimeException("Customer " + customer.getCusId() + " Not Available to Update..!");
+        }
+
+        customerRepo.updateCustomerWithoutImages(customer.getCusName().getFName(), customer.getCusName().getLName(), customer.getCusAddress(), customer.getCusContactNum(), customer.getCusImgDescription(), customer.getCusNicOrDlNum(), customer.getCusEmail(), customer.getCusUserName(), customer.getCusPassword(), customer.getCusStatus(), customer.getCusStatusReason(), customer.getCusId());
     }
 }
