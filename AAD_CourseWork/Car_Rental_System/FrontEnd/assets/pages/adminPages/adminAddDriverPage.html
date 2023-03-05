@@ -484,9 +484,9 @@
                                                         <div class="mb-3 col-6">
                                                             <label class="form-label" for="txtDriverId">Driver
                                                                 ID</label>
-                                                            <input class="form-control" id="txtDriverId"
-                                                                   placeholder="Driver ID"
-                                                                   type="text">
+                                                            <input class="form-control" disabled
+                                                                   id="txtDriverId"
+                                                                   placeholder="Driver ID" type="text">
                                                         </div>
 
                                                         <div class="mb-3 col-6">
@@ -536,15 +536,6 @@
                                                                    type="text">
                                                         </div>
 
-                                                        <div class="mb-3 col-6">
-                                                            <label class="form-label" for="uploadImgDiv1">Upload Driving
-                                                                License Image</label>
-                                                            <div class="input-group" id="uploadImgDiv1">
-                                                                <input class="form-control"
-                                                                       id="inpDriverDrivingLicenseImg"
-                                                                       type="file">
-                                                            </div>
-                                                        </div>
 
                                                         <div class="mb-3 col-6">
                                                             <label class="form-label" for="txtNicNum">NIC Number</label>
@@ -553,14 +544,6 @@
                                                                    type="text">
                                                         </div>
 
-                                                        <div class="mb-3 col-6">
-                                                            <label class="form-label" for="uploadImgDiv2">Upload NIC
-                                                                Image</label>
-                                                            <div class="input-group" id="uploadImgDiv2">
-                                                                <input class="form-control" id="inpDriverNicImg"
-                                                                       type="file">
-                                                            </div>
-                                                        </div>
 
                                                         <div class="mb-3 col-6">
                                                             <label class="form-label" for="txtUserName">User
@@ -579,7 +562,9 @@
 
 
                                                         <div class="col-12 d-flex justify-content-center">
-                                                            <button class="btn btn-primary w-25" type="submit">Save
+                                                            <button class="btn btn-primary w-25 mb-4 mt-2"
+                                                                    id="btnSaveDriver"
+                                                                    type="button">Save
                                                                 Driver
                                                             </button>
                                                         </div>
@@ -611,9 +596,111 @@
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
-    /*ADD CAR BUTTON FUNCTION*/
-    $("#btnAddCar1").click(function () {
-        alert("ok")
+
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+    function clearDriverTextFields() {
+        $("#txtDriverFirstName").val("");
+        $("#txtDriverLastName").val("");
+        $("#txtContactNum").val("");
+        $("#txtEmailAddress").val("");
+        $("#txtAddress").val("");
+        $("#txtDrivingLicense").val("");
+        $("#txtNicNum").val("");
+        $("#txtUserName").val("");
+        $("#txtPassword").val("");
+    }
+
+
+    /*SET DRIVER ID TO DRIVER ID TEXT FIELD*/
+    createNewDriverId();
+
+
+    /*CREATE NEW DRIVER ID*/
+    var newDriverId;
+
+    function createNewDriverId() {
+        $.ajax({
+            url: baseUrl + "driver/driverId",
+            dataType: "JSON",
+            async: false,
+            success: function (resp) {
+                let lastDriverId = resp.data;
+
+                let tempId = parseInt(lastDriverId.split("-")[1]);
+                tempId = tempId + 1;
+
+                if (tempId < 9) {
+
+                    newDriverId = "D-00" + tempId;
+
+                } else if (tempId < 99) {
+                    newDriverId = "D-0" + tempId;
+
+                } else {
+                    newDriverId = "D-" + tempId;
+
+                }
+
+                $("#txtDriverId").val(newDriverId);
+            },
+            error: function (error) {
+                alert("Error When Getting Last Driver ID From Back End!!");
+            }
+        });
+    }
+
+
+    function saveDriver() {
+        let driverId = $("#txtDriverId").val();
+        let driverFirstName = $("#txtDriverFirstName").val();
+        let driverLastName = $("#txtDriverLastName").val();
+        let driverContactNum = $("#txtContactNum").val();
+        let driverEmailAddress = $("#txtEmailAddress").val();
+        let driverAddress = $("#txtAddress").val();
+        let driverDlNum = $("#txtDrivingLicense").val();
+        let nicNum = $("#txtNicNum").val();
+        let userName = $("#txtUserName").val();
+        let password = $("#txtPassword").val();
+
+        var driver = {
+            driverId: driverId,
+            driverName: {
+                fName: driverFirstName,
+                lName: driverLastName,
+            },
+            driverAddress: driverAddress,
+            driverEmail: driverEmailAddress,
+            driverContactNum: driverContactNum,
+            driverNic: nicNum,
+            diverDrivingLicense: driverDlNum,
+            driverUserName: userName,
+            driverPassword: password
+        }
+
+        $.ajax({
+            url: baseUrl + "driver",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(driver),
+            dataType: "JSON",
+            success: function (res) {
+                alert(res.message);
+                clearDriverTextFields();
+                createNewDriverId();
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+
+    }
+
+    /*SAVE DRIVER BUTTON ON ACTION*/
+    $("#btnSaveDriver").click(function () {
+        alert("save button clicked")
+        saveDriver();
     });
 
     /*SIDE BAR SCRIPT*/
