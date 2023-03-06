@@ -65,4 +65,9 @@ public class DriverServiceImpl implements DriverService {
         return driverRepo.getRowCount();
     }
 
+    @Override
+    public DriverDTO getDriverById(String driverId) {
+        return mapper.map(driverRepo.findDriverByDriverId(driverId), DriverDTO.class);
+    }
+
 }

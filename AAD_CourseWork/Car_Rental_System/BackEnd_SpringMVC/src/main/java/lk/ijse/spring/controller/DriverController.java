@@ -6,6 +6,8 @@ import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/driver")
 @CrossOrigin
@@ -13,6 +15,34 @@ public class DriverController {
 
     @Autowired
     private DriverService driverService;
+
+    /*DELETE DRIVER*/
+    @DeleteMapping(params = "driverId")
+    public ResponseUtil deleteDriver(String driverId) {
+        driverService.deleteDriver(driverId);
+        return new ResponseUtil("200", driverId + " : Driver is Deleted", null);
+    }
+
+    /*UPDATE DRIVER*/
+    @PutMapping
+    public ResponseUtil updateDriver(@RequestBody DriverDTO driverDTO) {
+        driverService.updateDriver(driverDTO);
+        return new ResponseUtil("200", driverDTO.getDriverId() + " : Updated", null);
+    }
+
+    /*GET DRIVER BY ID*/
+    @GetMapping(path = "/getDriver/{driverId}")
+    public ResponseUtil getDriverById(@PathVariable String driverId) {
+        DriverDTO driver = driverService.getDriverById(driverId);
+        return new ResponseUtil("200", "success", driver);
+    }
+
+    /*GET ALL DRIVERS*/
+    @GetMapping
+    public ResponseUtil getAllDrivers() {
+        ArrayList<DriverDTO> allDrivers = driverService.getAllDrivers();
+        return new ResponseUtil("200", "success", allDrivers);
+    }
 
     /*SAVE DRIVER*/
     @PostMapping
