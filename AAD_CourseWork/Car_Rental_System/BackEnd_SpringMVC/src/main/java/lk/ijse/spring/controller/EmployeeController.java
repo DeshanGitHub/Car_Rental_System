@@ -36,7 +36,7 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseUtil saveEmployee(@RequestBody EmployeeDTO dto) {
-        System.out.println("Employee is : " + dto.toString());
+        //System.out.println("Employee is : " + dto.toString());
         employeeService.addEmployee(dto);
         return new ResponseUtil("200", dto.toString() + " : Added", null);
     }

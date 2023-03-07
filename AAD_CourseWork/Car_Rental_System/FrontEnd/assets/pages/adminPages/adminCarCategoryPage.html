@@ -472,91 +472,109 @@
                         <hr class="hr"/>
 
                         <div class="container-fluid">
+
                             <div class="row">
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtCarCategoryId">Car Category ID</label>
-                                    <input class="form-control" id="txtCarCategoryId" placeholder="Category ID"
-                                           type="text">
-                                </div>
+                                <form class="col-12" id="carCategoryForm">
+                                    <div class="row">
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtCarCategoryId">Car Category ID</label>
+                                            <input class="form-control" id="txtCarCategoryId" name="carCategoryId"
+                                                   placeholder="Category ID" type="text" readonly>
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtCarCategory">Category Name</label>
-                                    <input class="form-control" id="txtCarCategory" placeholder="Category Name"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtCarCategory">Category Name</label>
+                                            <input class="form-control" id="txtCarCategory" name="carCategoryName"
+                                                   placeholder="Category Name" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtCarModel">Car Model</label>
-                                    <input class="form-control" id="txtCarModel" placeholder="Model"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtCarModel">Car Model</label>
+                                            <input class="form-control" id="txtCarModel" name="carModel"
+                                                   placeholder="Model" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtCarBrand">Car Brand Name</label>
-                                    <input class="form-control" id="txtCarBrand" placeholder="Brand"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtCarBrand">Car Brand Name</label>
+                                            <input class="form-control" id="txtCarBrand" name="carBrandName"
+                                                   placeholder="Brand" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtCarType">Car Type</label>
-                                    <input class="form-control" id="txtCarType" placeholder="Type"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtCarType">Car Type</label>
+                                            <input class="form-control" id="txtCarType" name="carType"
+                                                   placeholder="Type" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtTransmissionType">Transmission Type</label>
-                                    <input class="form-control" id="txtTransmissionType" placeholder="Transmission"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtTransmissionType">Transmission
+                                                Type</label>
+                                            <input class="form-control" id="txtTransmissionType"
+                                                   name="carTransmissionType"
+                                                   placeholder="Transmission" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtFuelType">Fuel Type</label>
-                                    <input class="form-control" id="txtFuelType" placeholder="Fuel"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtFuelType">Fuel Type</label>
+                                            <input class="form-control" id="txtFuelType" name="carFuelType"
+                                                   placeholder="Fuel" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtDailyRate">Daily Rate (Rs.)</label>
-                                    <input class="form-control" id="txtDailyRate" placeholder="Daily Rate"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtDailyRate">Daily Rate (Rs.)</label>
+                                            <input class="form-control" id="txtDailyRate" name="dailyRatePrice"
+                                                   placeholder="Daily Rate" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtMonthlyRate">Monthly Rate (Rs.)</label>
-                                    <input class="form-control" id="txtMonthlyRate" placeholder="Monthly Rate"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtMonthlyRate">Monthly Rate (Rs.)</label>
+                                            <input class="form-control" id="txtMonthlyRate" name="monthlyRatePrice"
+                                                   placeholder="Monthly Rate" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtFreeKmForDay">Free km For Day (km)</label>
-                                    <input class="form-control" id="txtFreeKmForDay" placeholder="Free km For Day"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtFreeKmForDay">Free km For Day (km)</label>
+                                            <input class="form-control" id="txtFreeKmForDay"
+                                                   name="freeKmForDay"
+                                                   placeholder="Free km For Day" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtFreeKmForMonth">Free km For Month (km)</label>
-                                    <input class="form-control" id="txtFreeKmForMonth" placeholder="Free km For Month"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtFreeKmForMonth">Free km For Month
+                                                (km)</label>
+                                            <input class="form-control" id="txtFreeKmForMonth"
+                                                   name="freeKmForMonth"
+                                                   placeholder="Free km For Month" type="text">
+                                        </div>
 
-                                <div class="col-3 mb-3">
-                                    <label class="form-label" for="txtPricePerExtraKm">Price per extra km (Rs.)</label>
-                                    <input class="form-control" id="txtPricePerExtraKm" placeholder="Price per extra km"
-                                           type="text">
-                                </div>
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtPricePerExtraKm">Price per extra km
+                                                (Rs.)</label>
+                                            <input class="form-control" id="txtPricePerExtraKm"
+                                                   name="pricePerExtraKm"
+                                                   placeholder="Price per extra km" type="text">
+                                        </div>
+                                    </div>
+                                </form>
 
                                 <div class="col-12 mb-3 d-flex justify-content-end">
-                                    <button class="btn btn-success" style="margin-right: 5px; width: 10%" type="button">
+                                    <button class="btn btn-success" id="btnAddCarCategory"
+                                            style="margin-right: 5px; width: 10%"
+                                            type="button">
                                         Save
                                     </button>
-                                    <button class="btn btn-warning" style="margin-right: 5px; width: 10%" type="button">
+                                    <button class="btn btn-warning" id="btnUpdateCarCategory"
+                                            style="margin-right: 5px; width: 10%"
+                                            type="button">
                                         Update
                                     </button>
-                                    <button class="btn btn-danger" style="margin-right: 5px; width: 10%" type="button">
+                                    <button class="btn btn-danger" id="btnDeleteCarCategory"
+                                            style="margin-right: 5px; width: 10%"
+                                            type="button">
                                         Delete
                                     </button>
-                                    <button class="btn btn-secondary" style="margin-right: 5px; width: 10%"
-                                            type="button">Clear
+                                    <button class="btn btn-secondary" id="btnClearTextFields"
+                                            style="margin-right: 5px; width: 10%" type="button">Clear
                                     </button>
                                 </div>
 
@@ -631,10 +649,97 @@
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
-    /*ADD CAR BUTTON FUNCTION*/
-    $("#btnAddCar1").click(function () {
-        window.location.href = "adminAddCarPage.html";
+
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+    function updateCarCategory() {
+        let carCategoryId = $("#txtCarCategoryId").val();
+        let carCategoryName = $("#txtCarCategory").val();
+        let carModel = $("#txtCarModel").val();
+        let carBrandName = $("#txtCarBrand").val();
+        let carType = $("#txtCarType").val();
+        let carTransmissionType = $("#txtTransmissionType").val();
+        let carFuelType = $("#txtFuelType").val();
+        let carDailyRatePrice = $("#txtDailyRate").val();
+        let carMonthlyRatePrice = $("#txtMonthlyRate").val();
+        let freeKmForDay = $("#txtFreeKmForDay").val();
+        let freeKmForMonth = $("#txtFreeKmForMonth").val();
+        let pricePerExtraKm = $("#txtPricePerExtraKm").val();
+
+        //TODO
+    }
+
+    /*SET CAR CATEGORY ID TO TEXT FIELD*/
+    createNewCarCategoryId();
+
+    /*CREATE VARIABLE TO STORE NEW CAR CATEGORY ID*/
+    var newCarCategoryId;
+
+    function createNewCarCategoryId() {
+
+        $.ajax({
+
+            url: baseUrl + "carCategory/carCategoryId",
+            dataType: "JSON",
+            async: false,
+            success: function (resp) {
+                let lastCarCategoryId = resp.data;
+
+                let tempId = parseInt(lastCarCategoryId.split("-")[1]);
+                tempId = tempId + 1;
+
+
+                if (tempId < 9) {
+
+                    newCarCategoryId = "CC-00" + tempId;
+
+                } else if (tempId < 99) {
+                    newCarCategoryId = "CC-0" + tempId;
+
+                } else {
+                    newCarCategoryId = "CC-" + tempId;
+
+                }
+
+                $("#txtCarCategoryId").val(newCarCategoryId);
+
+            },
+            error: function (error) {
+                alert("Error When Getting Last Car Category ID From Back End!!");
+            }
+        });
+
+    }
+
+    function saveCarCategory() {
+        var formData = $("#carCategoryForm").serialize();
+
+
+        $.ajax({
+            url: baseUrl + "carCategory",
+            method: "POST",
+            data: formData,
+            dataType: "JSON",
+            success: function (resp) {
+                alert(resp.message);
+                //TODO
+            },
+            error: function (error) {
+                var jsObject = JSON.parse(error.responseText);
+                alert(jsObject.message);
+            }
+        });
+    }
+
+    /*SAVE CAR CATEGORY BUTTON ON ACTION*/
+    $("#btnAddCarCategory").click(function () {
+        saveCarCategory();
     });
+
+    /*ADD CAR BUTTON FUNCTION*/
+    /* $("#btnAddCar1").click(function () {
+         window.location.href = "adminAddCarPage.html";
+     });*/
 
     /*SIDE BAR SCRIPT*/
     $(document).ready(function () {
