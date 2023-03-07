@@ -479,7 +479,7 @@
                                         <div class="col-3 mb-3">
                                             <label class="form-label" for="txtCarCategoryId">Car Category ID</label>
                                             <input class="form-control" id="txtCarCategoryId" name="carCategoryId"
-                                                   placeholder="Category ID" type="text" readonly>
+                                                   placeholder="Category ID" readonly type="text">
                                         </div>
 
                                         <div class="col-3 mb-3">
@@ -597,7 +597,7 @@
                                             <th scope="col">Price per extra km(Rs.)</th>
                                         </tr>
                                         </thead>
-                                        <tbody class="table-group-divider">
+                                        <tbody class="table-group-divider" id="tblCarCategoryBody">
                                         <tr>
                                             <th scope="row">1</th>
                                             <td>Mark</td>
@@ -652,6 +652,51 @@
 
     let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
 
+    /*CLEAR BUTTON ON ACTION*/
+    $("#btnClearTextFields").click(function () {
+        clearTextFields();
+    });
+
+    /*DELETE BUTTON ON ACTION*/
+    $("#btnDeleteCarCategory").click(function () {
+        let carCategoryId = $("#txtCarCategoryId").val();
+
+        $.ajax({
+            url: baseUrl + "carCategory?carCategoryId=" + carCategoryId,
+            method: "DELETE",
+            dataType: "JSON",
+            success: function (resp) {
+                alert(resp.message);
+                loadCarCategoryDetailsTable();
+                clearTextFields();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    });
+
+    /*CLEAR TEXT FIELDS*/
+    function clearTextFields() {
+        createNewCarCategoryId();
+        $("#txtCarCategory").val("");
+        $("#txtCarModel").val("");
+        $("#txtCarBrand").val("");
+        $("#txtCarType").val("");
+        $("#txtTransmissionType").val("");
+        $("#txtFuelType").val("");
+        $("#txtDailyRate").val("");
+        $("#txtMonthlyRate").val("");
+        $("#txtFreeKmForDay").val("");
+        $("#txtFreeKmForMonth").val("");
+        $("#txtPricePerExtraKm").val("");
+    }
+
+    /*UPDATE BUTTON ON ACTION*/
+    $("#btnUpdateCarCategory").click(function () {
+        updateCarCategory();
+    });
+
     function updateCarCategory() {
         let carCategoryId = $("#txtCarCategoryId").val();
         let carCategoryName = $("#txtCarCategory").val();
@@ -666,7 +711,87 @@
         let freeKmForMonth = $("#txtFreeKmForMonth").val();
         let pricePerExtraKm = $("#txtPricePerExtraKm").val();
 
-        //TODO
+        var carCategory = {
+            carCategoryId: carCategoryId,
+            carCategoryName: carCategoryName,
+            carModel: carModel,
+            carBrandName: carBrandName,
+            carType: carType,
+            carTransmissionType: carTransmissionType,
+            carFuelType: carFuelType,
+            dailyRatePrice: carDailyRatePrice,
+            monthlyRatePrice: carMonthlyRatePrice,
+            freeKmForDay: freeKmForDay,
+            freeKmForMonth: freeKmForMonth,
+            pricePerExtraKm: pricePerExtraKm
+        }
+
+        $.ajax({
+            url: baseUrl + "carCategory",
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(carCategory),
+            dataType: "JSON",
+            success: function (resp) {
+                alert(resp.message);
+                loadCarCategoryDetailsTable();
+                clearTextFields();
+            },
+            error: function (error) {
+                let cause = (JSON).parse(error.responseText).message;
+                alert(cause);
+            }
+
+        });
+    }
+
+    loadCarCategoryDetailsTable();
+
+    function bindRowClickEventForCarDetailsTable() {
+        $("#tblCarCategoryBody>tr").click(function () {
+            let carCategoryId = $(this).children(":eq(0)").text();
+            let categoryName = $(this).children(":eq(1)").text();
+            let carModel = $(this).children(":eq(2)").text();
+            let carBrandName = $(this).children(":eq(3)").text();
+            let carType = $(this).children(":eq(4)").text();
+            let transmissionType = $(this).children(":eq(5)").text();
+            let fuelType = $(this).children(":eq(6)").text();
+            let dailyRate = $(this).children(":eq(7)").text();
+            let monthlyRate = $(this).children(":eq(8)").text();
+            let freeKmForDay = $(this).children(":eq(9)").text();
+            let freeKmForMonth = $(this).children(":eq(10)").text();
+            let pricePerExtraKm = $(this).children(":eq(11)").text();
+
+
+            $("#txtCarCategoryId").val(carCategoryId);
+            $("#txtCarCategory").val(categoryName);
+            $("#txtCarModel").val(carModel);
+            $("#txtCarBrand").val(carBrandName);
+            $("#txtCarType").val(carType);
+            $("#txtTransmissionType").val(transmissionType);
+            $("#txtFuelType").val(fuelType);
+            $("#txtDailyRate").val(dailyRate);
+            $("#txtMonthlyRate").val(monthlyRate);
+            $("#txtFreeKmForDay").val(freeKmForDay);
+            $("#txtFreeKmForMonth").val(freeKmForMonth);
+            $("#txtPricePerExtraKm").val(pricePerExtraKm);
+        });
+    }
+
+    function loadCarCategoryDetailsTable() {
+        $("#tblCarCategoryBody").empty();
+        $.ajax({
+            url: baseUrl + "carCategory",
+            dataType: "json",
+            success: function (resp) {
+                console.log(resp);
+                for (let carCategory of resp.data) {
+                    var row = '<tr><td>' + carCategory.carCategoryId + '</td><td>' + carCategory.carCategoryName + '</td><td>' + carCategory.carModel + '</td><td>' + carCategory.carBrandName + '</td><td>' + carCategory.carType + '</td><td>' + carCategory.carTransmissionType + '</td><td>' + carCategory.carFuelType + '</td><td>' + carCategory.dailyRatePrice + '</td><td>' + carCategory.monthlyRatePrice + '</td><td>' + carCategory.freeKmForDay + '</td><td>' + carCategory.freeKmForMonth + '</td><td>' + carCategory.pricePerExtraKm + '</td></tr>';
+                    $("#tblCarCategoryBody").append(row);
+                }
+                bindRowClickEventForCarDetailsTable();
+            }
+        });
     }
 
     /*SET CAR CATEGORY ID TO TEXT FIELD*/
@@ -722,7 +847,8 @@
             dataType: "JSON",
             success: function (resp) {
                 alert(resp.message);
-                //TODO
+                loadCarCategoryDetailsTable();
+                clearTextFields();
             },
             error: function (error) {
                 var jsObject = JSON.parse(error.responseText);

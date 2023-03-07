@@ -6,6 +6,8 @@ import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/carCategory")
 @CrossOrigin
@@ -14,6 +16,19 @@ public class CarCategoryController {
     @Autowired
     private CarCategoryService carCategoryService;
 
+    /*DELETE CAR CATEGORY*/
+    @DeleteMapping(params = "carCategoryId")
+    public ResponseUtil deleteCarCategory(String carCategoryId) {
+        carCategoryService.deleteCarCategory(carCategoryId);
+        return new ResponseUtil("200", carCategoryId + " : Deleted", null);
+    }
+
+    @GetMapping
+    public ResponseUtil getAllCarCategories() {
+        System.out.println("Get All Car Categories");
+        ArrayList<CarCategoryDTO> allCarCategories = carCategoryService.getAllCarCategories();
+        return new ResponseUtil("200", "success", allCarCategories);
+    }
 
     @PutMapping
     public ResponseUtil updateCarCategory(@RequestBody CarCategoryDTO dto) {
