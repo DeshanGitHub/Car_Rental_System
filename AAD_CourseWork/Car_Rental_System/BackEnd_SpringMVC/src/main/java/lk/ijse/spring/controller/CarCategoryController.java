@@ -16,6 +16,13 @@ public class CarCategoryController {
     @Autowired
     private CarCategoryService carCategoryService;
 
+    /*GET CAR CATEGORY USING ID*/
+    @GetMapping(path = "/getCategory/{categoryId}")
+    public ResponseUtil getCarCategory(@PathVariable String categoryId) {
+        CarCategoryDTO carCategory = carCategoryService.getCarCategoryById(categoryId);
+        return new ResponseUtil("200", "Success", carCategory);
+    }
+
     /*DELETE CAR CATEGORY*/
     @DeleteMapping(params = "carCategoryId")
     public ResponseUtil deleteCarCategory(String carCategoryId) {
@@ -52,7 +59,7 @@ public class CarCategoryController {
 
         if (carCategoryService.getCarCategoryCount() > 0) {
 
-            lastCarCategory = carCategoryService.getLastDriverId();
+            lastCarCategory = carCategoryService.getLastCarCategoryId();
         } else {
 
             lastCarCategory = "CC-000";

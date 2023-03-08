@@ -476,7 +476,7 @@
                                 <!--CAR PAGE LEFT SIDE-->
                                 <div class="col-5">
 
-                                    <div class="row mb-3">
+                                    <!--<div class="row mb-3">
                                         <div class="col-6 px-0">
                                             <label class="form-label" for="cmbCarBrand">Car Brand</label>
                                             <select aria-label="Default select example" class="form-select"
@@ -488,22 +488,62 @@
                                             </select>
                                         </div>
                                         <div class="col-6" style="padding-right: 0">
-                                            <label class="form-label" for="cmbCarBrand">Car Modal</label>
+                                            <label class="form-label" for="cmbCarBrand">Car Model</label>
                                             <select aria-label="Default select example" class="form-select"
-                                                    id="cmbCarModal">
-                                                <option selected>Select Car Modal</option>
+                                                    id="cmbCarModel">
+                                                <option selected>Select Car Model</option>
                                                 <option value="1">Aqua</option>
                                                 <option value="2">Leaf</option>
                                                 <option value="3">Lancer</option>
                                             </select>
                                         </div>
+                                    </div>-->
+
+                                    <div class="row mb-3">
+                                        <div class="col-6 px-0">
+                                            <label class="form-label" for="cmbCarCategoryId">Car Category ID</label>
+                                            <select aria-label="Default select example" class="form-select"
+                                                    id="cmbCarCategoryId">
+                                                <option selected>Select Car Category</option>
+                                                <option value="1">001</option>
+                                                <option value="2">002</option>
+                                                <option value="3">003</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 d-flex align-items-end" style="padding-right: 0">
+                                            <button class="btn btn-info" id="btnSetCarCategory" type="button">Set Car
+                                                Category
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-5 px-0">
+                                            <h5>Car Category Details</h5>
+                                        </div>
+                                        <div class="col-7" style="padding-right: 0">
+                                            <hr class="hr px-0 mx-0 "/>
+                                        </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <div class="col-6 px-0">
-                                            <label class="form-label" for="txtRentalRateId">Rental Rate ID</label>
-                                            <input class="form-control" id="txtRentalRateId"
-                                                   placeholder="Rental Rate ID" type="text">
+                                            <label class="form-label" for="txtCarBrand">Car Brand</label>
+                                            <input class="form-control" disabled id="txtCarBrand"
+                                                   placeholder="Car Brand" type="text">
+                                        </div>
+                                        <div class="col-6" style="padding-right: 0">
+                                            <label class="form-label" for="txtCarModel">Car Model</label>
+                                            <input class="form-control" disabled id="txtCarModel"
+                                                   placeholder="Car Model" type="text">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-6 px-0">
+                                            <label class="form-label" for="txtCarCategoryId">Car Category ID</label>
+                                            <input class="form-control" id="txtCarCategoryId" placeholder="Category ID"
+                                                   type="text">
                                         </div>
                                         <div class="col-6" style="padding-right: 0">
                                             <label class="form-label" for="txtCarCategory">Car Category</label>
@@ -580,8 +620,8 @@
                                         <div class="row mb-3">
                                             <div class="col-6  px-0">
                                                 <label class="form-label" for="txtCarId">Car ID</label>
-                                                <input class="form-control" id="txtCarId" placeholder="Car ID"
-                                                       type="text">
+                                                <input class="form-control" disabled id="txtCarId"
+                                                       placeholder="Car ID" type="text">
                                             </div>
                                             <div class="col-6" style="padding-right: 0">
                                                 <label class="form-label" for="txtRegistrationNum">Registration
@@ -592,17 +632,28 @@
                                         </div>
 
                                         <div class="row mb-3">
-                                            <div class="col-4  px-0">
+                                            <div class="col-6  px-0">
                                                 <label class="form-label" for="txtMileage">Mileage (km)</label>
                                                 <input class="form-control" id="txtMileage" placeholder="Mileage"
                                                        type="text">
                                             </div>
-                                            <div class="col-4" style="padding-right: 0">
+                                            <div class="col-6" style="padding-right: 0">
+                                                <label class="form-label" for="txtMileageLastServiced">Mileage Last
+                                                    Serviced (km)</label>
+                                                <input class="form-control" id="txtMileageLastServiced"
+                                                       placeholder="Car ID" type="text">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-6  px-0">
+
                                                 <label class="form-label" for="txtCarColor">Car Color</label>
                                                 <input class="form-control" id="txtCarColor"
                                                        placeholder="Color" type="text">
                                             </div>
-                                            <div class="col-4" style="padding-right: 0">
+                                            <div class="col-6" style="padding-right: 0">
                                                 <label class="form-label" for="txtPassengersCount">Passengers
                                                     Count</label>
                                                 <input class="form-control" id="txtPassengersCount"
@@ -653,7 +704,8 @@
 
                                         <div class="row ">
                                             <div class="col-12 px-0 d-flex justify-content-center mt-3">
-                                                <button class="btn btn-primary w-25 mx-1" type="submit">Save Car
+                                                <button class="btn btn-primary w-25 mx-1" id="btnSaveCar" type="button">
+                                                    Save Car
                                                 </button>
                                                 <button class="btn btn-secondary w-25 mx-1" type="submit">Clear</button>
                                             </div>
@@ -681,6 +733,248 @@
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
+
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
+    loadCarCategoryIdComboBox();
+
+    function uploadCarImagesAndSaveCarDetails() {
+        var imgCarFrontObject = $("#carInputImage1")[0].files[0];
+        var imgCarFrontName = newCarId + "_CarFrontImage_" + $("#carInputImage1")[0].files[0].name;
+
+        var imgCarBackObject = $("#carInputImage2")[0].files[0];
+        var imgCarBackName = newCarId + "_CarBackImage_" + $("#carInputImage2")[0].files[0].name;
+
+        var imgCarSideObject = $("#carInputImage3")[0].files[0];
+        var imgCarSideName = newCarId + "_CarSideImage_" + $("#carInputImage3")[0].files[0].name;
+
+        var imgCarInteriorObject = $("#carInputImage4")[0].files[0];
+        var imgCarInteriorName = newCarId + "_CarInteriorImage_" + $("#carInputImage4")[0].files[0].name;
+
+        var data = new FormData();
+        data.append("carFrontImage", imgCarFrontObject, imgCarFrontName);
+        data.append("carBackImage", imgCarBackObject, imgCarBackName);
+        data.append("carSideImage", imgCarSideObject, imgCarSideName);
+        data.append("carInteriorImage", imgCarInteriorObject, imgCarInteriorName);
+
+        $.ajax({
+            url: baseUrl + "car/carImg/" + newCarId,
+            method: "POST",
+            async: true,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (res) {
+                alert("Successfully Uploaded");
+                saveCar();
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+    }
+
+    function saveCar() {
+        let carId = $("#txtCarId").val();
+        let registrationNum = $("#txtRegistrationNum").val();
+        let mileage = $("#txtMileage").val();
+        let mileageLastServiced = $("#txtMileageLastServiced").val();
+        let passengersCount = $("#txtPassengersCount").val();
+        let availability = true;
+        let color = $("#txtCarColor").val();
+        let frontImgPath = "";
+        let backImgPath = "";
+        let sideImgPath = "";
+        let interiorPath = "";
+        /*CAR CATEGORY DETAILS*/
+        let carCategoryId = $("#txtCarCategoryId").val();
+        let carCategoryName = $("#txtCarCategory").val();
+        let carModel = $("#txtCarModel").val();
+        let carBrandName = $("#txtCarBrand").val();
+        let carType = $("#txtCarType").val();
+        let carTransmissionType = $("#txtTransmissionType").val();
+        let carFuelType = $("#txtFuelType").val();
+        let dailyRatePrice = $("#txtDailyRate").val();
+        let monthlyRatePrice = $("#txtMonthlyRate").val();
+        let freeKmForDay = $("#txtFreeKmForDay").val();
+        let freeKmForMonth = $("#txtFreeKmForMonth").val();
+        let pricePerExtraKm = $("#txtPricePerExtraKm").val();
+
+        var car = {
+            carId: carId,
+            registrationNum: registrationNum,
+            mileage: mileage,
+            mileageLastServiced: mileageLastServiced,
+            passengersCount: passengersCount,
+            availability: availability,
+            color: color,
+            frontImgPath: frontImgPath,
+            backImgPath: backImgPath,
+            sideImgPath: sideImgPath,
+            interiorPath: interiorPath,
+            carCategory: {
+                carCategoryId:carCategoryId,
+                carCategoryName:carCategoryName,
+                carModel:carModel,
+                carBrandName:carBrandName,
+                carType:carType,
+                carTransmissionType:carTransmissionType,
+                carFuelType:carFuelType,
+                dailyRatePrice:dailyRatePrice,
+                monthlyRatePrice:monthlyRatePrice,
+                freeKmForDay:freeKmForDay,
+                freeKmForMonth:freeKmForMonth,
+                pricePerExtraKm:pricePerExtraKm
+            }
+        }
+
+        $.ajax({
+            url: baseUrl + "car",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(car),
+            dataType: 'json',
+            success: function (res) {
+                alert(res.message);
+                //clearTextFields();
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+
+    }
+
+    /*SAVE BUTTON ON ACTION*/
+    $("#btnSaveCar").click(function () {
+        if ($("#txtCarCategoryId").val() !== "") {
+            if ($("#txtCarId").val() !== "") {
+                uploadCarImagesAndSaveCarDetails();
+            } else {
+                alert("Car ID Is Not Defined!!");
+            }
+        } else {
+            alert("Please Select Car Category!!");
+        }
+
+    });
+
+    /*SET CAR CATEGORY ID TO TEXT FIELD*/
+    createNewCarId();
+
+    /*CREATE VARIABLE TO STORE NEW CAR CATEGORY ID*/
+    var newCarId;
+
+    function createNewCarId() {
+
+        $.ajax({
+
+            url: baseUrl + "car/carId",
+            dataType: "JSON",
+            async: false,
+            success: function (resp) {
+                let lastCarId = resp.data;
+
+                let tempId = parseInt(lastCarId.split("-")[1]);
+                tempId = tempId + 1;
+
+
+                if (tempId < 9) {
+
+                    newCarId = "CC-00" + tempId;
+
+                } else if (tempId < 99) {
+                    newCarId = "CC-0" + tempId;
+
+                } else {
+                    newCarId = "CC-" + tempId;
+
+                }
+
+                $("#txtCarId").val(newCarId);
+
+            },
+            error: function (error) {
+                alert("Error When Getting Last Car ID From Back End!!");
+            }
+        });
+
+    }
+
+    function setCarCategoryDetails(carCategoryId) {
+        $.ajax({
+            url: baseUrl + "carCategory/getCategory/" + carCategoryId,
+            dataType: "JSON",
+            success: function (resp) {
+                //console.log(resp.data);
+                $("#txtCarBrand").val(resp.data.carBrandName);
+                $("#txtCarModel").val(resp.data.carModel);
+                $("#txtCarCategoryId").val(resp.data.carCategoryId);
+                $("#txtCarCategory").val(resp.data.carCategoryName);
+                $("#txtCarType").val(resp.data.carType);
+                $("#txtDailyRate").val(resp.data.dailyRatePrice);
+                $("#txtMonthlyRate").val(resp.data.monthlyRatePrice);
+                $("#txtFreeKmForDay").val(resp.data.freeKmForDay);
+                $("#txtFreeKmForMonth").val(resp.data.freeKmForMonth);
+                $("#txtPricePerExtraKm").val(resp.data.pricePerExtraKm);
+                $("#txtTransmissionType").val(resp.data.carTransmissionType);
+                $("#txtFuelType").val(resp.data.carFuelType);
+            }
+        });
+    }
+
+    /*SET CAR CATEGORY BUTTON ON ACTION*/
+    $("#btnSetCarCategory").click(function () {
+        /*GET SELECTED VALUE IN COMBO BOX*/
+        var cmbCarCategorySelectedValue = $("#cmbCarCategoryId").find('option:selected').text();
+
+        if (cmbCarCategorySelectedValue !== "Select Car Category") {
+            //alert(cmbCarCategorySelectedValue)
+            setCarCategoryDetails(cmbCarCategorySelectedValue);
+        } else {
+            $("#txtCarBrand").val("");
+            $("#txtCarModel").val("");
+            $("#txtCarCategoryId").val("");
+            $("#txtCarCategory").val("");
+            $("#txtCarType").val("");
+            $("#txtDailyRate").val("");
+            $("#txtMonthlyRate").val("");
+            $("#txtFreeKmForDay").val("");
+            $("#txtFreeKmForMonth").val("");
+            $("#txtPricePerExtraKm").val("");
+            $("#txtTransmissionType").val("");
+            $("#txtFuelType").val("");
+        }
+    });
+
+
+    /*SET CAR CATEGORY ID TO COMBO BOX*/
+    function loadCarCategoryIdComboBox() {
+        $("#cmbCarCategoryId").empty();
+        $.ajax({
+            url: baseUrl + "carCategory",
+            dataType: "JSON",
+            success: function (resp) {
+                console.log(resp);
+
+                /*SET SELECTED VALUE FOR COMBO BOX*/
+                var cmbEmptyRow = '<option selected>' + "Select Car Category" + '</option>';
+                $("#cmbCarCategoryId").append(cmbEmptyRow);
+
+
+                let rowValue = 1;
+                for (let carCategory of resp.data) {
+
+                    var cmbRow = '<option value="' + (rowValue++) + '">' + carCategory.carCategoryId + '</option>';
+                    $("#cmbCarCategoryId").append(cmbRow);
+
+                }
+            }
+        });
+    }
+
     /*ADD CAR BUTTON FUNCTION*/
     $("#btnAddCar1").click(function () {
         alert("ok")

@@ -60,7 +60,12 @@ public class CarCategoryServiceImpl implements CarCategoryService {
     }
 
     @Override
-    public String getLastDriverId() {
+    public String getLastCarCategoryId() {
         return carCategoryRepo.getCarCategoryLastId();
+    }
+
+    @Override
+    public CarCategoryDTO getCarCategoryById(String id) {
+        return mapper.map(carCategoryRepo.findByCarCategoryId(id), CarCategoryDTO.class);
     }
 }

@@ -15,5 +15,7 @@ public interface CarCategoryService {
 
     int getCarCategoryCount();
 
-    String getLastDriverId();
+    String getLastCarCategoryId();
+
+    CarCategoryDTO getCarCategoryById(String id);
 }
