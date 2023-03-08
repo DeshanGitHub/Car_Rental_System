@@ -707,7 +707,7 @@
                                                 <button class="btn btn-primary w-25 mx-1" id="btnSaveCar" type="button">
                                                     Save Car
                                                 </button>
-                                                <button class="btn btn-secondary w-25 mx-1" type="submit">Clear</button>
+                                                <button class="btn btn-secondary w-25 mx-1" type="submit" id="btnClearTextFields">Clear</button>
                                             </div>
                                         </div>
 
@@ -738,6 +738,40 @@
 
     loadCarCategoryIdComboBox();
 
+    /*CLEAR BUTTON ON ACTION*/
+    $("#btnClearTextFields").click(function () {
+        clearCarTextFields();
+    });
+
+    /*CLEAR TEXT FIELDS*/
+    function clearCarTextFields() {
+        createNewCarId();
+        $("#txtRegistrationNum").val("");
+        $("#txtMileage").val("");
+        $("#txtMileageLastServiced").val("");
+        $("#txtCarColor").val("");
+        $("#txtPassengersCount").val("");
+        $("#carInputImage1").val("");
+        $("#carInputImage2").val("");
+        $("#carInputImage3").val("");
+        $("#carInputImage4").val("");
+
+        /*CAR CATEGORY VALUES EMPTY*/
+        $("#txtCarBrand").val("");
+        $("#txtCarModel").val("");
+        $("#txtCarCategoryId").val("");
+        $("#txtCarCategory").val("");
+        $("#txtCarType").val("");
+        $("#txtDailyRate").val("");
+        $("#txtMonthlyRate").val("");
+        $("#txtFreeKmForDay").val("");
+        $("#txtFreeKmForMonth").val("");
+        $("#txtPricePerExtraKm").val("");
+        $("#txtTransmissionType").val("");
+        $("#txtFuelType").val("");
+    }
+
+
     function uploadCarImagesAndSaveCarDetails() {
         var imgCarFrontObject = $("#carInputImage1")[0].files[0];
         var imgCarFrontName = newCarId + "_CarFrontImage_" + $("#carInputImage1")[0].files[0].name;
@@ -765,7 +799,7 @@
             processData: false,
             data: data,
             success: function (res) {
-                alert("Successfully Uploaded");
+                alert("Images Successfully Uploaded");
                 saveCar();
             },
             error: function (error) {
@@ -814,18 +848,18 @@
             sideImgPath: sideImgPath,
             interiorPath: interiorPath,
             carCategory: {
-                carCategoryId:carCategoryId,
-                carCategoryName:carCategoryName,
-                carModel:carModel,
-                carBrandName:carBrandName,
-                carType:carType,
-                carTransmissionType:carTransmissionType,
-                carFuelType:carFuelType,
-                dailyRatePrice:dailyRatePrice,
-                monthlyRatePrice:monthlyRatePrice,
-                freeKmForDay:freeKmForDay,
-                freeKmForMonth:freeKmForMonth,
-                pricePerExtraKm:pricePerExtraKm
+                carCategoryId: carCategoryId,
+                carCategoryName: carCategoryName,
+                carModel: carModel,
+                carBrandName: carBrandName,
+                carType: carType,
+                carTransmissionType: carTransmissionType,
+                carFuelType: carFuelType,
+                dailyRatePrice: dailyRatePrice,
+                monthlyRatePrice: monthlyRatePrice,
+                freeKmForDay: freeKmForDay,
+                freeKmForMonth: freeKmForMonth,
+                pricePerExtraKm: pricePerExtraKm
             }
         }
 
@@ -837,7 +871,7 @@
             dataType: 'json',
             success: function (res) {
                 alert(res.message);
-                //clearTextFields();
+                clearCarTextFields();
             },
             error: function (error) {
                 let cause = JSON.parse(error.responseText).message;
