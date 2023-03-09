@@ -63,7 +63,8 @@
                 <div class="container-fluid ">
                     <div class="row">
                         <div class="col-12 bg-primary px-0">
-                            <img alt="image" class="w-100" src="../../../assets/img/cars/car-12.jpg" style="max-width: 100vw">
+                            <img alt="image" class="w-100" src="../../../assets/img/cars/car-12.jpg"
+                                 style="max-width: 100vw">
                         </div>
 
                     </div>
@@ -102,15 +103,19 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img alt="image 1" class="d-block w-100"
-                                             src="../../../assets/img/cars/car-1.jpg">
+                                             src="" id="img_1">
                                     </div>
                                     <div class="carousel-item">
                                         <img alt="image 2" class="d-block w-100"
-                                             src="../../../assets/img/cars/car-3.jpg">
+                                             src="" id="img_2">
                                     </div>
                                     <div class="carousel-item">
                                         <img alt="image 3" class="d-block w-100"
-                                             src="../../../assets/img/cars/car-12.jpg">
+                                             src="" id="img_3">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img alt="image 4" class="d-block w-100"
+                                             src="" id="img_4">
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" data-bs-slide="prev"
@@ -131,56 +136,60 @@
 
                                 <tbody>
                                 <tr>
+                                    <th scope="row">Car ID</th>
+                                    <td id="td_1">CAR-000</td>
+                                </tr>
+                                <tr>
                                     <th scope="row">Brand</th>
-                                    <td>Toyota</td>
+                                    <td id="td_2">Toyota</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Model</th>
-                                    <td>Corolla</td>
+                                    <td id="td_3">Corolla</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Type</th>
-                                    <td>Luxury</td>
+                                    <td id="td_4">Luxury</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">No of passengers</th>
-                                    <td>4</td>
+                                    <td id="td_5">4</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Transmission type</th>
-                                    <td>Auto</td>
+                                    <td id="td_6">Auto</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Fuel Type</th>
-                                    <td>Petrol</td>
+                                    <td id="td_7">Petrol</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Daily rate</th>
-                                    <td>Rs. 3000</td>
+                                    <td id="td_8">Rs. 3000</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Monthly rat</th>
-                                    <td>Rs. 50000</td>
+                                    <td id="td_9">Rs. 50000</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Free km For Day</th>
-                                    <td>10 km</td>
+                                    <td id="td_10">10 km</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Free km For Month</th>
-                                    <td>100 km</td>
+                                    <td id="td_11">100 km</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Price Per Extra km</th>
-                                    <td>Rs. 40</td>
+                                    <td id="td_12">Rs. 40</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Registration Number</th>
-                                    <td>KE - 2275</td>
+                                    <td id="td_13">KE - 2275</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Color</th>
-                                    <td>Blue</td>
+                                    <td id="td_14">Blue</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -328,14 +337,61 @@
     $("#carListMainId").css("display", "block");
     $("#carBookingMainId").css("display", "none");
 
-    loadCarsForThePage();
+    loadCarsToThePage();
+
+    /*SET IMAGES TO IMAGE VIEW*/
+    function loadCarImages(carFrontImgPath, carBackImgPath, carSideImgPath, carInteriorImgPath) {
+        let frontImgNameArray = carFrontImgPath.split("\\CarImages\\");
+        $("#img_1").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
+
+        let backImgNameArray = carBackImgPath.split("\\CarImages\\");
+        $("#img_2").attr('src', "../../imgUpload/CarImages/" + backImgNameArray[1]);
+
+        let sideImgNameArray = carSideImgPath.split("\\CarImages\\");
+        $("#img_3").attr('src', "../../imgUpload/CarImages/" + sideImgNameArray[1]);
+
+        let interiorImgNameArray = carInteriorImgPath.split("\\CarImages\\");
+        $("#img_4").attr('src', "../../imgUpload/CarImages/" + interiorImgNameArray[1]);
+    }
 
     function loadBookingArea(carId) {
-        console.log("Booking Area Car ID : "+carId);
+        //console.log("Booking Area Car ID : "+carId);
+
+        $.ajax({
+            url: baseUrl + "car/getCar/" + carId,
+            dataType: "JSON",
+            success: function (resp) {
+                //console.log(resp);
+                $("#td_1").text(resp.data.carId);
+                $("#td_2").text(resp.data.carCategory.carBrandName);
+                $("#td_3").text(resp.data.carCategory.carModel);
+                $("#td_4").text(resp.data.carCategory.carType);
+                $("#td_5").text(resp.data.passengersCount);
+                $("#td_6").text(resp.data.carCategory.carTransmissionType);
+                $("#td_7").text(resp.data.carCategory.carFuelType);
+                $("#td_8").text(resp.data.carCategory.dailyRatePrice);
+                $("#td_9").text(resp.data.carCategory.monthlyRatePrice);
+                $("#td_10").text(resp.data.carCategory.freeKmForDay);
+                $("#td_11").text(resp.data.carCategory.freeKmForMonth);
+                $("#td_12").text(resp.data.carCategory.pricePerExtraKm);
+                $("#td_13").text(resp.data.registrationNum);
+                $("#td_14").text(resp.data.color);
+
+
+                /*LOAD CAR IMAGES*/
+                loadCarImages(resp.data.frontImgPath, resp.data.backImgPath, resp.data.sideImgPath, resp.data.interiorPath);
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
+
+        //TODO
     }
 
     /*LOAD CARS FOR THE PAGE*/
-    function loadCarsForThePage() {
+    function loadCarsToThePage() {
         $("#carListLoadingArea").empty();
 
         $.ajax({
@@ -345,33 +401,33 @@
                 console.log(resp.data);
                 for (let car of resp.data) {
 
-                    let carId=car.carId;
+                    let carId = car.carId;
                     let frontImgNameArray = car.frontImgPath.split("\\CarImages\\");
                     //$("#img1").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
 
-                    console.log("img path : "+frontImgNameArray[1])
-                    var imgContent = "<div class=\"col-3 mx-3 mb-3 border d-flex align-items-center\" id=\"imgDivId\" style=\"height: 300px\">"+"<div class=\"container-fluid \">"+"<div class=\"row\">"+"<div class=\"col-12 bg-primary px-0\">"+"<img alt=\"image\" class=\"w-100\" src=\"\" style=\"max-width: 100vw\" id=\"carImg_1\">"+"</div>"+"</div>"+"<div class=\"row bg-primary\">"+"<div class=\"col-6 bg-danger \">"+"<p id=\"p1\">Toyota Corolla</p>"+"</div>"+"<div class=\"col-6 bg-danger text-end\">"+"<p id=\"p2\">128$</p>"+"</div>"+"</div>"+"</div>"+"</div>";
+                    console.log("img path : " + frontImgNameArray[1])
+                    var imgContent = "<div class=\"col-3 mx-3 mb-3 border d-flex align-items-center\" id=\"imgDivId\" style=\"height: 300px\">" + "<div class=\"container-fluid \">" + "<div class=\"row\">" + "<div class=\"col-12 bg-primary px-0\">" + "<img alt=\"image\" class=\"w-100\" src=\"\" style=\"max-width: 100vw\" id=\"carImg_1\">" + "</div>" + "</div>" + "<div class=\"row bg-primary\">" + "<div class=\"col-6 bg-danger \">" + "<p id=\"p1\">Toyota Corolla</p>" + "</div>" + "<div class=\"col-6 bg-danger text-end\">" + "<p id=\"p2\">128$</p>" + "</div>" + "</div>" + "</div>" + "</div>";
                     $("#carListLoadingArea").append(imgContent);
 
                     /*SET VALUE ATTRIBUTE VALUE TO IMAGE CONTAINER*/
-                    $("#imgDivId").attr('id', "imgDivId_"+carId);
-                    $("#imgDivId_"+carId).attr('value', carId);
+                    $("#imgDivId").attr('id', "imgDivId_" + carId);
+                    $("#imgDivId_" + carId).attr('value', carId);
                     //$("#imgDivId_"+carId)
 
                     /*SET IMAGE*/
                     $("#carImg_1").attr('id', carId);
-                    $("#"+carId+"").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
+                    $("#" + carId + "").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
 
                     /*SET CAR BRAND AND MODEL*/
-                    $("#p1").attr('id',"p1_"+carId);
-                    $("#p1_"+carId).text(car.carCategory.carBrandName+' '+car.carCategory.carModel);
+                    $("#p1").attr('id', "p1_" + carId);
+                    $("#p1_" + carId).text(car.carCategory.carBrandName + ' ' + car.carCategory.carModel);
 
                     /*SET PRICE*/
-                    $("#p2").attr('id',"p2_"+carId);
-                    $("#p2_"+carId).text("Rs. "+car.carCategory.dailyRatePrice);
-                    //TODO
+                    $("#p2").attr('id', "p2_" + carId);
+                    $("#p2_" + carId).text("Rs. " + car.carCategory.dailyRatePrice);
 
-                    bindingImageAreaClickEvent("imgDivId_"+carId);
+
+                    bindingImageAreaClickEvent("imgDivId_" + carId);
                 }
                 //bindingImageAreaClickEvent();
             }
@@ -382,11 +438,11 @@
 
     /*EVENT BINDING FOR THE CAR IMAGE AREA*/
     function bindingImageAreaClickEvent(clickAreaId) {
-        $("#"+clickAreaId).click(function () {
+        $("#" + clickAreaId).click(function () {
             $("#carListMainId").css("display", "none");
             $("#carBookingMainId").css("display", "block");
 
-            let carId=$(this).attr('value');
+            let carId = $(this).attr('value');
             loadBookingArea(carId);
         });
     }
