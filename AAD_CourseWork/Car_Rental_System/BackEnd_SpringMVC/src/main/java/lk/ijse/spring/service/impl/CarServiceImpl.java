@@ -2,7 +2,6 @@ package lk.ijse.spring.service.impl;
 
 import lk.ijse.spring.dto.CarDTO;
 import lk.ijse.spring.entity.Car;
-import lk.ijse.spring.entity.Customer;
 import lk.ijse.spring.repo.CarRepo;
 import lk.ijse.spring.service.CarService;
 import org.modelmapper.ModelMapper;
@@ -78,7 +77,16 @@ public class CarServiceImpl implements CarService {
             throw new RuntimeException("Car " + car.getCarId() + " Not Available to Update..!");
         }
 
-        carRepo.updateCarWithoutImages(car.isAvailability(),car.getColor(),car.getMileage(),car.getMileageLastServiced(),car.getPassengersCount(),car.getRegistrationNum(),car.getCarCategory().getCarCategoryId(),car.getCarId());
+        carRepo.updateCarWithoutImages(car.isAvailability(), car.getColor(), car.getMileage(), car.getMileageLastServiced(), car.getPassengersCount(), car.getRegistrationNum(), car.getCarCategory().getCarCategoryId(), car.getCarId());
 
+    }
+
+    @Override
+    public CarDTO getCarById(String carId) {
+        if (!carRepo.existsById(carId)) {
+            throw new RuntimeException("No " + carId + " Customer..!!");
+        }
+
+        return mapper.map(carRepo.findCarByCarId(carId), CarDTO.class);
     }
 }

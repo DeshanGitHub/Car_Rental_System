@@ -641,7 +641,7 @@
                                                 <label class="form-label" for="txtMileageLastServiced">Mileage Last
                                                     Serviced (km)</label>
                                                 <input class="form-control" id="txtMileageLastServiced"
-                                                       placeholder="Car ID" type="text">
+                                                       placeholder="Mileage Last Serviced" type="text">
                                             </div>
 
                                         </div>
@@ -917,13 +917,13 @@
 
                 if (tempId < 9) {
 
-                    newCarId = "CC-00" + tempId;
+                    newCarId = "CAR-00" + tempId;
 
                 } else if (tempId < 99) {
-                    newCarId = "CC-0" + tempId;
+                    newCarId = "CAR-0" + tempId;
 
                 } else {
-                    newCarId = "CC-" + tempId;
+                    newCarId = "CAR-" + tempId;
 
                 }
 

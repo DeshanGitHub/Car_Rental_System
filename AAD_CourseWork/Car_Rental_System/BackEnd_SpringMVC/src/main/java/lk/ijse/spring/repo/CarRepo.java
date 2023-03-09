@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 
 public interface CarRepo extends JpaRepository<Car, String> {
 
+    /*GET CAR BY ID*/
+    Car findCarByCarId(String carId);
 
     /*UPDATE CAR WITHOUT IMAGES*/
     @Modifying

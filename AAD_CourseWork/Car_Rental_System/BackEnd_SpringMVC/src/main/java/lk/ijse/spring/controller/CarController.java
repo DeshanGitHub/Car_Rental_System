@@ -1,6 +1,7 @@
 package lk.ijse.spring.controller;
 
 import lk.ijse.spring.dto.CarDTO;
+import lk.ijse.spring.dto.CustomerDTO;
 import lk.ijse.spring.service.CarService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/car")
@@ -24,6 +26,49 @@ public class CarController {
     static String carBackImgPath;
     static String carSideImgPath;
     static String carInteriorImgPath;
+
+    /*DELETE CAR BY ID*/
+    @DeleteMapping(params = "carId")
+    public ResponseUtil deleteCar(String carId) {
+        CarDTO carDTO = carService.getCarById(carId);
+        carService.deleteCar(carId);
+        boolean isDeletedImages = deleteUploadedImg(carDTO.getFrontImgPath(), carDTO.getBackImgPath(),carDTO.getSideImgPath(),carDTO.getInteriorPath());
+        if (isDeletedImages) {
+            return new ResponseUtil("200", carId + " : Deleted", null);
+        } else {
+            return new ResponseUtil("500", "Car Details Are Deleted, But Images Are Not Deleted!!!", null);
+        }
+
+    }
+
+    /*DELETE UPLOADED IMAGE*/
+    public boolean deleteUploadedImg(String carFrontImagePath, String carBackImagePath, String carSideImagePath, String carInteriorImagePath) {
+        try {
+
+            File fileFront = new File(carFrontImagePath);
+            File fileBack = new File(carBackImagePath);
+            File fileSide = new File(carSideImagePath);
+            File fileInterior = new File(carInteriorImagePath);
+
+            if (fileFront.delete() && fileBack.delete() && fileSide.delete() && fileInterior.delete()) {
+                System.out.println("Images are deleted.");
+                return true;
+            } else {
+                System.out.println("Delete operation is failed.");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to Delete images !!");
+            return false;
+        }
+    }
+
+    /*GET ALL CARS*/
+    @GetMapping
+    public ResponseUtil getAllCars() {
+        ArrayList<CarDTO> allCars = carService.getAllCars();
+        return new ResponseUtil("200", "success", allCars);
+    }
 
     /*UPDATE CAR WITHOUT IMAGES*/
     @PutMapping(path = "/updateWithoutImages")

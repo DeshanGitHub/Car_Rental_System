@@ -50,7 +50,7 @@ public class CustomerController {
         if (isDeletedImages) {
             return new ResponseUtil("200", cusId + " : Deleted", null);
         } else {
-            return new ResponseUtil("500", "Customer Details Are Deleted, But Images Are Not Deleted!!!", "");
+            return new ResponseUtil("500", "Customer Details Are Deleted, But Images Are Not Deleted!!!", null);
         }
 
     }

@@ -21,4 +21,6 @@ public interface CarService {
     void isExistsCar(String id);
 
     void updateCarWithoutImages(CarDTO dto);
+
+    CarDTO getCarById(String carId);
 }
