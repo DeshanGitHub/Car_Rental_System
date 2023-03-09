@@ -27,6 +27,13 @@ public class CarController {
     static String carSideImgPath;
     static String carInteriorImgPath;
 
+    /*GET CAR BY ID*/
+    @GetMapping(path = "/getCar/{carId}")
+    public ResponseUtil getCarById(@PathVariable String carId) {
+        CarDTO carDTO = carService.getCarById(carId);
+        return new ResponseUtil("200", "success", carDTO);
+    }
+
     /*DELETE CAR BY ID*/
     @DeleteMapping(params = "carId")
     public ResponseUtil deleteCar(String carId) {

@@ -573,14 +573,16 @@
                                     <div class="carousel slide" data-bs-ride="carousel" id="carouselExampleAutoplaying">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
-                                                <img alt="image_1" class="d-block w-100" src="../../img/cars/car-1.jpg">
+                                                <img alt="image_1" class="d-block w-100" id="img1" src="">
                                             </div>
                                             <div class="carousel-item">
-                                                <img alt="image_2" class="d-block w-100" src="../../img/cars/car-3.jpg">
+                                                <img alt="image_2" class="d-block w-100" id="img2" src="">
                                             </div>
                                             <div class="carousel-item">
-                                                <img alt="image_3" class="d-block w-100"
-                                                     src="../../img/cars/car-12.jpg">
+                                                <img alt="image_3" class="d-block w-100" id="img3" src="">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img alt="image_4" class="d-block w-100" id="img4" src="">
                                             </div>
                                         </div>
                                         <button class="carousel-control-prev" data-bs-slide="prev"
@@ -838,6 +840,21 @@
 
     loadCarTable();
 
+    /*SET IMAGES TO IMAGE VIEW*/
+    function setImages(carFrontImgPath, carBackImgPath, carSideImgPath, carInteriorImgPath) {
+        let frontImgNameArray = carFrontImgPath.split("\\CarImages\\");
+        $("#img1").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
+
+        let backImgNameArray = carBackImgPath.split("\\CarImages\\");
+        $("#img2").attr('src', "../../imgUpload/CarImages/" + backImgNameArray[1]);
+
+        let sideImgNameArray = carSideImgPath.split("\\CarImages\\");
+        $("#img3").attr('src', "../../imgUpload/CarImages/" + sideImgNameArray[1]);
+
+        let interiorImgNameArray = carInteriorImgPath.split("\\CarImages\\");
+        $("#img4").attr('src', "../../imgUpload/CarImages/" + interiorImgNameArray[1]);
+    }
+
     $("#page-content-wrapper1").css("display", "block");
     $("#page-content-wrapper2").css("display", "none");
 
@@ -864,9 +881,22 @@
     });
 
     function loadPageContentTwo(tblRowCarId) {
+        $.ajax({
+            url: baseUrl + "car/getCar/" + tblRowCarId,
+            dataType: "JSON",
+            success: function (resp) {
+                //console.log(resp);
+                $("#h1_1").text(resp.data.carId);
+                $("#txtCarId").val(resp.data.carId);
 
-        $("#h1_1").text(tblRowCarId);
-        $("#txtCarId").val(tblRowCarId);
+                /*LOAD CAR IMAGES*/
+                setImages(resp.data.frontImgPath, resp.data.backImgPath, resp.data.sideImgPath, resp.data.interiorPath);
+            },
+            error: function (error) {
+                let cause = JSON.parse(error.responseText).message;
+                alert(cause);
+            }
+        });
 
         //TODO
     }
