@@ -58,13 +58,12 @@
 <main id="carListMainId">
     <!--CAR LIST AREA-->
     <section class="container-fluid position-relative" style="margin-top: 100px">
-        <div class="row mt-3 justify-content-center ">
+        <div class="row mt-3 justify-content-center " id="carListLoadingArea">
             <div class="col-3 mx-3 mb-3 border d-flex align-items-center" id="imgDivId" style="height: 300px">
                 <div class="container-fluid ">
                     <div class="row">
                         <div class="col-12 bg-primary px-0">
-                            <img alt="image" class="w-100" src="../../../assets/img/cars/car-12.jpg"
-                                 style="max-width: 100vw">
+                            <img alt="image" class="w-100" src="../../../assets/img/cars/car-12.jpg" style="max-width: 100vw">
                         </div>
 
                     </div>
@@ -323,21 +322,72 @@
 <script src="../../../assets/jQuery/jquery-3.6.0.min.js"></script>
 
 <script>
+
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
+
     $("#carListMainId").css("display", "block");
     $("#carBookingMainId").css("display", "none");
 
     loadCarsForThePage();
 
+    function loadBookingArea(carId) {
+        console.log("Booking Area Car ID : "+carId);
+    }
+
     /*LOAD CARS FOR THE PAGE*/
     function loadCarsForThePage() {
-        bindingImageAreaClickEvent();
+        $("#carListLoadingArea").empty();
+
+        $.ajax({
+            url: baseUrl + "car",
+            dataType: "JSON",
+            success: function (resp) {
+                console.log(resp.data);
+                for (let car of resp.data) {
+
+                    let carId=car.carId;
+                    let frontImgNameArray = car.frontImgPath.split("\\CarImages\\");
+                    //$("#img1").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
+
+                    console.log("img path : "+frontImgNameArray[1])
+                    var imgContent = "<div class=\"col-3 mx-3 mb-3 border d-flex align-items-center\" id=\"imgDivId\" style=\"height: 300px\">"+"<div class=\"container-fluid \">"+"<div class=\"row\">"+"<div class=\"col-12 bg-primary px-0\">"+"<img alt=\"image\" class=\"w-100\" src=\"\" style=\"max-width: 100vw\" id=\"carImg_1\">"+"</div>"+"</div>"+"<div class=\"row bg-primary\">"+"<div class=\"col-6 bg-danger \">"+"<p id=\"p1\">Toyota Corolla</p>"+"</div>"+"<div class=\"col-6 bg-danger text-end\">"+"<p id=\"p2\">128$</p>"+"</div>"+"</div>"+"</div>"+"</div>";
+                    $("#carListLoadingArea").append(imgContent);
+
+                    /*SET VALUE ATTRIBUTE VALUE TO IMAGE CONTAINER*/
+                    $("#imgDivId").attr('id', "imgDivId_"+carId);
+                    $("#imgDivId_"+carId).attr('value', carId);
+                    //$("#imgDivId_"+carId)
+
+                    /*SET IMAGE*/
+                    $("#carImg_1").attr('id', carId);
+                    $("#"+carId+"").attr('src', "../../imgUpload/CarImages/" + frontImgNameArray[1]);
+
+                    /*SET CAR BRAND AND MODEL*/
+                    $("#p1").attr('id',"p1_"+carId);
+                    $("#p1_"+carId).text(car.carCategory.carBrandName+' '+car.carCategory.carModel);
+
+                    /*SET PRICE*/
+                    $("#p2").attr('id',"p2_"+carId);
+                    $("#p2_"+carId).text("Rs. "+car.carCategory.dailyRatePrice);
+                    //TODO
+
+                    bindingImageAreaClickEvent("imgDivId_"+carId);
+                }
+                //bindingImageAreaClickEvent();
+            }
+        });
+
+
     }
 
     /*EVENT BINDING FOR THE CAR IMAGE AREA*/
-    function bindingImageAreaClickEvent() {
-        $("#imgDivId").click(function () {
+    function bindingImageAreaClickEvent(clickAreaId) {
+        $("#"+clickAreaId).click(function () {
             $("#carListMainId").css("display", "none");
             $("#carBookingMainId").css("display", "block");
+
+            let carId=$(this).attr('value');
+            loadBookingArea(carId);
         });
     }
 </script>
