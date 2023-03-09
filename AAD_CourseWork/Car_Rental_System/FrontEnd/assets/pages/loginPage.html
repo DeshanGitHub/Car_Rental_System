@@ -111,7 +111,8 @@
                                                 </span>
                                                         <input aria-describedby="basic-addon1" aria-label="Username"
                                                                class="form-control"
-                                                               placeholder="Username" required type="text">
+                                                               id="txtUserName" placeholder="Username" required
+                                                               type="text">
                                                     </div>
                                                 </div>
 
@@ -124,7 +125,8 @@
                                                 </span>
                                                         <input aria-describedby="basic-addon2" aria-label="Password"
                                                                class="form-control"
-                                                               placeholder="Password" required type="text">
+                                                               id="txtPassword" placeholder="Password" required
+                                                               type="text">
                                                     </div>
                                                 </div>
                                                 <!-- Force next columns to break to new line -->
@@ -133,7 +135,8 @@
                                                 </div>-->
 
                                                 <div class="col-5 d-flex justify-content-center mb-4 mt-3">
-                                                    <button class="btn btn-info vw-100" type="button" id="btnLogin">Login
+                                                    <button class="btn btn-info vw-100" id="btnLogin" type="button">
+                                                        Login
                                                     </button>
                                                 </div>
 
@@ -276,22 +279,62 @@
 
 <!--MY SCRIPT-->
 <script>
-    /**/
+    let baseUrl = "http://localhost:8080/BackEnd_SpringMVC_war_exploded/";
 
-/*LOGIN BUTTON FUNCTION*/
-$("#btnLogin").click(function () {
+    /*LOGIN BUTTON FUNCTION*/
+    $("#btnLogin").click(function () {
         /*GET SELECTED BOOTSTRAP DROPDOWN VALUE*/
-        let cmbSelectedValue=$("#cmbUserType option:selected").text();
+        let cmbSelectedValue = $("#cmbUserType option:selected").text();
+        let txtUserNameValue = $("#txtUserName").val();
+        let txtPasswordValue = $("#txtPassword").val();
 
-        if(cmbSelectedValue === "Customer"){
-            /*REDIRECT TO OTHER WEB PAGE*/
-            window.location.href="registeredCustomerPages/RegisteredCustomerHomePage.html";
-        }else if(cmbSelectedValue === "Driver"){
-            window.location.href="registerDriverPages/driverSchedulePage.html";
-        }else if(cmbSelectedValue === "Admin"){
-            window.location.href="adminPages/adminDashBoardPage.html";
+        if (cmbSelectedValue === "Customer" && txtUserNameValue !== "" && txtPasswordValue !== "") {
+
+            $.ajax({
+                url: baseUrl + "customer/getCustomer/" + txtUserNameValue + "/" + txtPasswordValue,
+                dataType: "JSON",
+                success: function (resp) {
+                    //console.log(resp.data);
+                    /*REDIRECT TO OTHER WEB PAGE*/
+                    window.location.href = "registeredCustomerPages/RegisteredCustomerHomePage.html";
+                },
+                error: function (error) {
+                    alert(JSON.parse(error.responseText).message);
+                }
+            });
+
+        } else if (cmbSelectedValue === "Driver" && txtUserNameValue !== "" && txtPasswordValue !== "") {
+
+            $.ajax({
+                url: baseUrl + "driver/getDriver/" + txtUserNameValue + "/" + txtPasswordValue,
+                dataType: "JSON",
+                success: function (resp) {
+                    //console.log(resp.data);
+                    window.location.href = "registerDriverPages/driverSchedulePage.html";
+                },
+                error: function (error) {
+                    alert(JSON.parse(error.responseText).message);
+                }
+            });
+
+
+        } else if (cmbSelectedValue === "Admin" && txtUserNameValue !== "" && txtPasswordValue !== "") {
+
+            $.ajax({
+                url: baseUrl + "employee/getEmployee/" + txtUserNameValue + "/" + txtPasswordValue,
+                dataType: "json",
+                success: function (resp) {
+                    //console.log(resp.data);
+                    window.location.href = "adminPages/adminDashBoardPage.html";
+                },
+                error: function (error) {
+                    alert(JSON.parse(error.responseText).message);
+                }
+            });
+        } else {
+            alert("Please Check Input Values!!");
         }
-});
+    });
 
 </script>
 <!--/MY SCRIPT-->

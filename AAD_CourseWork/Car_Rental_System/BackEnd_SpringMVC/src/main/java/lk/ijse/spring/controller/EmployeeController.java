@@ -16,6 +16,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @GetMapping(path = "/getEmployee/{userName}/{password}")
+    public ResponseUtil getEmployeeBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password){
+        System.out.println("Method Called : "+userName+", "+password);
+        EmployeeDTO employeeDTO = employeeService.getEmployeeByUserNameAndPassword(userName, password);
+        return new ResponseUtil("200","success",employeeDTO);
+    }
+
     @GetMapping
     public ResponseUtil getAllEmployees() {
         ArrayList<EmployeeDTO> allEmployees = employeeService.getAllEmployees();

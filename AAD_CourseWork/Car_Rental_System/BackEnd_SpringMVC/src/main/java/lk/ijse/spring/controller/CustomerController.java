@@ -1,6 +1,7 @@
 package lk.ijse.spring.controller;
 
 import lk.ijse.spring.dto.CustomerDTO;
+import lk.ijse.spring.dto.EmployeeDTO;
 import lk.ijse.spring.service.CustomerService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,13 @@ public class CustomerController {
             return new ResponseUtil("500", "Customer Details Are Deleted, But Images Are Not Deleted!!!", null);
         }
 
+    }
+
+    @GetMapping(path = "/getCustomer/{userName}/{password}")
+    public ResponseUtil getCustomerBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password){
+        System.out.println("Method Called : "+userName+", "+password);
+        CustomerDTO customerDTO = customerService.getCustomerByUserNameAndPassword(userName, password);
+        return new ResponseUtil("200","success",customerDTO);
     }
 
     /*CREATE STATIC VARIABLES TO STORE IMAGE UPLOADING PATH*/

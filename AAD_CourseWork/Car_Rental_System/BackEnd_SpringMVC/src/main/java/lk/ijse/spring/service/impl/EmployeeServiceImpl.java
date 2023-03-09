@@ -27,6 +27,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employeeRepo.existsById(dto.getId())) {
             throw new RuntimeException("Employee " + dto.getId() + " Already Exists..!!");
         }
+        if (employeeRepo.existsEmployeeByUserName(dto.getUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another User Name");
+        }
         employeeRepo.save(mapper.map(dto, Employee.class));
     }
 
@@ -43,6 +46,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (!employeeRepo.existsById(dto.getId())) {
             throw new RuntimeException("Employee " + dto.getId() + " Not Available to Update..!");
         }
+        if (employeeRepo.existsEmployeeByUserName(dto.getUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another User Name");
+        }
         employeeRepo.save(mapper.map(dto, Employee.class));
     }
 
@@ -50,5 +56,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     public ArrayList<EmployeeDTO> getAllEmployees() {
         return mapper.map(employeeRepo.findAll(), new TypeToken<ArrayList<EmployeeDTO>>() {
         }.getType());
+    }
+
+    @Override
+    public EmployeeDTO getEmployeeByUserNameAndPassword(String userName, String password) {
+        Employee employee = employeeRepo.findByUserNameAndPassword(userName, password);
+
+        if(employee==null){
+            throw new RuntimeException("Incorrect Password and Username!!");
+        }
+        return mapper.map(employee, EmployeeDTO.class);
     }
 }

@@ -27,6 +27,9 @@ public class DriverServiceImpl implements DriverService {
         if (driverRepo.existsById(dto.getDriverId())) {
             throw new RuntimeException("Driver " + dto.getDriverId() + " Already Exists..!!");
         }
+        if (driverRepo.existsDriverByDriverUserName(dto.getDriverUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another One");
+        }
 
         driverRepo.save(mapper.map(dto, Driver.class));
     }
@@ -44,6 +47,9 @@ public class DriverServiceImpl implements DriverService {
     public void updateDriver(DriverDTO dto) {
         if (!(driverRepo.existsById(dto.getDriverId()))) {
             throw new RuntimeException("Driver " + dto.getDriverId() + " Not Available to Update..!");
+        }
+        if (driverRepo.existsDriverByDriverUserName(dto.getDriverUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another One");
         }
 
         driverRepo.save(mapper.map(dto, Driver.class));
@@ -68,6 +74,16 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public DriverDTO getDriverById(String driverId) {
         return mapper.map(driverRepo.findDriverByDriverId(driverId), DriverDTO.class);
+    }
+
+    @Override
+    public DriverDTO getDriverByUserNameAndPassword(String userName, String password) {
+        Driver driver = driverRepo.findDriverByDriverUserNameAndDriverPassword(userName, password);
+
+        if (driver == null) {
+            throw new RuntimeException("Incorrect Password and Username!!");
+        }
+        return mapper.map(driver, DriverDTO.class);
     }
 
 }

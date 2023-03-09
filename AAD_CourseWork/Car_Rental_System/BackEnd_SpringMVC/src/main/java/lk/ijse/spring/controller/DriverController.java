@@ -16,6 +16,13 @@ public class DriverController {
     @Autowired
     private DriverService driverService;
 
+    @GetMapping(path = "/getDriver/{userName}/{password}")
+    public ResponseUtil getEmployeeBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password) {
+        System.out.println("Method Called : " + userName + ", " + password);
+        DriverDTO driverDTO = driverService.getDriverByUserNameAndPassword(userName, password);
+        return new ResponseUtil("200", "success", driverDTO);
+    }
+
     /*DELETE DRIVER*/
     @DeleteMapping(params = "driverId")
     public ResponseUtil deleteDriver(String driverId) {

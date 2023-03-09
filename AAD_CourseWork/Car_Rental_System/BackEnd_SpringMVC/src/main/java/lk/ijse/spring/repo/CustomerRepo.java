@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerRepo extends JpaRepository<Customer, String> {
 
+    Customer findByCusUserNameAndCusPassword(String userName, String password);
+
+    /*FIND IS EXISTS USER NAME*/
+    boolean existsCustomersByCusUserName(String userName);
 
     /*UPDATE CUSTOMER WITHOUT IMAGES*/
     @Modifying

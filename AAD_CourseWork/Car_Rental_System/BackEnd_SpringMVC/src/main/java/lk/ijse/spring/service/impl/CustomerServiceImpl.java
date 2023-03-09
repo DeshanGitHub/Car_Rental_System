@@ -26,6 +26,9 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerRepo.existsById(dto.getCusId())) {
             throw new RuntimeException("Customer " + dto.getCusId() + " Already Exists..!!");
         }
+        if (customerRepo.existsCustomersByCusUserName(dto.getCusUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another One");
+        }
         customerRepo.save(mapper.map(dto, Customer.class));
     }
 
@@ -41,6 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateCustomer(CustomerDTO dto) {
         if (!customerRepo.existsById(dto.getCusId())) {
             throw new RuntimeException("Customer " + dto.getCusId() + " Not Available to Update..!");
+        }
+        if (customerRepo.existsCustomersByCusUserName(dto.getCusUserName())) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another One");
         }
         customerRepo.save(mapper.map(dto, Customer.class));
     }
@@ -87,5 +93,15 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         customerRepo.updateCustomerWithoutImages(customer.getCusName().getFName(), customer.getCusName().getLName(), customer.getCusAddress(), customer.getCusContactNum(), customer.getCusImgDescription(), customer.getCusNicOrDlNum(), customer.getCusEmail(), customer.getCusUserName(), customer.getCusPassword(), customer.getCusStatus(), customer.getCusStatusReason(), customer.getCusId());
+    }
+
+    @Override
+    public CustomerDTO getCustomerByUserNameAndPassword(String userName, String password) {
+        Customer customer = customerRepo.findByCusUserNameAndCusPassword(userName, password);
+
+        if (customer == null) {
+            throw new RuntimeException("Incorrect Password and Username!!");
+        }
+        return mapper.map(customer, CustomerDTO.class);
     }
 }

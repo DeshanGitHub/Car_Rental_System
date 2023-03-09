@@ -310,7 +310,7 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                        <button class="btn btn-primary w-25" type="button">Booking
+                                        <button class="btn btn-primary w-25" type="button" id="btnBooking">Booking
                                         </button>
                                     </div>
 
@@ -338,6 +338,11 @@
     $("#carBookingMainId").css("display", "none");
 
     loadCarsToThePage();
+
+    /*BOOKING BUTTON ON ACTION*/
+    $("#btnBooking").click(function () {
+        alert("ok")
+    });
 
     /*SET IMAGES TO IMAGE VIEW*/
     function loadCarImages(carFrontImgPath, carBackImgPath, carSideImgPath, carInteriorImgPath) {
