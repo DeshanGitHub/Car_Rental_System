@@ -29,7 +29,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
      */
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        System.out.println("Im from Web app Initializer");
+        //System.out.println("Im from Web app Initializer");
         registration.setMultipartConfig(new MultipartConfigElement(System.getProperty("java.io.tmpdir")));
     }
 }
