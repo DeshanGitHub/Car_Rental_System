@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.math.BigDecimal;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -22,4 +24,5 @@ public class CarCategoryDTO {
     private double freeKmForDay;
     private double freeKmForMonth;
     private double pricePerExtraKm;
+    private double lossDamageWaiverAmount;
 }

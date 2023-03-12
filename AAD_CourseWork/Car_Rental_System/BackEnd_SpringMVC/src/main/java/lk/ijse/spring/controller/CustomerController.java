@@ -20,6 +20,14 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    public static String loggedCustomerId;
+
+    /*GET LOGGED CUSTOMER ID*/
+    @GetMapping(path = "/loggedCustomerId")
+    public ResponseUtil getLoggedCustomerId(){
+        return new ResponseUtil("200","success",loggedCustomerId);
+    }
+
     /*DELETE UPLOADED IMAGE*/
     public boolean deleteUploadedImg(String frontImagePath, String backImagePath) {
         try {
@@ -57,8 +65,12 @@ public class CustomerController {
 
     @GetMapping(path = "/getCustomer/{userName}/{password}")
     public ResponseUtil getCustomerBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password) {
-        System.out.println("Method Called : " + userName + ", " + password);
+        //System.out.println("Method Called : " + userName + ", " + password);
         CustomerDTO customerDTO = customerService.getCustomerByUserNameAndPassword(userName, password);
+
+        /*STORE CUSTOMER ID FOR GET THAT CUSTOMER AFTER LOGIN TO APPLICATION*/
+        loggedCustomerId = customerDTO.getCusId();
+
         return new ResponseUtil("200", "success", customerDTO);
     }
 

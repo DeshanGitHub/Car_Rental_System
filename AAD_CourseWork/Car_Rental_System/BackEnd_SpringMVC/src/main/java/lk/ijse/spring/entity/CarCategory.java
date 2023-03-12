@@ -28,4 +28,5 @@ public class CarCategory {
     private BigDecimal freeKmForDay;
     private BigDecimal freeKmForMonth;
     private BigDecimal pricePerExtraKm;
+    private BigDecimal lossDamageWaiverAmount;
 }

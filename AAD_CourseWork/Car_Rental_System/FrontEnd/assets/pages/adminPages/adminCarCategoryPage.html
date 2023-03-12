@@ -554,6 +554,15 @@
                                                    name="pricePerExtraKm"
                                                    placeholder="Price per extra km" type="text">
                                         </div>
+
+                                        <div class="col-3 mb-3">
+                                            <label class="form-label" for="txtLossDamageWaiverAmount">Loss Damage Waiver
+                                                Amount
+                                                (Rs.)</label>
+                                            <input class="form-control" id="txtLossDamageWaiverAmount"
+                                                   name="lossDamageWaiverAmount"
+                                                   placeholder="Loss Damage Waiver" type="text">
+                                        </div>
                                     </div>
                                 </form>
 
@@ -595,6 +604,7 @@
                                             <th scope="col">Free km for day(km)</th>
                                             <th scope="col">Free km for month(km)</th>
                                             <th scope="col">Price per extra km(Rs.)</th>
+                                            <th scope="col">LDW(Rs.)</th>
                                         </tr>
                                         </thead>
                                         <tbody class="table-group-divider" id="tblCarCategoryBody">
@@ -690,6 +700,7 @@
         $("#txtFreeKmForDay").val("");
         $("#txtFreeKmForMonth").val("");
         $("#txtPricePerExtraKm").val("");
+        $("#txtLossDamageWaiverAmount").val("");
     }
 
     /*UPDATE BUTTON ON ACTION*/
@@ -710,6 +721,7 @@
         let freeKmForDay = $("#txtFreeKmForDay").val();
         let freeKmForMonth = $("#txtFreeKmForMonth").val();
         let pricePerExtraKm = $("#txtPricePerExtraKm").val();
+        let lossDamageWaiverAmount = $("#txtLossDamageWaiverAmount").val();
 
         var carCategory = {
             carCategoryId: carCategoryId,
@@ -723,7 +735,8 @@
             monthlyRatePrice: carMonthlyRatePrice,
             freeKmForDay: freeKmForDay,
             freeKmForMonth: freeKmForMonth,
-            pricePerExtraKm: pricePerExtraKm
+            pricePerExtraKm: pricePerExtraKm,
+            lossDamageWaiverAmount: lossDamageWaiverAmount
         }
 
         $.ajax({
@@ -761,6 +774,7 @@
             let freeKmForDay = $(this).children(":eq(9)").text();
             let freeKmForMonth = $(this).children(":eq(10)").text();
             let pricePerExtraKm = $(this).children(":eq(11)").text();
+            let lossDamageWaiverAmount = $(this).children(":eq(12)").text();
 
 
             $("#txtCarCategoryId").val(carCategoryId);
@@ -775,6 +789,7 @@
             $("#txtFreeKmForDay").val(freeKmForDay);
             $("#txtFreeKmForMonth").val(freeKmForMonth);
             $("#txtPricePerExtraKm").val(pricePerExtraKm);
+            $("#txtLossDamageWaiverAmount").val(lossDamageWaiverAmount);
         });
     }
 
@@ -786,7 +801,7 @@
             success: function (resp) {
                 console.log(resp);
                 for (let carCategory of resp.data) {
-                    var row = '<tr><td>' + carCategory.carCategoryId + '</td><td>' + carCategory.carCategoryName + '</td><td>' + carCategory.carModel + '</td><td>' + carCategory.carBrandName + '</td><td>' + carCategory.carType + '</td><td>' + carCategory.carTransmissionType + '</td><td>' + carCategory.carFuelType + '</td><td>' + carCategory.dailyRatePrice + '</td><td>' + carCategory.monthlyRatePrice + '</td><td>' + carCategory.freeKmForDay + '</td><td>' + carCategory.freeKmForMonth + '</td><td>' + carCategory.pricePerExtraKm + '</td></tr>';
+                    var row = '<tr><td>' + carCategory.carCategoryId + '</td><td>' + carCategory.carCategoryName + '</td><td>' + carCategory.carModel + '</td><td>' + carCategory.carBrandName + '</td><td>' + carCategory.carType + '</td><td>' + carCategory.carTransmissionType + '</td><td>' + carCategory.carFuelType + '</td><td>' + carCategory.dailyRatePrice + '</td><td>' + carCategory.monthlyRatePrice + '</td><td>' + carCategory.freeKmForDay + '</td><td>' + carCategory.freeKmForMonth + '</td><td>' + carCategory.pricePerExtraKm +'</td><td>' + carCategory.lossDamageWaiverAmount + '</td></tr>';
                     $("#tblCarCategoryBody").append(row);
                 }
                 bindRowClickEventForCarDetailsTable();
@@ -839,6 +854,7 @@
     function saveCarCategory() {
         var formData = $("#carCategoryForm").serialize();
 
+        console.log(formData);
 
         $.ajax({
             url: baseUrl + "carCategory",

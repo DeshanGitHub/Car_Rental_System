@@ -606,6 +606,14 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mb-3">
+                                        <div class="col-6 px-0">
+                                            <label class="form-label" for="txtLossDamageWaiver">Loss Damage Waiver Amount</label>
+                                            <input class="form-control" id="txtLossDamageWaiver"
+                                                   placeholder="Loss Damage Waiver" type="text">
+                                        </div>
+                                    </div>
+
                                 </div>
 
 
@@ -769,6 +777,7 @@
         $("#txtPricePerExtraKm").val("");
         $("#txtTransmissionType").val("");
         $("#txtFuelType").val("");
+        $("#txtLossDamageWaiver").val("");
     }
 
 
@@ -834,6 +843,7 @@
         let freeKmForDay = $("#txtFreeKmForDay").val();
         let freeKmForMonth = $("#txtFreeKmForMonth").val();
         let pricePerExtraKm = $("#txtPricePerExtraKm").val();
+        let lossDamageWaiverAmount=$("#txtLossDamageWaiver").val();
 
         var car = {
             carId: carId,
@@ -859,7 +869,8 @@
                 monthlyRatePrice: monthlyRatePrice,
                 freeKmForDay: freeKmForDay,
                 freeKmForMonth: freeKmForMonth,
-                pricePerExtraKm: pricePerExtraKm
+                pricePerExtraKm: pricePerExtraKm,
+                lossDamageWaiverAmount:lossDamageWaiverAmount
             }
         }
 
@@ -955,6 +966,7 @@
                 $("#txtPricePerExtraKm").val(resp.data.pricePerExtraKm);
                 $("#txtTransmissionType").val(resp.data.carTransmissionType);
                 $("#txtFuelType").val(resp.data.carFuelType);
+                $("#txtLossDamageWaiver").val(resp.data.lossDamageWaiverAmount);
             }
         });
     }
@@ -980,6 +992,7 @@
             $("#txtPricePerExtraKm").val("");
             $("#txtTransmissionType").val("");
             $("#txtFuelType").val("");
+            $("#txtLossDamageWaiver").val("");
         }
     });
 
