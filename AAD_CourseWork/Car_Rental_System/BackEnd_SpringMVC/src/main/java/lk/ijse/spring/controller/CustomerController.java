@@ -1,7 +1,6 @@
 package lk.ijse.spring.controller;
 
 import lk.ijse.spring.dto.CustomerDTO;
-import lk.ijse.spring.dto.EmployeeDTO;
 import lk.ijse.spring.service.CustomerService;
 import lk.ijse.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +56,10 @@ public class CustomerController {
     }
 
     @GetMapping(path = "/getCustomer/{userName}/{password}")
-    public ResponseUtil getCustomerBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password){
-        System.out.println("Method Called : "+userName+", "+password);
+    public ResponseUtil getCustomerBySearchingUserNameAndPassword(@PathVariable String userName, @PathVariable String password) {
+        System.out.println("Method Called : " + userName + ", " + password);
         CustomerDTO customerDTO = customerService.getCustomerByUserNameAndPassword(userName, password);
-        return new ResponseUtil("200","success",customerDTO);
+        return new ResponseUtil("200", "success", customerDTO);
     }
 
     /*CREATE STATIC VARIABLES TO STORE IMAGE UPLOADING PATH*/
@@ -100,12 +99,15 @@ public class CustomerController {
         return new ResponseUtil("200", "success", lastCustomerId);
     }
 
-    @PostMapping(path = "/image/{cusId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseUtil uploadImages(@RequestPart("frontImage") MultipartFile frontImage, @RequestPart("backImage") MultipartFile backImage, @PathVariable String cusId) {
+    @PostMapping(path = "/image/{cusId}/{cusUserName}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseUtil uploadImages(@RequestPart("frontImage") MultipartFile frontImage, @RequestPart("backImage") MultipartFile backImage, @PathVariable String cusId, @PathVariable String cusUserName) {
         System.out.println("Save Image method invoked.");
         try {
-            /*FIND CUSTOMER IS EXISTS BEFORE SAVING IMAGES*/
+            /*CHECK CUSTOMER IS EXISTS BEFORE SAVING IMAGES*/
             customerService.isExistsCustomer(cusId);
+
+            /*CHECK CUSTOMER USERNAME IS EXISTS BEFORE SAVING IMAGES*/
+            customerService.findCustomerUserNameIsExists(cusUserName);
 
             String projectPath = String.valueOf(new File("D:\\GDSE 2022\\All Projects\\AAD_Coursework_Project\\AAD_CourseWork\\Car_Rental_System\\FrontEnd\\assets\\imgUpload"));
             File uploadDir = new File(projectPath + "\\CustomerImages");

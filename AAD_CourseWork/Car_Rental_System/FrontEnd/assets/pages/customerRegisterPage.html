@@ -383,7 +383,7 @@
     /*UPLOAD CUSTOMER IMAGES*/
     function uploadCustomerImagesAndSaveDetails() {
 
-        //console.log("kd : " + newCustomerId);
+        let cusUserName = $("#txtCustomerUserNameId").val();
 
         var imgFrontObject = $("#customerImageFrontSide")[0].files[0];
         var imgFrontName = newCustomerId + "_FrontImage_" + $("#customerImageFrontSide")[0].files[0].name;
@@ -396,7 +396,7 @@
         data.append("backImage", imgBackObject, imgBackName);
 
         $.ajax({
-            url: baseUrl + "customer/image/" + newCustomerId,
+            url: baseUrl + "customer/image/" + newCustomerId + "/" + cusUserName,
             method: "POST",
             async: true,
             contentType: false,
@@ -454,7 +454,7 @@
             dataType: 'json',
             success: function (res) {
                 alert(res.message);
-               clearTextFields();
+                clearTextFields();
             },
             error: function (error) {
                 let cause = JSON.parse(error.responseText).message;

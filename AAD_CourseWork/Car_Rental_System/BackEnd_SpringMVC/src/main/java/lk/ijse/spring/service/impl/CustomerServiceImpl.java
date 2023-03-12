@@ -104,4 +104,11 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return mapper.map(customer, CustomerDTO.class);
     }
+
+    @Override
+    public void findCustomerUserNameIsExists(String userName) {
+        if (customerRepo.existsCustomersByCusUserName(userName)) {
+            throw new RuntimeException("Username Already Exists..!! Please Try Another One");
+        }
+    }
 }

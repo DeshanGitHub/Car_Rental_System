@@ -25,4 +25,6 @@ public interface CustomerService {
     void updateCustomerWithoutImages(CustomerDTO dto);
 
     CustomerDTO getCustomerByUserNameAndPassword(String userName, String password);
+
+    void findCustomerUserNameIsExists(String userName);
 }
