@@ -256,20 +256,54 @@
                             <div class="mb-3">
                                 <label class="form-label" for="txtLossDamageWaiverPaymentId">Loss Damage Waiver
                                     Payment</label>
-                                <input class="form-control" id="txtLossDamageWaiverPaymentId" type="text">
+                                <input class="form-control" disabled id="txtLossDamageWaiverPaymentId" type="text">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label class="form-label" for="txtRentalPaymentId">Rental Payment</label>
-                                <input class="form-control" id="txtRentalPaymentId" type="text">
+                                <label class="form-label" for="txtNumberOfRentDatesId">Number Of Rent Dates</label>
+                                <input class="form-control" disabled id="txtNumberOfRentDatesId" type="text">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="txtRentalAmountOnDailyBasisId">Rental Amount On Daily
+                                    Basis</label>
+                                <input class="form-control" disabled id="txtRentalAmountOnDailyBasisId" type="text">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="txtRentalAmountOnMonthlyBasis">Rental Amount On Monthly
+                                    Basis</label>
+                                <input class="form-control" disabled id="txtRentalAmountOnMonthlyBasis" type="text">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="txtDriverCharge">Driver Charge</label>
+                                <input class="form-control" disabled id="txtDriverCharge" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="txtFullRentalAmount">Full Rental Amount</label>
+                                <input class="form-control" disabled id="txtFullRentalAmount" type="text">
                             </div>
                         </div>
                         <div class="col-12">
                             <h6>Note</h6>
-                            <p>You have to make the Loss Damage Waiver payment before booking the car. After you
-                                return the car, If the vehicle is unharmed the Loss Damage Waiver will be returned in
-                                full to you.</p>
+                            <ul>
+                                <li>You have to make the Loss Damage Waiver payment before booking the car. After you
+                                    return the car, If the vehicle is unharmed the Loss Damage Waiver will be returned
+                                    in
+                                    full to you.
+                                </li>
+                                <li>1000.00 LKR per day will be added to the charges if you hire a driver along with the
+                                    car.
+                                </li>
+                            </ul>
                         </div>
                         <div class="col-12 mt-3">
                             <h4 class="mb-3">Your Payment</h4>
@@ -284,14 +318,14 @@
                                                     id="selectReasonId">
                                                 <option selected>Not Selected</option>
                                                 <option value="1">Loss Damage Waiver Payment</option>
-                                                <option value="2">Rental Payment</option>
+                                                <option value="2">LDW Payment & Rental Payment</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="mb-3">
                                             <label class="form-label" for="txtCustomerId">Your ID</label>
-                                            <input class="form-control" id="txtCustomerId" type="text" disabled>
+                                            <input class="form-control" disabled id="txtCustomerId" type="text">
                                         </div>
                                     </div>
                                     <div class="col-6 mb-2">
@@ -341,8 +375,92 @@
 
     /*BOOKING BUTTON ON ACTION*/
     $("#btnBooking").click(function () {
-        alert("ok")
+
+        alert("ok");
+        //TODO
+
     });
+
+    /*CREATE NEW BOOKING ID*/
+    let newBookingId;
+
+    function createNewBookingId() {
+        $.ajax({
+            url:baseUrl+'booking/bookingId',
+            //dataType:
+            //TODO
+            //THIS IS THE LAST EDITED POINT
+        });
+    }
+
+    /*FIND DATE FIELDS ARE FILLED*/
+    function setValuesForTextFields() {
+
+        if (($("#pickupDateId").val() !== "") && ($("#returnDateId").val() !== "")) {
+            //FIND NUMBER OF DATES
+            const startDate = new Date($("#pickupDateId").val());
+            const endDate = new Date($("#returnDateId").val());
+            const oneDay = 24 * 60 * 60 * 1000; // milliseconds in one day
+            const diffDays = Math.round(Math.abs((startDate.getTime() - endDate.getTime()) / oneDay));
+
+            const diffDaysPlusOne = diffDays + 1;
+
+            /*SET NUMBER OF RENT DATES FOR TEXT FIELD*/
+            $("#txtNumberOfRentDatesId").val(diffDaysPlusOne + " Days");
+
+            //SET RENTAL AMOUNT OF DAILY BASIS TEXT FIELD
+            if (diffDaysPlusOne >= 30) {
+                const thirtyDateCount = diffDaysPlusOne / 30;
+                const onesDateCount = diffDaysPlusOne % 30;
+
+                const thirtyDateCountWithoutDecimalPoints = parseFloat(thirtyDateCount.toFixed(0));
+
+                /* console.log("Thirty Day count : " + thirtyDateCount);
+                 console.log("Thirty Day count after removing decimal places : " + parseFloat(thirtyDateCount.toFixed(0)));
+                 console.log("Ones Day count : " + onesDateCount);*/
+
+                $("#txtRentalAmountOnDailyBasisId").val(onesDateCount + " × " + $("#td_8").text() + " = " + "Rs. " + (onesDateCount * ($("#td_8").text())));
+                $("#txtRentalAmountOnMonthlyBasis").val(thirtyDateCountWithoutDecimalPoints + " × " + $("#td_9").text() + " = " + "Rs. " + (thirtyDateCountWithoutDecimalPoints * ($("#td_9").text())));
+            } else if (diffDaysPlusOne >= 0 && diffDaysPlusOne < 30) {
+                $("#txtRentalAmountOnDailyBasisId").val(diffDaysPlusOne + " × " + $("#td_8").text() + " = " + "Rs. " + (diffDaysPlusOne * ($("#td_8").text())));
+
+                //console.log("Ones Date Count : " + diffDaysPlusOne);
+            }
+
+            /*SET DRIVER CHARGE FOR TEXT FIELD*/
+            if ($("#driverAvailabilityId").find('option:selected').text() === "Yes") {
+                $("#txtDriverCharge").val(diffDaysPlusOne + " × " + 1000 + " = " + "Rs. " + diffDaysPlusOne * 1000);
+            } else if ($("#driverAvailabilityId").find('option:selected').text() === "No") {
+                let driverChargeArray = $("#txtDriverCharge").val().split("Rs. ");
+                let fullRentalAmountArray = $("#txtFullRentalAmount").val().split("Rs. ");
+
+                $("#txtFullRentalAmount").val(((parseFloat(fullRentalAmountArray[1])) - parseFloat(driverChargeArray[1])).toFixed(2));
+                $("#txtDriverCharge").val("Rs. 0.00");
+            }
+
+            /*SET FULL RENTAL AMOUNT TO TEXT FIELD*/
+            let rentalAmountOnDailyBasisArray = $("#txtRentalAmountOnDailyBasisId").val().split("Rs. ");
+            let rentalAmountOnMonthlyBasisArray = $("#txtRentalAmountOnMonthlyBasis").val().split("Rs. ");
+            let driverChargeArray = $("#txtDriverCharge").val().split("Rs. ");
+
+            let fullRentalAmount = (parseFloat(rentalAmountOnDailyBasisArray[1])) + (parseFloat(rentalAmountOnMonthlyBasisArray[1])) + (parseFloat(driverChargeArray[1]));
+
+            $("#txtFullRentalAmount").val("Rs. " + fullRentalAmount.toFixed(2));
+            //TODO
+        }
+    }
+
+    /*EVENT LISTNER FOR RETURN DATE PICKER, PICKUP DATE PICKER, DRIVER STATUS COMBO BOX*/
+    $("#returnDateId, #pickupDateId, #driverAvailabilityId").on("change", function () {
+        setValuesForTextFields();
+    });
+
+    /*EVENT LISTNER FOR PICKUP DATE PICKER*/
+    /* $("#pickupDateId").on('change', function () {
+         //alert($(this).val());
+         //alert($("#returnDateId").val());
+         findDateFieldsAreFilled();
+     });*/
 
     /*SET IMAGES TO IMAGE VIEW*/
     function loadCarImages(carFrontImgPath, carBackImgPath, carSideImgPath, carInteriorImgPath) {
@@ -359,11 +477,13 @@
         $("#img_4").attr('src', "../../imgUpload/CarImages/" + interiorImgNameArray[1]);
     }
 
-    function getLoggedCustomerId() {
+    /*function setLoggedCustomerId() {
         $.ajax({
             url: baseUrl + "customer/loggedCustomerId",
             dataType: "JSON",
             success: function (resp) {
+                console.log(resp);
+
                 $("#txtCustomerId").val(resp.data);
             },
             error: function (error) {
@@ -371,8 +491,9 @@
                 alert(cause);
             }
         });
-    }
+    }*/
 
+    /*LOAD CAR BOOKING SECTION*/
     function loadBookingArea(carId) {
         //console.log("Booking Area Car ID : "+carId);
 
@@ -380,7 +501,7 @@
             url: baseUrl + "car/getCar/" + carId,
             dataType: "JSON",
             success: function (resp) {
-                //console.log(resp);
+                console.log(resp);
                 $("#td_1").text(resp.data.carId);
                 $("#td_2").text(resp.data.carCategory.carBrandName);
                 $("#td_3").text(resp.data.carCategory.carModel);
@@ -395,12 +516,37 @@
                 $("#td_12").text(resp.data.carCategory.pricePerExtraKm);
                 $("#td_13").text(resp.data.registrationNum);
                 $("#td_14").text(resp.data.color);
-
+                /*SET LOSS DAMAGE WAIVER AMOUNT TO TEXT FIELD*/
+                $("#txtLossDamageWaiverPaymentId").val(resp.data.carCategory.lossDamageWaiverAmount);
+                /*SET RENTAL AMOUNT ON DAILY BASIS PRICE FOR TEXT FIELD*/
+                $("#txtRentalAmountOnDailyBasisId").val("Rs. 0.00");
+                /*SET RENTAL AMOUNT ON MONTHLY BASIS PRICE FOR TEXT FIELD*/
+                $("#txtRentalAmountOnMonthlyBasis").val("Rs. 0.00");
+                /*SET DRIVER CHARGE FOR TEXT FIELD*/
+                $("#txtDriverCharge").val("Rs. 0.00");
+                /*SET FULL RENTAL AMOUNT FOR TEXT FIELD*/
+                $("#txtFullRentalAmount").val("Rs. 0.00");
+                /*SET NUMBER OF RENT DATES FOR TEXT FIELD*/
+                $("#txtNumberOfRentDatesId").val("0");
 
                 /*LOAD CAR IMAGES*/
                 loadCarImages(resp.data.frontImgPath, resp.data.backImgPath, resp.data.sideImgPath, resp.data.interiorPath);
 
-                getLoggedCustomerId();
+                //setLoggedCustomerId();
+
+                /*SET CUSTOMER ID TO TEXT FIELD*/
+                $.ajax({
+                    url: baseUrl + "customer/loggedCustomerId",
+                    dataType: "JSON",
+                    success: function (resp) {
+                        let customerId = resp.data;
+                        $("#txtCustomerId").val(customerId);
+                    },
+                    error: function (error) {
+                        let cause = JSON.parse(error.responseText).message;
+                        alert(cause);
+                    }
+                });
             },
             error: function (error) {
                 let cause = JSON.parse(error.responseText).message;

@@ -490,7 +490,7 @@
                                                 <option selected>Search by booking status</option>
                                                 <option value="1">Pending</option>
                                                 <option value="2">Confirmed</option>
-                                                <option value="3">Closed</option>
+                                                <option value="3">Completed</option>
                                             </select>
                                         </div>
 
@@ -622,7 +622,8 @@
 
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="txtCustomerName">Customer Name</label>
-                                                <input class="form-control" id="txtCustomerName" placeholder="Customer Name"
+                                                <input class="form-control" id="txtCustomerName"
+                                                       placeholder="Customer Name"
                                                        type="text">
                                             </div>
 
@@ -689,7 +690,8 @@
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingStatusReason">Booking Status Reason</label>
+                                                <label class="form-label" for="txtBookingStatusReason">Booking Status
+                                                    Reason</label>
                                                 <input class="form-control" id="txtBookingStatusReason"
                                                        placeholder="Reason"
                                                        type="text">
@@ -707,14 +709,16 @@
                                     <form>
                                         <div class="row">
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtLossDamageWaiverAmount">Loss Damage Waiver Amount</label>
+                                                <label class="form-label" for="txtLossDamageWaiverAmount">Loss Damage
+                                                    Waiver Amount</label>
                                                 <input class="form-control" id="txtLossDamageWaiverAmount"
                                                        placeholder="Amount"
                                                        type="text">
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtLDWPayedAmount">LDW Payed Amount</label>
+                                                <label class="form-label" for="txtLDWPayedAmount">LDW Payed
+                                                    Amount</label>
                                                 <input class="form-control" id="txtLDWPayedAmount"
                                                        placeholder="Amount"
                                                        type="text">
@@ -728,7 +732,8 @@
                                             </div>
 
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtRentalPayedAmount">Rental Payed Amount</label>
+                                                <label class="form-label" for="txtRentalPayedAmount">Rental Payed
+                                                    Amount</label>
                                                 <input class="form-control" id="txtRentalPayedAmount"
                                                        placeholder="Amount To Pay"
                                                        type="text">
@@ -749,7 +754,8 @@
                                         <div class="row">
                                             <div class="col-3 mb-3">
                                                 <label class="form-label" for="cmbDrivers">Select Driver</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbDrivers">
+                                                <select aria-label="Default select example" class="form-select"
+                                                        id="cmbDrivers">
                                                     <option selected>Select here</option>
                                                     <option value="1">D001</option>
                                                     <option value="2">D002</option>
@@ -763,13 +769,14 @@
                                                        type="text">
                                             </div>
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtDriverAvailability">Driver Availability</label>
+                                                <label class="form-label" for="txtDriverAvailability">Driver
+                                                    Availability</label>
                                                 <input class="form-control" id="txtDriverAvailability"
                                                        placeholder="Availability"
                                                        type="text">
                                             </div>
                                             <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-secondary w-50">Update</button>
+                                                <button class="btn btn-secondary w-50" type="button">Update</button>
                                             </div>
                                         </div>
                                     </form>
@@ -786,22 +793,32 @@
                                     <form>
                                         <div class="row">
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbBookingStatus">Select Booking Status</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbBookingStatus">
+                                                <label class="form-label" for="cmbBookingStatus">Select Booking
+                                                    Status</label>
+                                                <select aria-label="Default select example" class="form-select"
+                                                        id="cmbBookingStatus">
                                                     <option selected>Select here</option>
                                                     <option value="1">Pending</option>
                                                     <option value="2">Accept</option>
                                                     <option value="3">Deny</option>
+                                                    <option value="4">Complete</option>
                                                 </select>
                                             </div>
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="txtBookingStatusReason2">Status Reason</label>
+                                                <label class="form-label" for="txtBookingStatusReason2">Status
+                                                    Reason</label>
                                                 <input class="form-control" id="txtBookingStatusReason2"
                                                        placeholder="Reason"
                                                        type="text">
                                             </div>
+                                            <div class="col-3 mb-3">
+                                                <label class="form-label" for="txtDistance">Distance(Km)</label>
+                                                <input class="form-control" disabled
+                                                       id="txtDistance"
+                                                       placeholder="Distance" type="text">
+                                            </div>
                                             <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-primary w-50">Save</button>
+                                                <button class="btn btn-primary w-50" type="button">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -820,15 +837,17 @@
                                     <form>
                                         <div class="row">
                                             <div class="col-3 mb-3">
-                                                <label class="form-label" for="cmbDeleteConfirmation">Do You Want To Delete This Booking</label>
-                                                <select class="form-select" aria-label="Default select example" id="cmbDeleteConfirmation">
+                                                <label class="form-label" for="cmbDeleteConfirmation">Do You Want To
+                                                    Delete This Booking</label>
+                                                <select aria-label="Default select example" class="form-select"
+                                                        id="cmbDeleteConfirmation">
                                                     <option selected>No</option>
                                                     <option value="1">Yes</option>
                                                 </select>
                                             </div>
 
                                             <div class="col-3 mb-3 d-flex align-items-end">
-                                                <button type="button" class="btn btn-danger w-50">Delete</button>
+                                                <button class="btn btn-danger w-50" type="button">Delete</button>
                                             </div>
                                         </div>
                                     </form>
@@ -856,6 +875,16 @@
 
     $("#page-content-wrapper1").css("display", "block");
     $("#page-content-wrapper2").css("display", "none");
+
+    /*EVENT LISTNER FOR BOOKING STATUS COMBO BOX*/
+    $("#cmbBookingStatus").on("change", function () {
+
+        if ($('#cmbBookingStatus').val() === '4') {
+            $("#txtDistance").prop('disabled', false);
+        } else {
+            $("#txtDistance").prop('disabled', true);
+        }
+    });
 
     /*LOAD CAR TABLE*/
     function loadCarTable() {

@@ -1,6 +1,5 @@
 package lk.ijse.spring.dto;
 
-import lk.ijse.spring.entity.PaymentDetail;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,5 +33,5 @@ public class ReservationDetailDTO {
 
     private String carId;
 
-    private List<PaymentDetail> paymentDetails;
+    private List<PaymentDetailDTO> paymentDetails;
 }
