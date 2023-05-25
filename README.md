@@ -1,6 +1,6 @@
 # CAR RENTAL - SPRING MVC
 
-### What is this ?
+### Description
 
 A web application designed for a car rental place to handle its all rental processes.
 Customers can rent cars using this application & it allows the admin to manage
